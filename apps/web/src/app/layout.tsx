@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { profile } from "@/data/profile";
+import { themeInitScript } from "@/lib/theme";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -9,7 +11,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="antialiased">
         <a
           href="#contenido"
@@ -17,6 +22,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Saltar al contenido
         </a>
+        <ScrollProgress />
         {children}
       </body>
     </html>

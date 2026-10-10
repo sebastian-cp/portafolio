@@ -10,8 +10,18 @@
   --accent-contrast: #ffffff;
 }
 
+:root[data-theme="dark"] {
+  --background: #0c0a09;
+  --foreground: #f5f5f4;
+  --muted: #a8a29e;
+  --surface: #1c1917;
+  --border: #292524;
+  --accent: #a5b4fc;
+  --accent-contrast: #1e1b4b;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
     --background: #0c0a09;
     --foreground: #f5f5f4;
     --muted: #a8a29e;
@@ -70,4 +80,28 @@ body {
     transform: none;
     transition: none;
   }
+}
+
+/* Icono del toggle según tema */
+.theme-toggle .icon-sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+/* Fondo animado del hero: solo transform/opacity (compositor) */
+.aurora { position: absolute; inset: -20% -10% auto; height: 28rem; z-index: -1; pointer-events: none; filter: blur(60px); opacity: 0.35; }
+.aurora::before, .aurora::after { content: ""; position: absolute; border-radius: 50%; width: 20rem; height: 20rem; }
+.aurora::before { background: var(--accent); left: 10%; animation: drift 14s ease-in-out infinite alternate; }
+.aurora::after { background: #22d3ee; right: 10%; animation: drift 18s ease-in-out infinite alternate-reverse; }
+@keyframes drift { to { transform: translate(8rem, 3rem) scale(1.2); } }
+
+@keyframes word-in { from { opacity: 0; transform: translateY(0.4em); } }
+.word-in { animation: word-in 0.4s ease; }
+@keyframes panel-in { from { opacity: 0; transform: translateY(6px); } }
+.panel-in { animation: panel-in 0.3s ease; }
+
+.caret { display: inline-block; width: 2px; height: 1em; margin-left: 2px; vertical-align: text-bottom; background: var(--accent); animation: blink 1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora::before, .aurora::after, .word-in, .panel-in, .caret { animation: none; }
 }
