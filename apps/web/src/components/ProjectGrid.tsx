@@ -1,14 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import type { Content } from "@/i18n";
-import { ProjectCard } from "./ProjectCard";
 
 type Filter = "all" | "react" | "angular";
 
-export function ProjectGrid({ projects, t }: { projects: Content["projects"]; t: Content["projectsUi"] }) {
+export interface GridItem {
+  slug: string;
+  stack: "react" | "angular";
+  /** Tarjeta ya renderizada en el servidor: así los logos de stack no viajan al cliente. */
+  card: ReactNode;
+}
+
+export function ProjectGrid({ items, t }: { items: GridItem[]; t: Content["projectsUi"] }) {
   const [filter, setFilter] = useState<Filter>("all");
-  const visible = filter === "all" ? projects : projects.filter((p) => p.stack === filter);
+  const visible = filter === "all" ? items : items.filter((p) => p.stack === filter);
   const filters: Filter[] = ["all", "react", "angular"];
 
   return (
@@ -30,7 +36,7 @@ export function ProjectGrid({ projects, t }: { projects: Content["projects"]; t:
         {(visible.length === 1 ? t.shownOne : t.shownMany).replace("{n}", String(visible.length))}
       </p>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {visible.map((p) => <ProjectCard key={p.slug} project={p} t={t} />)}
+        {visible.map((p) => <div key={p.slug} className="contents">{p.card}</div>)}
       </div>
     </div>
   );

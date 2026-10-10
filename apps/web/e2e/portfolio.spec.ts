@@ -5,9 +5,10 @@ test.describe("español", () => {
     await page.goto("/es");
   });
 
-  test("muestra el nombre y las secciones principales", async ({ page }) => {
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Cofré");
-    for (const name of ["Sobre mí", "Experiencia", "Demos interactivas", "Proyectos", "Contacto"]) {
+  test("muestra el titular y las secciones principales", async ({ page }) => {
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("sistemas que no pueden fallar");
+    await expect(page.getByText("Sebastián Andrés Cofré Parra").first()).toBeVisible();
+    for (const name of ["Dónde se usa lo que hago", "Experiencia", "Demos interactivas", "Proyectos", "Contacto"]) {
       await expect(page.getByRole("heading", { level: 2, name })).toBeVisible();
     }
   });
@@ -80,6 +81,16 @@ test.describe("español", () => {
     await expect(page).toHaveURL(/#contacto$/);
   });
 
+  test("muestra los logos de las organizaciones y la bandera", async ({ page }) => {
+    for (const alt of ["Clínica Alemana de Santiago", "Banco Interamericano de Desarrollo", "LUXXOR"]) {
+      const logo = page.getByRole("img", { name: alt });
+      await expect(logo).toBeVisible();
+      // next/image falla en silencio si la ruta no existe: comprobamos que cargó
+      await expect.poll(() => logo.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
+    }
+    await expect(page.getByRole("img", { name: "Chile" })).toBeVisible();
+  });
+
   test("el nav marca la sección visible", async ({ page }) => {
     const nav = page.getByRole("navigation", { name: "Principal" });
     await page.locator("#proyectos").scrollIntoViewIfNeeded();
@@ -109,7 +120,7 @@ test.describe("english", () => {
   });
 
   test("renders translated sections", async ({ page }) => {
-    for (const name of ["About me", "Experience", "Interactive demos", "Projects", "Contact"]) {
+    for (const name of ["Where my work runs", "Experience", "Interactive demos", "Projects", "Contact"]) {
       await expect(page.getByRole("heading", { level: 2, name })).toBeVisible();
     }
   });
@@ -119,6 +130,14 @@ test.describe("english", () => {
     await page.getByRole("button", { name: "Ask", exact: true }).click();
     await expect(page.getByRole("status").filter({ hasText: "Playwright" })).toBeAttached();
   });
+});
+
+test("no publica el teléfono", async ({ page }) => {
+  for (const path of ["/es", "/en"]) {
+    await page.goto(path);
+    await expect(page.locator("body")).not.toContainText("9881");
+    await expect(page.locator("body")).not.toContainText(/Disponible para proyectos|Available for projects/);
+  }
 });
 
 test("en móvil el disparador de la paleta conserva su nombre accesible", async ({ browser }) => {

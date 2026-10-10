@@ -1,6 +1,6 @@
 import type { Content } from "@/i18n";
-import { Badge } from "@/ui/Badge";
 import { Card } from "@/ui/Card";
+import { TechChip } from "@/ui/TechChip";
 
 type Project = Content["projects"][number];
 
@@ -23,7 +23,7 @@ export function ProjectCard({ project, t }: { project: Project; t: Content["proj
         ))}
       </ul>
       <ul className="mt-4 flex flex-wrap gap-2" aria-label={t.techLabel}>
-        {tech.map((x) => <li key={x}><Badge mono>{x}</Badge></li>)}
+        {tech.map((x) => <li key={x}><TechChip name={x} /></li>)}
       </ul>
       <footer className="mt-auto flex gap-4 border-t border-border pt-4 text-sm font-medium" style={{ marginTop: "1.5rem" }}>
         {demo && <a className={link} href={demo} target="_blank" rel="noopener noreferrer">{t.demo}<span className="sr-only"> {t.of} {title}</span></a>}

@@ -54,7 +54,7 @@ export function CommandPalette({ t, profile, otherLocale }: Props) {
     const go = (id: string) => () => { window.location.hash = id; };
     const ext = (url: string) => () => { window.open(url, "_blank", "noopener,noreferrer"); };
     return [
-      { id: "a-sobre", label: t.actions.about, run: go("sobre-mi") },
+      { id: "a-sobre", label: t.actions.about, run: go("trabajo") },
       { id: "a-exp", label: t.actions.experience, run: go("experiencia") },
       { id: "a-demo", label: t.actions.rag, run: go("demo-rag") },
       { id: "a-vit", label: t.actions.vitals, run: go("demo-vitals") },

@@ -4,6 +4,7 @@ import { CommandPalette } from "@/components/CommandPalette";
 import { Counter } from "@/components/Counter";
 import { Experience } from "@/components/Experience";
 import { HeroCard } from "@/components/HeroCard";
+import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { RagDemo } from "@/components/RagDemo";
 import { Reveal } from "@/components/Reveal";
@@ -15,6 +16,11 @@ import { WebVitals } from "@/components/WebVitals";
 import { getContent, isLocale } from "@/i18n";
 import { Button } from "@/ui/Button";
 import { Card } from "@/ui/Card";
+import { CertBadge } from "@/ui/CertBadge";
+import { ChileFlag } from "@/ui/Flag";
+import { OrgLogo } from "@/ui/OrgLogo";
+import { TechChip } from "@/ui/TechChip";
+import { ORG_LOGOS } from "@/data/logos";
 
 const link = "text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:decoration-accent";
 
@@ -25,7 +31,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const { profile, ui } = t;
 
   const nav = [
-    { href: "#sobre-mi", label: ui.nav.about },
+    { href: "#trabajo", label: ui.nav.about },
     { href: "#experiencia", label: ui.nav.experience },
     { href: "#demos", label: ui.nav.demos },
     { href: "#proyectos", label: ui.nav.projects },
@@ -68,24 +74,30 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
           <div>
             <p className="t-eyebrow flex flex-wrap items-center gap-x-3 gap-y-2">
-              <span className="inline-flex items-center gap-2 text-good">
-                <span className="pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-good" />
-                {ui.hero.available}
-              </span>
+              <span className="text-foreground">{profile.name}</span>
               <span aria-hidden="true" className="inline-block h-px w-5 bg-border" />
-              {profile.location}
+              <span className="inline-flex items-center gap-1.5">
+                <ChileFlag title="Chile" />
+                {profile.location}
+              </span>
             </p>
 
-            <h1 className="t-hero mt-6">{profile.name}</h1>
+            <h1 className="t-hero mt-6 max-w-[15ch]">{ui.hero.tagline}</h1>
 
-            <p className="mt-5 text-xl text-muted sm:text-2xl">
-              {profile.role} · <RotatingWord words={profile.rotating} />
+            <p className="mt-6 max-w-2xl text-xl sm:text-2xl">{ui.hero.kicker}</p>
+
+            <p className="mt-4 flex items-center gap-2.5">
+              <span className="t-eyebrow">{ui.hero.daily}</span>
+              <span aria-hidden="true" className="inline-block h-px w-5 bg-border" />
+              <span className="font-mono text-sm">
+                <RotatingWord words={profile.rotating} />
+              </span>
             </p>
 
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">{profile.summary}</p>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">{profile.summary}</p>
 
             <div className="mt-9 flex flex-wrap gap-3">
-              <Button href="#proyectos">{ui.cta.projects}</Button>
+              <Button href="#trabajo">{ui.cta.projects}</Button>
               <Button href="#demos" variant="secondary">{ui.cta.demos}</Button>
               <Button href={profile.cv} download variant="ghost">{ui.cta.cv}</Button>
             </div>
@@ -101,32 +113,50 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </section>
 
         {/* ---------------- Sobre mí ---------------- */}
-        <section id="sobre-mi" aria-labelledby="h-about" className="scroll-mt-24 pt-16">
+        <section id="trabajo" aria-labelledby="h-about" className="scroll-mt-24 pt-16">
           <Reveal>
             <SectionHeader id="h-about" index={ui.indexes.about} eyebrow={ui.eyebrows.about} title={ui.sections.about} />
 
-            <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {t.stats.map((s, i) => (
-                <Card key={s.label} as="div" padding="lg" className={i === 0 ? "sm:col-span-2" : ""}>
-                  <dd className="t-stat text-gradient">
-                    <Counter to={s.value} suffix={s.suffix} />
-                  </dd>
-                  <dt className="mt-3 text-sm leading-snug text-muted">{s.label}</dt>
+            <ul className="grid gap-4 lg:grid-cols-3">
+              {t.work.map((w) => (
+                <Card as="li" key={w.id} padding="lg" className="flex flex-col">
+                  <div className="flex items-start justify-between gap-3">
+                    <p className="t-eyebrow text-accent">{w.domain}</p>
+                    {ORG_LOGOS[w.id] && <OrgLogo logo={ORG_LOGOS[w.id]} />}
+                  </div>
+                  <h3 className="t-card mt-4 text-xl">{w.product}</h3>
+                  <p className="mt-1 text-sm text-faint">{w.org}</p>
+                  <p className="mt-4 flex-1 text-sm leading-relaxed text-muted">{w.line}</p>
+                  <ul className="mt-5 flex flex-wrap gap-1.5">
+                    {w.tech.map((x) => <li key={x}><TechChip name={x} /></li>)}
+                  </ul>
                 </Card>
               ))}
+            </ul>
 
-              <Card as="div" padding="lg" className="sm:col-span-2 lg:col-span-4">
-                <div className="grid gap-5 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-8">
+            <Card as="div" padding="lg" className="mt-4">
+              <dl className="grid gap-6 sm:grid-cols-3 sm:items-center">
+                <div className="flex items-center gap-4">
+                  <dd className="t-stat text-gradient text-[2.5rem]">
+                    <Counter to={t.years.value} suffix={t.years.suffix} />
+                  </dd>
+                  <dt className="text-sm leading-snug text-muted">{t.years.label}</dt>
+                </div>
+                <div>
                   <dt className="t-eyebrow">{t.education.label}</dt>
-                  <dd className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <span className="t-card">{t.education.degree}</span>
+                  <dd className="mt-1.5">
+                    <span className="t-card block">{t.education.degree}</span>
                     <span className="text-sm text-muted">{t.education.place}</span>
-                    <span aria-hidden="true" className="hidden h-4 w-px bg-border sm:block" />
-                    <span className="font-mono text-xs text-accent-2">{t.education.cert}</span>
                   </dd>
                 </div>
-              </Card>
-            </dl>
+                <div>
+                  <dt className="t-eyebrow">{t.education.certLabel}</dt>
+                  <dd className="mt-2">
+                    <CertBadge code="AZ-900" title={t.education.certTitle} issuer="Microsoft Certified" />
+                  </dd>
+                </div>
+              </dl>
+            </Card>
 
             <h3 className="t-eyebrow mt-12">{ui.sections.stack}</h3>
             <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -134,7 +164,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 <Card key={s.group} as="div" className={i === 0 ? "sm:col-span-2 lg:col-span-1" : ""}>
                   <h4 className="t-card">{s.group}</h4>
                   <ul className="mt-3 flex flex-wrap gap-1.5">
-                    {s.items.map((x) => <li key={x} className="chip">{x}</li>)}
+                    {s.items.map((x) => <li key={x}><TechChip name={x} /></li>)}
                   </ul>
                 </Card>
               ))}
@@ -194,7 +224,14 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               title={ui.sections.projects}
               aside={<span className="chip">{ui.asides.projects}</span>}
             />
-            <ProjectGrid projects={t.projects} t={t.projectsUi} />
+            <ProjectGrid
+              t={t.projectsUi}
+              items={t.projects.map((p) => ({
+                slug: p.slug,
+                stack: p.stack,
+                card: <ProjectCard project={p} t={t.projectsUi} />,
+              }))}
+            />
           </Reveal>
         </section>
 
@@ -202,27 +239,18 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <section id="contacto" aria-labelledby="h-contact" className="scroll-mt-24 pt-28">
           <Reveal>
             <SectionHeader id="h-contact" index={ui.indexes.contact} eyebrow={ui.eyebrows.contact} title={ui.sections.contact} />
-            <Card as="div" padding="lg" className="grid gap-8 sm:grid-cols-[1.2fr_1fr]">
-              <div>
-                <p className="t-section">{ui.contactIntro}</p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Button href={`mailto:${profile.email}`}>{profile.email}</Button>
-                  <Button href={profile.cv} download variant="secondary">{ui.cta.cv}</Button>
-                </div>
+            <Card as="div" padding="lg" className="text-center">
+              <p className="t-section mx-auto max-w-[18ch]">{ui.contactIntro}</p>
+              <p className="mx-auto mt-4 max-w-md text-muted">{ui.contactSub}</p>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <Button href={`mailto:${profile.email}`}>{ui.contactCta}</Button>
+                <Button href={profile.cv} download variant="secondary">{ui.cta.cv}</Button>
               </div>
-              <dl className="grid content-start gap-4 text-sm">
-                <div>
-                  <dt className="t-eyebrow">Tel</dt>
-                  <dd className="mt-1 font-mono">{profile.phone}</dd>
-                </div>
-                <div>
-                  <dt className="t-eyebrow">Links</dt>
-                  <dd className="mt-1 flex gap-4">
-                    <a className={link} href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                    <a className={link} href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-                  </dd>
-                </div>
-              </dl>
+              <p className="mt-6 font-mono text-sm text-muted">{profile.email}</p>
+              <div className="mt-8 flex justify-center gap-6 text-sm">
+                <a className={link} href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a className={link} href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+              </div>
             </Card>
           </Reveal>
         </section>

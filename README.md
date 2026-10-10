@@ -7,6 +7,14 @@ Monorepo con dos apps frontend:
 | `apps/web` | Next.js 15 (App Router), React 19, TypeScript, Tailwind 4 | `cd apps/web && npm i && npm run dev` |
 | `apps/angular-demo` | Angular 19, Signals, OnPush | `cd apps/angular-demo && npm i && npm start` · tests: `npm test` |
 
+## Logos y marcas
+Los logos de tecnología vienen de `simple-icons` (CC0) y se pintan en `currentColor`,
+no en el color de marca, para que contrasten en ambos temas. Los logos de Clínica Alemana,
+BID y LUXXOR están en `apps/web/public/logos/` y se declaran en `apps/web/src/data/logos.ts`;
+quita una entrada de ahí y la tarjeta deja de mostrarlo. La insignia AZ-900 es un diseño
+propio, no el arte oficial de Microsoft: para usar el oficial, descarga el PNG desde Credly
+a `public/badges/az-900.png` y pásalo como `image` a `CertBadge`.
+
 ## Sistema de diseño
 Tokens en `apps/web/src/app/globals.css` (claro/oscuro), primitivas en `apps/web/src/ui`
 (`Card`, `Button`, `Badge`, `Tabs`) documentadas en Storybook. Tipografía: Instrument Sans +
