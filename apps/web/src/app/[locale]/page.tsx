@@ -73,28 +73,20 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           <div className="grid-lines" aria-hidden="true" />
 
           <div>
-            <p className="t-eyebrow flex flex-wrap items-center gap-x-3 gap-y-2">
-              <span className="text-foreground">{profile.name}</span>
-              <span aria-hidden="true" className="inline-block h-px w-5 bg-border" />
-              <span className="inline-flex items-center gap-1.5">
-                <ChileFlag title="Chile" />
-                {profile.location}
-              </span>
+            <p className="t-eyebrow flex items-center gap-2">
+              <ChileFlag title="Chile" />
+              {profile.location}
             </p>
 
-            <h1 className="t-hero mt-6 max-w-[15ch]">{ui.hero.tagline}</h1>
+            <h1 className="t-hero mt-5">{profile.name}</h1>
 
-            <p className="mt-6 max-w-2xl text-xl sm:text-2xl">{ui.hero.kicker}</p>
-
-            <p className="mt-4 flex items-center gap-2.5">
-              <span className="t-eyebrow">{ui.hero.daily}</span>
-              <span aria-hidden="true" className="inline-block h-px w-5 bg-border" />
-              <span className="font-mono text-sm">
-                <RotatingWord words={profile.rotating} />
-              </span>
+            <p className="mt-5 text-xl text-muted sm:text-2xl">
+              {profile.role} · <RotatingWord words={profile.rotating} />
             </p>
 
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">{profile.summary}</p>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+              <span className="text-foreground">{ui.hero.kicker}</span> {profile.summary}
+            </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
               <Button href="#trabajo">{ui.cta.projects}</Button>

@@ -28,9 +28,7 @@ export const es = {
     lang: { other: "en" as Locale, label: "English", aria: "Switch to English" },
     cta: { projects: "Ver proyectos", demos: "Probar demos", cv: "Descargar CV" },
     hero: {
-      tagline: "Hago interfaces para sistemas que no pueden fallar.",
       kicker: "Ficha clínica en salud y scoring crediticio en banca.",
-      daily: "Día a día",
       paletteHint: "para navegar",
     },
     eyebrows: {
@@ -64,7 +62,7 @@ export const es = {
   profile: {
     name: "Sebastián Andrés Cofré Parra",
     role: "Software Engineer · Full Stack",
-    location: "Santiago, Chile · Remoto / Híbrido",
+    location: "Chile · Solo remoto",
     email: "scofreparr@gmail.com",
     github: "https://github.com/sebastian-cp",
     linkedin: "https://linkedin.com/in/sebastian-cofre",

@@ -16,9 +16,7 @@ export const en: Content = {
     lang: { other: "es", label: "Español", aria: "Cambiar a español" },
     cta: { projects: "View projects", demos: "Try the demos", cv: "Download CV" },
     hero: {
-      tagline: "I build interfaces for systems that can't fail.",
       kicker: "Electronic health records and multi-country credit scoring.",
-      daily: "Day to day",
       paletteHint: "to navigate",
     },
     eyebrows: {
@@ -51,7 +49,7 @@ export const en: Content = {
   },
   profile: {
     ...es.profile,
-    location: "Santiago, Chile · Remote / Hybrid",
+    location: "Chile · Remote only",
     summary:
       "I take requirements end to end: shape them with the Product Owner, build them and validate them before shipping. I bring AI into the development cycle — agents, reusable skills and Playwright tests — so the team ships faster without lowering the bar.",
     rotating: ["Angular", "React", "Node.js", "Applied AI"],

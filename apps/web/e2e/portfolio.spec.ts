@@ -5,9 +5,8 @@ test.describe("español", () => {
     await page.goto("/es");
   });
 
-  test("muestra el titular y las secciones principales", async ({ page }) => {
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("sistemas que no pueden fallar");
-    await expect(page.getByText("Sebastián Andrés Cofré Parra").first()).toBeVisible();
+  test("muestra el nombre y las secciones principales", async ({ page }) => {
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Sebastián Andrés Cofré Parra");
     for (const name of ["Dónde se usa lo que hago", "Experiencia", "Demos interactivas", "Proyectos", "Contacto"]) {
       await expect(page.getByRole("heading", { level: 2, name })).toBeVisible();
     }
@@ -136,6 +135,8 @@ test("no publica el teléfono", async ({ page }) => {
   for (const path of ["/es", "/en"]) {
     await page.goto(path);
     await expect(page.locator("body")).not.toContainText("9881");
+    await expect(page.locator("body")).not.toContainText("Santiago,");
+    await expect(page.locator("body")).not.toContainText(/Híbrido|Hybrid/);
     await expect(page.locator("body")).not.toContainText(/Disponible para proyectos|Available for projects/);
   }
 });
