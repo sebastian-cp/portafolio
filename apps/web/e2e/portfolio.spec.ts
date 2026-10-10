@@ -44,26 +44,6 @@ test.describe("español", () => {
     await expect(page.locator('[data-metric="ttfb"]')).toContainText(/ms|s/);
   });
 
-  test("accesibilidad: el árbol cambia entre sin ARIA y con ARIA", async ({ page }) => {
-    const tree = page.getByTestId("a11y-tree");
-    await expect(tree).toContainText("generic");
-    await expect(tree).toContainText("sin rol");
-    await page.getByRole("button", { name: "Con ARIA" }).click();
-    await expect(tree).toContainText(/button\s*"Añadir a favoritos"/);
-    await page.getByTestId("a11y-demo").getByRole("button").click();
-    await expect(tree).toContainText("pressed=true");
-
-    await page.getByRole("button", { name: "Campo de formulario" }).click();
-    await expect(tree).toContainText(/textbox\s*"Correo electrónico"/);
-    // Regresión: escribir no debe provocar un bucle de renders
-    await page.getByLabel("Correo electrónico").fill("hola");
-    await page.getByLabel("Correo electrónico").blur();
-    await expect(tree).toContainText("invalid=true");
-    await expect(page.getByTestId("a11y-demo").getByRole("alert")).toContainText("correo válido");
-    await page.getByRole("button", { name: "Sin ARIA" }).click();
-    await expect(tree).toContainText("sin nombre accesible");
-  });
-
   test("el filtro de proyectos usa aria-pressed", async ({ page }) => {
     await page.getByRole("button", { name: "Angular", exact: true }).click();
     await expect(page.getByRole("button", { name: "Angular", exact: true })).toHaveAttribute("aria-pressed", "true");
@@ -136,7 +116,8 @@ test("no publica el teléfono", async ({ page }) => {
     await page.goto(path);
     await expect(page.locator("body")).not.toContainText("9881");
     await expect(page.locator("body")).not.toContainText("Santiago,");
-    await expect(page.locator("body")).not.toContainText(/Híbrido|Hybrid/);
+    // Fuera del formulario de contacto: ahí "Híbrido" es una opción que elige el reclutador, no el perfil.
+    await expect(page.locator("main")).not.toContainText(/Híbrido|Hybrid/, { useInnerText: true });
     await expect(page.locator("body")).not.toContainText(/Disponible para proyectos|Available for projects/);
   }
 });

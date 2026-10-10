@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
-import { A11yPlayground } from "@/components/A11yPlayground";
 import { CommandPalette } from "@/components/CommandPalette";
+import { Contact } from "@/components/Contact";
 import { Counter } from "@/components/Counter";
 import { Experience } from "@/components/Experience";
 import { HeroCard } from "@/components/HeroCard";
+import { Hobbies } from "@/components/Hobbies";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { RagDemo } from "@/components/RagDemo";
@@ -22,8 +23,6 @@ import { OrgLogo } from "@/ui/OrgLogo";
 import { TechChip } from "@/ui/TechChip";
 import { ORG_LOGOS } from "@/data/logos";
 
-const link = "text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:decoration-accent";
-
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
@@ -35,6 +34,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     { href: "#experiencia", label: ui.nav.experience },
     { href: "#demos", label: ui.nav.demos },
     { href: "#proyectos", label: ui.nav.projects },
+    { href: "#hobbies", label: ui.nav.hobbies },
     { href: "#contacto", label: ui.nav.contact },
   ];
 
@@ -197,12 +197,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 <WebVitals t={t.vitals} />
               </div>
             </Reveal>
-            <Reveal>
-              <div id="demo-a11y" className="scroll-mt-24">
-                <h3 className="t-card mb-4">{ui.sections.a11y}</h3>
-                <A11yPlayground t={t.a11y} />
-              </div>
-            </Reveal>
           </div>
         </section>
 
@@ -227,23 +221,19 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </Reveal>
         </section>
 
+        {/* ---------------- Hobbies ---------------- */}
+        <section id="hobbies" aria-labelledby="h-hobbies" className="scroll-mt-24 pt-28">
+          <Reveal>
+            <SectionHeader id="h-hobbies" index={ui.indexes.hobbies} eyebrow={ui.eyebrows.hobbies} title={ui.sections.hobbies} />
+            <Hobbies t={t.hobbies} />
+          </Reveal>
+        </section>
+
         {/* ---------------- Contacto ---------------- */}
         <section id="contacto" aria-labelledby="h-contact" className="scroll-mt-24 pt-28">
           <Reveal>
             <SectionHeader id="h-contact" index={ui.indexes.contact} eyebrow={ui.eyebrows.contact} title={ui.sections.contact} />
-            <Card as="div" padding="lg" className="text-center">
-              <p className="t-section mx-auto max-w-[18ch]">{ui.contactIntro}</p>
-              <p className="mx-auto mt-4 max-w-md text-muted">{ui.contactSub}</p>
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Button href={`mailto:${profile.email}`}>{ui.contactCta}</Button>
-                <Button href={profile.cv} download variant="secondary">{ui.cta.cv}</Button>
-              </div>
-              <p className="mt-6 font-mono text-sm text-muted">{profile.email}</p>
-              <div className="mt-8 flex justify-center gap-6 text-sm">
-                <a className={link} href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a className={link} href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-              </div>
-            </Card>
+            <Contact t={ui.contact} cta={ui.cta} profile={profile} />
           </Reveal>
         </section>
       </main>
