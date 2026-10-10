@@ -12,6 +12,30 @@ const field =
   "w-full rounded-xl border border-border bg-surface-2 px-4 py-2.5 text-foreground transition-colors placeholder:text-faint focus:border-accent/60";
 const label = "grid gap-1.5 text-sm text-muted";
 
+/** Select con chevron propio: el nativo queda pegado al borde y no respeta el padding del campo. */
+function Select({ name, placeholder, options }: { name: string; placeholder: string; options: readonly string[] }) {
+  return (
+    <span className="relative block">
+      <select name={name} defaultValue="" className={`${field} appearance-none pr-11`}>
+        <option value="">{placeholder}</option>
+        {options.map((o) => <option key={o}>{o}</option>)}
+      </select>
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 16 16"
+        className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="m4 6 4 4 4-4" />
+      </svg>
+    </span>
+  );
+}
+
 /** Grupo de opciones tipo chip: radios nativos (teclado y lector de pantalla gratis) con aspecto de pastilla. */
 function Choices({ name, legend, options, required }: { name: string; legend: string; options: readonly string[]; required?: boolean }) {
   return (
@@ -149,17 +173,11 @@ export function ContactDialog({ t, email, children }: { t: T; email: string; chi
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className={label}>
                       {t.budget}
-                      <select name="budget" defaultValue="" className={field}>
-                        <option value="">{t.optional}</option>
-                        {t.budgetOptions.map((o) => <option key={o}>{o}</option>)}
-                      </select>
+                      <Select name="budget" placeholder={t.optional} options={t.budgetOptions} />
                     </label>
                     <label className={label}>
                       {t.timeline}
-                      <select name="timeline" defaultValue="" className={field}>
-                        <option value="">{t.optional}</option>
-                        {t.timelineOptions.map((o) => <option key={o}>{o}</option>)}
-                      </select>
+                      <Select name="timeline" placeholder={t.optional} options={t.timelineOptions} />
                     </label>
                   </div>
                 </>
