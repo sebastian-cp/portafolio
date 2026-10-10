@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import type { Content } from "@/i18n";
+import { speak } from "@/lib/a11y-speech";
 import { buildTree, type A11yNode } from "@/lib/a11y-tree";
 import { Badge } from "@/ui/Badge";
 import { Card } from "@/ui/Card";
@@ -15,6 +16,14 @@ const MODES: Mode[] = ["bad", "good"];
 const Heart = ({ on }: { on: boolean }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill={on ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" aria-hidden="true" focusable="false">
     <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8Z" />
+  </svg>
+);
+
+/** Parlante: tachado cuando el lector no anuncia un control. */
+const Speaker = ({ muted }: { muted?: boolean }) => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={`mt-0.5 shrink-0 ${muted ? "text-faint" : "text-accent"}`}>
+    <path d="M11 5 6 9H3v6h3l5 4z" />
+    {muted ? <path d="m16 9 5 6m0-6-5 6" /> : <path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" />}
   </svg>
 );
 
@@ -89,6 +98,8 @@ export function A11yPlayground({ t }: { t: Content["a11y"] }) {
     return () => mo.disconnect();
   }, [example, mode]);
 
+  const spoken = speak(tree, t.speech);
+
   const pill = "rounded-full border border-border px-3.5 py-1.5 text-sm text-muted transition-colors hover:text-foreground aria-pressed:border-transparent aria-pressed:bg-accent aria-pressed:text-accent-contrast";
 
   return (
@@ -119,19 +130,41 @@ export function A11yPlayground({ t }: { t: Content["a11y"] }) {
           <p className="mt-2 text-xs text-muted">{t.keyboard}</p>
         </section>
 
-        <section aria-label={t.treeTitle}>
-          <h4 className="t-eyebrow">{t.treeTitle}</h4>
-          <ul data-testid="a11y-tree" className="mt-3 min-h-36 space-y-1 rounded-xl border border-border bg-background p-4 font-mono text-xs">
-            {tree.map((n, i) => (
-              <li key={i} style={{ paddingLeft: `${n.depth * 1}rem` }} className="flex flex-wrap items-center gap-x-2">
-                <span className="text-accent">{n.role}</span>
-                {n.name && <span>&quot;{n.name}&quot;</span>}
-                {n.details.map((d) => <span key={d} className="text-muted">[{d}]</span>)}
-                {n.warn && <Badge tone="bad">{n.warn === "noName" ? t.noName : t.noRole}</Badge>}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-2 text-xs text-muted">{t.treeNote}</p>
+        <section aria-label={t.hearTitle}>
+          <h4 className="t-eyebrow">{t.hearTitle}</h4>
+          <div data-testid="a11y-speech" className="mt-3 min-h-36 rounded-xl border border-border bg-background p-4">
+            {spoken.length === 0 ? (
+              <p className="flex items-center gap-2.5 text-muted"><Speaker muted />{t.silence}</p>
+            ) : (
+              <ul className="space-y-2">
+                {spoken.map((s, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <Speaker muted={s.plain} />
+                    <span className={s.plain ? "text-muted" : "text-foreground"}>
+                      «{s.text}»
+                      {s.plain && <span className="ml-2 text-xs text-faint">{t.plainText}</span>}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <p className={`mt-3 text-sm leading-relaxed ${mode === "bad" ? "text-bad" : "text-good"}`}>{t.verdicts[example][mode]}</p>
+
+          <details className="group mt-3">
+            <summary className="cursor-pointer text-xs text-muted hover:text-foreground">{t.treeTitle}</summary>
+            <ul data-testid="a11y-tree" className="mt-2 space-y-1 rounded-xl border border-border bg-background p-4 font-mono text-xs">
+              {tree.map((n, i) => (
+                <li key={i} style={{ paddingLeft: `${n.depth * 1}rem` }} className="flex flex-wrap items-center gap-x-2">
+                  <span className="text-accent">{n.role}</span>
+                  {n.name && <span>&quot;{n.name}&quot;</span>}
+                  {n.details.map((d) => <span key={d} className="text-muted">[{d}]</span>)}
+                  {n.warn && <Badge tone="bad">{n.warn === "noName" ? t.noName : t.noRole}</Badge>}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-2 text-xs text-muted">{t.treeNote}</p>
+          </details>
         </section>
       </div>
     </Card>

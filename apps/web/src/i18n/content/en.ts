@@ -264,13 +264,40 @@ export const en: Content = {
   },
   a11y: {
     intro:
-      "Same UI, two implementations. On the right, the accessibility tree a screen reader sees (role and name). Switch between “No ARIA” and “With ARIA” and compare.",
+      "They look the same, but they don't sound the same. People who can't see the screen use a reader that announces what each element is and what it's called. Switch between “No ARIA” and “With ARIA” and see what that person would hear.",
+    hearTitle: "What a screen reader says",
+    silence: "Nothing. The reader skips this element.",
+    plainText: "(as plain text, not as a control)",
+    speech: {
+      roles: { button: "button", textbox: "edit text", link: "link", heading: "heading", checkbox: "checkbox", combobox: "combo box", img: "image", list: "list", listitem: "list item", alert: "alert" },
+      pressed: "pressed",
+      notPressed: "not pressed",
+      expanded: "expanded",
+      collapsed: "collapsed",
+      required: "required",
+      invalid: "invalid entry",
+      noName: "unlabeled",
+    },
+    verdicts: {
+      button: {
+        bad: "The heart says nothing and Tab never reaches it. For someone who can't see the screen, the button doesn't exist.",
+        good: "It says what it does, that it's a button and whether it's on. It works with Tab and Enter.",
+      },
+      field: {
+        bad: "It only says “edit text”: you don't know what to type. If you get it wrong, the error shows in red but nobody reads it.",
+        good: "It says what it asks for and that it's required. If you get it wrong, it reads the error out loud.",
+      },
+      disclosure: {
+        bad: "It reads like any other text: nobody knows it can be opened, and Tab never reaches it.",
+        good: "It says it's a button and whether the answer is expanded or collapsed.",
+      },
+    },
     examples: { button: "Icon button", field: "Form field", disclosure: "Accordion" },
     exampleLabel: "Example",
     modes: { bad: "No ARIA", good: "With ARIA" },
     modeLabel: "Implementation",
     demoArea: "Demo component",
-    treeTitle: "Accessibility tree",
+    treeTitle: "See the technical tree (role and name)",
     noName: "no accessible name",
     noRole: "no role: keyboard and screen readers don't see it as a control",
     keyboard: "Try Tab: in “No ARIA” the control doesn't even receive focus.",

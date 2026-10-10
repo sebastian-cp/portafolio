@@ -57,6 +57,8 @@ function accessibleName(el: Element, role: string): string {
   }
   if (role === "img") return el.getAttribute("alt") ?? "";
   if (["button", "link", "heading", "listitem", "checkbox"].includes(role)) return textOf(el);
+  // Una alerta no tiene nombre formal, pero el lector anuncia su contenido: se muestra igual.
+  if (role === "alert" || role === "status") return textOf(el);
   return "";
 }
 

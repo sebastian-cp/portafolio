@@ -294,13 +294,40 @@ export const es = {
   },
   a11y: {
     intro:
-      "Misma interfaz, dos implementaciones. A la derecha, el árbol de accesibilidad que ve un lector de pantalla (rol y nombre). Cambia entre «Sin ARIA» y «Con ARIA» y compáralos.",
+      "Se ven iguales, pero no suenan igual. Quien no ve la pantalla usa un lector que anuncia qué es cada elemento y cómo se llama. Cambia entre «Sin ARIA» y «Con ARIA» y mira qué escucharía esa persona.",
+    hearTitle: "Lo que escucha un lector de pantalla",
+    silence: "Nada. El lector se salta este elemento.",
+    plainText: "(solo como texto, no como control)",
+    speech: {
+      roles: { button: "botón", textbox: "campo de texto", link: "enlace", heading: "encabezado", checkbox: "casilla", combobox: "lista desplegable", img: "imagen", list: "lista", listitem: "elemento de lista", alert: "alerta" },
+      pressed: "presionado",
+      notPressed: "no presionado",
+      expanded: "expandido",
+      collapsed: "contraído",
+      required: "obligatorio",
+      invalid: "entrada no válida",
+      noName: "sin nombre",
+    },
+    verdicts: {
+      button: {
+        bad: "El corazón no dice nada y con Tab no se llega a él. Para quien no ve la pantalla, el botón no existe.",
+        good: "Dice qué hace, que es un botón y si está activo. Se usa con Tab y Enter.",
+      },
+      field: {
+        bad: "Solo dice «campo de texto»: no sabes qué escribir. Si te equivocas, el error se ve en rojo pero nadie lo lee.",
+        good: "Dice qué pedir y que es obligatorio. Si te equivocas, lee el error en voz alta.",
+      },
+      disclosure: {
+        bad: "Se lee como un texto más: nadie sabe que se puede abrir, y con Tab no se alcanza.",
+        good: "Avisa que es un botón y si la respuesta está expandida o contraída.",
+      },
+    },
     examples: { button: "Botón con ícono", field: "Campo de formulario", disclosure: "Acordeón" },
     exampleLabel: "Ejemplo",
     modes: { bad: "Sin ARIA", good: "Con ARIA" },
     modeLabel: "Implementación",
     demoArea: "Componente de demostración",
-    treeTitle: "Árbol de accesibilidad",
+    treeTitle: "Ver el árbol técnico (rol y nombre)",
     noName: "sin nombre accesible",
     noRole: "sin rol: el teclado y los lectores no lo ven como control",
     keyboard: "Prueba Tab: en «Sin ARIA» el control ni siquiera recibe el foco.",

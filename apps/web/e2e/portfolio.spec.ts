@@ -46,11 +46,15 @@ test.describe("español", () => {
 
   test("accesibilidad: el árbol cambia entre sin ARIA y con ARIA", async ({ page }) => {
     const tree = page.getByTestId("a11y-tree");
+    const speech = page.getByTestId("a11y-speech");
+    await expect(speech).toContainText("Nada. El lector se salta este elemento.");
     await expect(tree).toContainText("generic");
     await expect(tree).toContainText("sin rol");
     await page.getByRole("button", { name: "Con ARIA" }).click();
+    await expect(speech).toContainText("Añadir a favoritos, botón, no presionado");
     await expect(tree).toContainText(/button\s*"Añadir a favoritos"/);
     await page.getByTestId("a11y-demo").getByRole("button").click();
+    await expect(speech).toContainText("Añadir a favoritos, botón, presionado");
     await expect(tree).toContainText("pressed=true");
 
     await page.getByRole("button", { name: "Campo de formulario" }).click();
