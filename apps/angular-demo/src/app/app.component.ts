@@ -1,68 +1,33 @@
-import { ChangeDetectionStrategy, Component, computed, effect, signal } from '@angular/core';
-
-type Filter = 'all' | 'pending' | 'done';
-
-interface Task {
-  id: number;
-  title: string;
-  done: boolean;
-}
-
-const STORAGE_KEY = 'task-board';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  template: `
+    <header>
+      <strong>Angular 19 · demos</strong>
+      <nav aria-label="Principal">
+        @for (l of links; track l.path) {
+          <a [routerLink]="l.path" routerLinkActive="active" ariaCurrentWhenActive="page">{{ l.label }}</a>
+        }
+      </nav>
+    </header>
+    <router-outlet />
+  `,
+  styles: `
+    header { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; padding: .75rem 1.5rem; border-bottom: 1px solid #e7e5e4; background: #fff; }
+    nav { display: flex; gap: .5rem; }
+    a { padding: .4rem .8rem; border-radius: 999px; color: #57534e; text-decoration: none; border: 1px solid transparent; }
+    a.active { background: #4338ca; color: #fff; }
+    a:not(.active):hover { border-color: #a8a29e; }
+  `,
 })
 export class AppComponent {
-  readonly filters: { value: Filter; label: string }[] = [
-    { value: 'all', label: 'Todas' },
-    { value: 'pending', label: 'Pendientes' },
-    { value: 'done', label: 'Completadas' },
+  readonly links = [
+    { path: '/tasks', label: 'Tareas' },
+    { path: '/dashboard', label: 'Dashboard' },
+    { path: '/rag', label: 'RAG' },
   ];
-
-  readonly tasks = signal<Task[]>(this.load());
-  readonly filter = signal<Filter>('all');
-
-  readonly visible = computed(() => {
-    const f = this.filter();
-    return this.tasks().filter((t) => f === 'all' || (f === 'done') === t.done);
-  });
-  readonly remaining = computed(() => this.tasks().filter((t) => !t.done).length);
-
-  constructor() {
-    effect(() => {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.tasks()));
-      } catch {
-        /* almacenamiento no disponible */
-      }
-    });
-  }
-
-  add(input: HTMLInputElement): void {
-    const title = input.value.trim();
-    if (!title) return;
-    this.tasks.update((ts) => [...ts, { id: Date.now(), title, done: false }]);
-    input.value = '';
-    input.focus();
-  }
-
-  toggle(id: number): void {
-    this.tasks.update((ts) => ts.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
-  }
-
-  remove(id: number): void {
-    this.tasks.update((ts) => ts.filter((t) => t.id !== id));
-  }
-
-  private load(): Task[] {
-    try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]') as Task[];
-    } catch {
-      return [];
-    }
-  }
 }

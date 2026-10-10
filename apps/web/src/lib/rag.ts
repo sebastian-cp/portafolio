@@ -1,7 +1,11 @@
-import type { Chunk } from "@/data/knowledge";
+export interface Chunk {
+  id: string;
+  source: string;
+  text: string;
+}
 
 const STOP = new Set(
-  "de la el en y a los las un una por con para que se del al es lo su sus como mas pero mi me tu te cual cuales tienes tiene has hecho sobre hay son fue ha he o u e le les usas usaste haces hiciste experiencia trabajado trabajaste trabajo".split(" "),
+  "de la el en y a los las un una por con para que se del al es lo su sus como mas pero mi me tu te cual cuales tienes tiene has hecho sobre hay son fue ha he o u e le les usas usaste haces hiciste experiencia trabajado trabajaste trabajo experience worked work used the of and to in is are was with for on at by an be it as do does did you your have has had how what which can could about that this from or".split(" "),
 );
 
 /** Normaliza, quita tildes y stopwords, y reduce cada palabra a un prefijo (stem tosco). */

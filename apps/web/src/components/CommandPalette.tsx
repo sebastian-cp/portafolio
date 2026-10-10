@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import type { Content, Locale } from "@/i18n";
 import { toggleTheme } from "@/lib/theme";
 
 interface Action {
@@ -10,15 +11,15 @@ interface Action {
 }
 
 interface Props {
-  email: string;
-  github: string;
-  linkedin: string;
-  cv: string;
+  t: Content["palette"];
+  profile: Content["profile"];
+  otherLocale: Locale;
 }
 
 const fold = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 
-export function CommandPalette({ email, github, linkedin, cv }: Props) {
+export function CommandPalette({ t, profile, otherLocale }: Props) {
+  const { email, github, linkedin, cv } = profile;
   const dialog = useRef<HTMLDialogElement>(null);
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
@@ -53,18 +54,21 @@ export function CommandPalette({ email, github, linkedin, cv }: Props) {
     const go = (id: string) => () => { window.location.hash = id; };
     const ext = (url: string) => () => { window.open(url, "_blank", "noopener,noreferrer"); };
     return [
-      { id: "a-sobre", label: "Ir a Sobre mí", run: go("sobre-mi") },
-      { id: "a-exp", label: "Ir a Experiencia", run: go("experiencia") },
-      { id: "a-demo", label: "Probar demo RAG", run: go("demo-rag") },
-      { id: "a-proy", label: "Ir a Proyectos", run: go("proyectos") },
-      { id: "a-cont", label: "Ir a Contacto", run: go("contacto") },
-      { id: "a-theme", label: "Cambiar tema claro/oscuro", run: () => { toggleTheme(); } },
-      { id: "a-mail", label: "Copiar correo", run: () => { navigator.clipboard?.writeText(email).then(() => setNotice("Correo copiado")); } },
-      { id: "a-cv", label: "Descargar CV (PDF)", run: () => { window.open(cv, "_blank"); } },
-      { id: "a-gh", label: "Abrir GitHub", run: ext(github) },
-      { id: "a-li", label: "Abrir LinkedIn", run: ext(linkedin) },
+      { id: "a-sobre", label: t.actions.about, run: go("sobre-mi") },
+      { id: "a-exp", label: t.actions.experience, run: go("experiencia") },
+      { id: "a-demo", label: t.actions.rag, run: go("demo-rag") },
+      { id: "a-vit", label: t.actions.vitals, run: go("demo-vitals") },
+      { id: "a-a11y", label: t.actions.a11y, run: go("demo-a11y") },
+      { id: "a-proy", label: t.actions.projects, run: go("proyectos") },
+      { id: "a-cont", label: t.actions.contact, run: go("contacto") },
+      { id: "a-theme", label: t.actions.theme, run: () => { toggleTheme(); } },
+      { id: "a-lang", label: t.actions.lang, run: () => { window.location.assign(`/${otherLocale}`); } },
+      { id: "a-mail", label: t.actions.mail, run: () => { navigator.clipboard?.writeText(email).then(() => setNotice(t.copied)); } },
+      { id: "a-cv", label: t.actions.cv, run: () => { window.open(cv, "_blank"); } },
+      { id: "a-gh", label: t.actions.github, run: ext(github) },
+      { id: "a-li", label: t.actions.linkedin, run: ext(linkedin) },
     ];
-  }, [email, cv, github, linkedin]);
+  }, [t, email, cv, github, linkedin, otherLocale]);
 
   const filtered = actions.filter((a) => fold(a.label).includes(fold(query)));
 
@@ -88,12 +92,12 @@ export function CommandPalette({ email, github, linkedin, cv }: Props) {
         aria-keyshortcuts="Control+K Meta+K"
         className="flex items-center gap-2 rounded-lg border border-border px-3 py-1.5 text-sm text-muted hover:text-foreground"
       >
-        Buscar <kbd className="hidden font-mono text-xs sm:inline">Ctrl K</kbd>
+        {t.open} <kbd className="hidden font-mono text-xs sm:inline">Ctrl K</kbd>
       </button>
 
       <dialog
         ref={dialog}
-        aria-label="Paleta de comandos"
+        aria-label={t.title}
         onClick={(e) => { if (e.target === dialog.current) dialog.current?.close(); }}
         className="m-auto mt-[15vh] w-[min(32rem,92vw)] rounded-xl border border-border bg-surface p-0 text-foreground backdrop:bg-black/50"
       >
@@ -102,15 +106,15 @@ export function CommandPalette({ email, github, linkedin, cv }: Props) {
           aria-expanded="true"
           aria-controls={listId}
           aria-activedescendant={filtered[active] ? `${listId}-${active}` : undefined}
-          aria-label="Buscar comando"
+          aria-label={t.inputLabel}
           value={query}
           onChange={(e) => { setQuery(e.target.value); setActive(0); }}
           onKeyDown={onKeyDown}
-          placeholder="Escribe un comando…"
+          placeholder={t.placeholder}
           autoComplete="off"
           className="w-full rounded-t-xl border-b border-border bg-transparent px-4 py-3 outline-none"
         />
-        <ul id={listId} role="listbox" aria-label="Comandos" className="max-h-72 overflow-y-auto p-2">
+        <ul id={listId} role="listbox" aria-label={t.list} className="max-h-72 overflow-y-auto p-2">
           {filtered.map((a, i) => (
             <li
               key={a.id}
@@ -124,7 +128,7 @@ export function CommandPalette({ email, github, linkedin, cv }: Props) {
               {a.label}
             </li>
           ))}
-          {filtered.length === 0 && <li className="px-3 py-2 text-sm text-muted">Sin resultados</li>}
+          {filtered.length === 0 && <li className="px-3 py-2 text-sm text-muted">{t.empty}</li>}
         </ul>
       </dialog>
 

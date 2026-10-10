@@ -7,13 +7,16 @@ Monorepo con dos apps frontend:
 | `apps/web` | Next.js 15 (App Router), React 19, TypeScript, Tailwind 4 | `cd apps/web && npm i && npm run dev` |
 | `apps/angular-demo` | Angular 19, Signals, OnPush | `cd apps/angular-demo && npm i && npm start` · tests: `npm test` |
 
-## Interactividad (apps/web)
-- Paleta de comandos `Ctrl/⌘ + K` (combobox accesible sobre `<dialog>`)
-- Tema claro/oscuro sin flash (script previo al paint)
-- Experiencia en pestañas con navegación por flechas
-- Demo RAG sobre el CV: TF-IDF + similitud coseno, en el navegador (`src/lib/rag.ts`)
-- Contadores, barra de progreso de scroll y palabra rotativa (CSS + rAF, respetan `prefers-reduced-motion`)
-- Tests e2e: `cd apps/web && npm run test:e2e` (usa `CHROMIUM_PATH` si no tienes los navegadores de Playwright)
+## Demos (apps/web, ES/EN en `/es` y `/en`)
+- **Core Web Vitals en vivo**: LCP, CLS, INP, FCP y TTFB medidos con `PerformanceObserver`, más un laboratorio para provocar CLS e INP.
+- **Accesibilidad antes/después**: componentes «sin ARIA» vs «con ARIA» y árbol de accesibilidad calculado en vivo (`src/lib/a11y-tree.ts`).
+- **Demo RAG sobre el CV**: TF-IDF + similitud coseno en el navegador (`src/lib/rag.ts`).
+- **Design system en Storybook**: `src/ui` (Button, Badge, Tabs) y ProjectCard. `npm run storybook` · `npm run build:all` genera `public/storybook`.
+- Paleta `Ctrl/⌘ + K`, tema claro/oscuro sin flash, i18n con middleware por `Accept-Language`.
+- Tests e2e: `npm run test:e2e` (usa `CHROMIUM_PATH` si no tienes los navegadores de Playwright).
+
+## Demos (apps/angular-demo)
+Rutas lazy: `/tasks` (Signals + OnPush), `/dashboard` (métricas en vivo con `effect()` y SVG propio), `/rag` (mismo motor TF-IDF). Tests: `npm test`.
 
 ## Decisiones
 - **Server Components por defecto**; las islas cliente son solo los componentes interactivos.

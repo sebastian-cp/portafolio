@@ -1,0 +1,41 @@
+<main>
+  <h1>Pregúntale a mi CV</h1>
+  <p class="sub">Recuperación TF-IDF con Signals: <code>query</code> → <code>hits</code> → <code>answer</code> (computed). Sin APIs.</p>
+
+  <form (submit)="$event.preventDefault(); ask()">
+    <label for="q">Pregunta sobre mi experiencia</label>
+    <div class="row">
+      <input id="q" type="text" autocomplete="off" [value]="query()" (input)="query.set($any($event.target).value)" />
+      <button type="submit" class="primary">Preguntar</button>
+    </div>
+  </form>
+
+  <ul class="chips" aria-label="Preguntas sugeridas">
+    @for (s of suggestions; track s) {
+      <li><button type="button" (click)="ask(s)">{{ s }}</button></li>
+    }
+  </ul>
+
+  @if (asked()) {
+    <section aria-labelledby="h-hits">
+      <h2 id="h-hits">1 · Fragmentos recuperados</h2>
+      @if (!hits().length) {
+        <p class="muted">Ninguno superó el umbral de similitud.</p>
+      }
+      <ol>
+        @for (h of hits(); track h.chunk.id) {
+          <li>
+            <div class="meta"><span>{{ h.chunk.source }}</span><span>{{ h.score.toFixed(2) }}</span></div>
+            <div class="bar" aria-hidden="true"><div [style.width.%]="h.score * 100"></div></div>
+            <p>{{ h.chunk.text }}</p>
+          </li>
+        }
+      </ol>
+    </section>
+    <section aria-labelledby="h-ans">
+      <h2 id="h-ans">2 · Respuesta</h2>
+      <p [attr.aria-hidden]="streaming()">{{ visibleText() }}@if (streaming()) {<span class="caret"></span>}</p>
+      <p role="status" class="sr-only">{{ streaming() ? '' : answer() }}</p>
+    </section>
+  }
+</main>

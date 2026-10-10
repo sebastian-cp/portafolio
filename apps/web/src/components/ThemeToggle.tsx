@@ -2,12 +2,12 @@
 
 import { toggleTheme } from "@/lib/theme";
 
-export function ThemeToggle() {
+export function ThemeToggle({ label }: { label: string }) {
   return (
     <button
       type="button"
       onClick={toggleTheme}
-      aria-label="Cambiar entre tema claro y oscuro"
+      aria-label={label}
       className="theme-toggle rounded-lg border border-border p-2 text-muted hover:text-foreground"
     >
       <svg className="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">

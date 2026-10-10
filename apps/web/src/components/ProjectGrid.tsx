@@ -1,41 +1,36 @@
 "use client";
 
 import { useState } from "react";
-import type { Project, Stack } from "@/data/projects";
+import type { Content } from "@/i18n";
 import { ProjectCard } from "./ProjectCard";
 
-const filters: { value: Stack | "all"; label: string }[] = [
-  { value: "all", label: "Todos" },
-  { value: "react", label: "React / Next.js" },
-  { value: "angular", label: "Angular" },
-];
+type Filter = "all" | "react" | "angular";
 
-export function ProjectGrid({ projects }: { projects: Project[] }) {
-  const [filter, setFilter] = useState<Stack | "all">("all");
+export function ProjectGrid({ projects, t }: { projects: Content["projects"]; t: Content["projectsUi"] }) {
+  const [filter, setFilter] = useState<Filter>("all");
   const visible = filter === "all" ? projects : projects.filter((p) => p.stack === filter);
+  const filters: Filter[] = ["all", "react", "angular"];
 
   return (
     <div>
-      <div role="group" aria-label="Filtrar proyectos por tecnología" className="flex flex-wrap gap-2">
-        {filters.map(({ value, label }) => (
+      <div role="group" aria-label={t.filterLabel} className="flex flex-wrap gap-2">
+        {filters.map((f) => (
           <button
-            key={value}
+            key={f}
             type="button"
-            aria-pressed={filter === value}
-            onClick={() => setFilter(value)}
+            aria-pressed={filter === f}
+            onClick={() => setFilter(f)}
             className="rounded-full border border-border px-4 py-1.5 text-sm transition-colors aria-pressed:border-accent aria-pressed:bg-accent aria-pressed:text-accent-contrast"
           >
-            {label}
+            {t[f]}
           </button>
         ))}
       </div>
       <p className="sr-only" role="status">
-        {visible.length} proyecto{visible.length === 1 ? "" : "s"} mostrado{visible.length === 1 ? "" : "s"}
+        {(visible.length === 1 ? t.shownOne : t.shownMany).replace("{n}", String(visible.length))}
       </p>
       <div className="mt-6 grid gap-6 md:grid-cols-2">
-        {visible.map((p) => (
-          <ProjectCard key={p.slug} project={p} />
-        ))}
+        {visible.map((p) => <ProjectCard key={p.slug} project={p} t={t} />)}
       </div>
     </div>
   );

@@ -1,0 +1,47 @@
+<main>
+  <h1>Dashboard en vivo</h1>
+  <p class="sub">Métricas simuladas · Signals + <code>effect()</code> con limpieza · gráfico SVG propio</p>
+
+  <div class="controls">
+    <button type="button" class="primary" [attr.aria-pressed]="running()" (click)="running.set(!running())">
+      {{ running() ? 'Pausar' : 'Reanudar' }}
+    </button>
+
+    <div role="group" aria-label="Velocidad de actualización">
+      @for (s of speeds; track s.ms) {
+        <button type="button" [attr.aria-pressed]="speed() === s.ms" (click)="speed.set(s.ms)">{{ s.label }}</button>
+      }
+    </div>
+
+    <div role="group" aria-label="Series visibles">
+      @for (l of lines(); track l.key) {
+        <button type="button" [attr.aria-pressed]="l.on" (click)="toggleSeries(l.key)">
+          <span class="dot" [style.background]="l.color"></span>{{ l.label }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <svg [attr.viewBox]="'0 0 ' + width + ' ' + height" role="img" [attr.aria-label]="'Gráfico de líneas. ' + chartLabel()" preserveAspectRatio="none">
+    @for (y of [0.25, 0.5, 0.75]; track y) {
+      <line x1="0" [attr.y1]="height * y" [attr.x2]="width" [attr.y2]="height * y" class="grid" />
+    }
+    @for (l of lines(); track l.key) {
+      @if (l.on) {
+        <polyline [attr.points]="l.points" [attr.stroke]="l.color" fill="none" stroke-width="2" vector-effect="non-scaling-stroke" />
+      }
+    }
+  </svg>
+
+  <dl class="stats">
+    @for (l of lines(); track l.key) {
+      @if (l.on) {
+        <div>
+          <dt><span class="dot" [style.background]="l.color"></span>{{ l.label }}</dt>
+          <dd class="big">{{ l.stats.last.toFixed(l.key === 'err' ? 2 : 0) }} <small>{{ l.unit }}</small></dd>
+          <dd class="small">prom. {{ l.stats.avg.toFixed(l.key === 'err' ? 2 : 0) }} · máx. {{ l.stats.max.toFixed(l.key === 'err' ? 2 : 0) }}</dd>
+        </div>
+      }
+    }
+  </dl>
+</main>

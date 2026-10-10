@@ -15,6 +15,8 @@ const eslintConfig = [
     ignores: [
       "node_modules/**",
       ".next/**",
+      "public/storybook/**",
+      "storybook-static/**",
       "out/**",
       "build/**",
       "next-env.d.ts",

@@ -5,3 +5,5 @@ dist
 .DS_Store
 test-results
 playwright-report
+public/storybook
+storybook-static
