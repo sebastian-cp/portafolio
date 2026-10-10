@@ -1,0 +1,12 @@
+main { max-width: 36rem; margin: 3rem auto; padding: 0 1.5rem; }
+h1 { margin: 0; }
+.sub { color: #57534e; margin-top: .25rem; }
+.row { display: flex; gap: .5rem; margin-top: .25rem; }
+input[type='text'] { flex: 1; padding: .5rem; border: 1px solid #a8a29e; border-radius: .375rem; }
+button { padding: .5rem .9rem; border: 1px solid #a8a29e; border-radius: .375rem; background: #fff; cursor: pointer; }
+button[aria-pressed='true'], form button { background: #4338ca; color: #fff; border-color: #4338ca; }
+.filters { display: flex; gap: .5rem; margin: 1.25rem 0 .5rem; }
+ul { list-style: none; padding: 0; }
+li { display: flex; justify-content: space-between; align-items: center; padding: .6rem 0; border-bottom: 1px solid #e7e5e4; }
+li.done label { text-decoration: line-through; color: #78716c; }
+:focus-visible { outline: 2px solid #4338ca; outline-offset: 2px; }

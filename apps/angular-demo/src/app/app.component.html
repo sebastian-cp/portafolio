@@ -1,0 +1,40 @@
+<main>
+  <h1>Task Board</h1>
+  <p class="sub">Angular 19 · Signals · OnPush · control flow nativo</p>
+
+  <form (submit)="$event.preventDefault(); add(title)">
+    <label for="new-task">Nueva tarea</label>
+    <div class="row">
+      <input #title id="new-task" type="text" autocomplete="off" />
+      <button type="submit">Agregar</button>
+    </div>
+  </form>
+
+  <div role="group" aria-label="Filtrar tareas" class="filters">
+    @for (f of filters; track f.value) {
+      <button type="button" [attr.aria-pressed]="filter() === f.value" (click)="filter.set(f.value)">
+        {{ f.label }}
+      </button>
+    }
+  </div>
+
+  <p role="status" class="count">
+    {{ remaining() }} {{ remaining() === 1 ? 'pendiente' : 'pendientes' }}
+  </p>
+
+  @if (visible().length) {
+    <ul>
+      @for (t of visible(); track t.id) {
+        <li [class.done]="t.done">
+          <label>
+            <input type="checkbox" [checked]="t.done" (change)="toggle(t.id)" />
+            {{ t.title }}
+          </label>
+          <button type="button" (click)="remove(t.id)" [attr.aria-label]="'Eliminar ' + t.title">✕</button>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="empty">No hay tareas para mostrar.</p>
+  }
+</main>
