@@ -1,6 +1,4 @@
-import { es, type Content } from "./es";
-
-const REPO = "https://github.com/sebastian-cp/portafolio";
+import { es, REPO, STORYBOOK, angularDemo, type Content } from "./es";
 
 export const en: Content = {
   locale: "en",
@@ -179,19 +177,19 @@ export const en: Content = {
       "What do you do with AI in development?",
     ],
     knowledge: [
-      { id: "k1", source: "Summary", text: "I am a Full Stack Software Engineer with experience in electronic health records in healthcare and multi-country credit scoring systems in banking." },
-      { id: "k2", source: "NTT DATA · Clínica Alemana", text: "I work as a Rising Software Engineer on the Clínica Alemana de Santiago project since January 2025: I analyze, design, develop, validate and deliver requirements using agile methodologies." },
-      { id: "k3", source: "NTT DATA · Mentoring", text: "I train new developers, support their onboarding and their adoption of AI workflows. I coordinate requirements and timelines with Product Owners." },
-      { id: "k4", source: "NTT DATA · AI", text: "I define standards, instructions and flows for generative AI agents, hooks and skills, and create reusable skills that automate repetitive tasks in the development lifecycle." },
-      { id: "k5", source: "NTT DATA · Tokens", text: "I optimize context and tokens: I cut unnecessary information in interactions with generative models to make them more efficient." },
-      { id: "k6", source: "Testing", text: "I design and automate functional tests with Playwright, assisted by AI to generate and run scenarios. I also use Jest and unit tests." },
-      { id: "k7", source: "LUXXOR · Chatbot", text: "At LUXXOR I built a virtual assistance chatbot with the OpenAI API for Web and WhatsApp, using the GPT-3.5 model with tuned temperature, token limit and system prompt." },
-      { id: "k8", source: "LUXXOR · RAG", text: "I implemented a RAG flow: I indexed the knowledge base with embeddings in ChromaDB (a vector database) for semantic search and to retrieve context before generating the answer." },
-      { id: "k9", source: "LUXXOR · Frontend", text: "I built dynamic interfaces with React and Material-UI, backed by robust Node.js services." },
-      { id: "k10", source: "BID · Angular", text: "On the BID project (Inter-American Development Bank) I built the front end of a multi-country credit scoring banking application with Angular, TypeScript and Bootstrap." },
-      { id: "k11", source: "BID · Quality", text: "I applied static analysis with SonarQube and wrote unit tests for a more stable and maintainable product." },
-      { id: "k12", source: "Education", text: "I am a Computer Engineer graduated in 2025 from INACAP and hold the Microsoft Azure Fundamentals AZ-900 certification." },
-      { id: "k13", source: "Stack", text: "My stack: Angular, React, TypeScript, JavaScript, Node.js, Django, Python, PL/SQL; Oracle, PostgreSQL and ChromaDB databases; Git, GitLab, Jenkins, ArgoCD, Jira and Bitbucket tools." },
+      { id: "k1", source: "Summary", text: "I am a Full Stack Software Engineer with experience in electronic health records in healthcare and multi-country credit scoring systems in banking.", tags: "who are you yourself introduce about profile summary background years career full stack" },
+      { id: "k2", source: "NTT DATA · Clínica Alemana", text: "I work as a Rising Software Engineer on the Clínica Alemana de Santiago project since January 2025: I analyze, design, develop, validate and deliver requirements using agile methodologies.", tags: "today currently now current role job position company where employer ntt data healthcare clinic" },
+      { id: "k3", source: "NTT DATA · Mentoring", text: "I train new developers, support their onboarding and their adoption of AI workflows. I coordinate requirements and timelines with Product Owners.", tags: "mentor mentoring train teach onboarding leadership lead team coordinate product owner" },
+      { id: "k4", source: "NTT DATA · AI", text: "I define standards, instructions and flows for generative AI agents, hooks and skills, and create reusable skills that automate repetitive tasks in the development lifecycle.", tags: "ai artificial intelligence agents copilot claude automation prompts generative" },
+      { id: "k5", source: "NTT DATA · Tokens", text: "I optimize context and tokens: I cut unnecessary information in interactions with generative models to make them more efficient.", tags: "tokens context optimize cost efficiency llm models" },
+      { id: "k6", source: "Testing", text: "I design and automate functional tests with Playwright, assisted by AI to generate and run scenarios. I also use Jest and unit tests.", tags: "tests testing qa quality automation e2e unit jest playwright" },
+      { id: "k7", source: "LUXXOR · Chatbot", text: "At LUXXOR I built a virtual assistance chatbot with the OpenAI API for Web and WhatsApp, using the GPT-3.5 model with tuned temperature, token limit and system prompt.", tags: "chatbot bot chatgpt openai gpt whatsapp assistant llm" },
+      { id: "k8", source: "LUXXOR · RAG", text: "I implemented a RAG flow: I indexed the knowledge base with embeddings in ChromaDB (a vector database) for semantic search and to retrieve context before generating the answer.", tags: "rag embeddings vector semantic search chromadb" },
+      { id: "k9", source: "LUXXOR · Frontend", text: "I built dynamic interfaces with React and Material-UI, backed by robust Node.js services.", tags: "react frontend front interfaces ui material node backend" },
+      { id: "k10", source: "BID · Angular", text: "On the BID project (Inter-American Development Bank) I built the front end of a multi-country credit scoring banking application with Angular, TypeScript and Bootstrap.", tags: "angular banking bank bid finance credit scoring frontend typescript" },
+      { id: "k11", source: "BID · Quality", text: "I applied static analysis with SonarQube and wrote unit tests for a more stable and maintainable product.", tags: "quality sonarqube clean code unit maintainable" },
+      { id: "k12", source: "Education", text: "I am a Computer Engineer graduated in 2025 from INACAP and hold the Microsoft Azure Fundamentals AZ-900 certification.", tags: "education study studied university degree school engineer certifications certified azure inacap" },
+      { id: "k13", source: "Stack", text: "My stack: Angular, React, TypeScript, JavaScript, Node.js, Django, Python, PL/SQL; Oracle, PostgreSQL and ChromaDB databases; Git, GitLab, Jenkins, ArgoCD, Jira and Bitbucket tools.", tags: "technologies languages tools know stack databases sql python backend devops" },
     ],
   },
   vitals: {
@@ -285,7 +283,7 @@ export const en: Content = {
         "Playwright e2e tests in both languages",
       ],
       tech: ["Next.js 15", "React 19", "TypeScript", "Tailwind 4", "Playwright"],
-      repo: `${REPO}/tree/main/apps/web`,
+      repo: `${REPO}/apps/web`,
     },
     {
       slug: "web-vitals",
@@ -298,7 +296,7 @@ export const en: Content = {
         "Every metric explains how to fix it",
       ],
       tech: ["React 19", "PerformanceObserver", "Event Timing", "Layout Instability"],
-      repo: `${REPO}/blob/main/apps/web/src/components/WebVitals.tsx`,
+      repo: `${REPO}/apps/web/src/components/WebVitals.tsx`,
     },
     {
       slug: "a11y-playground",
@@ -311,7 +309,7 @@ export const en: Content = {
         "Focus and keyboard: what breaks without semantics",
       ],
       tech: ["React 19", "WAI-ARIA", "MutationObserver"],
-      repo: `${REPO}/blob/main/apps/web/src/lib/a11y-tree.ts`,
+      repo: `${REPO}/apps/web/src/lib/a11y-tree.ts`,
     },
     {
       slug: "demo-rag",
@@ -324,7 +322,7 @@ export const en: Content = {
         "Pure, testable retrieval logic",
       ],
       tech: ["React 19", "TypeScript", "TF-IDF", "Cosine similarity"],
-      repo: `${REPO}/blob/main/apps/web/src/lib/rag.ts`,
+      repo: `${REPO}/apps/web/src/lib/rag.ts`,
     },
     {
       slug: "design-system",
@@ -337,8 +335,8 @@ export const en: Content = {
         "a11y addon to catch contrast and semantics issues",
       ],
       tech: ["Storybook 9", "React 19", "Tailwind 4", "WAI-ARIA"],
-      demo: process.env.NEXT_PUBLIC_STORYBOOK_URL ?? "/storybook/index.html",
-      repo: `${REPO}/tree/main/apps/web/src/ui`,
+      demo: STORYBOOK,
+      repo: `${REPO}/apps/web/src/ui`,
     },
     {
       slug: "angular-grid",
@@ -351,7 +349,8 @@ export const en: Content = {
         "The windowing maths is pure and covered by tests",
       ],
       tech: ["Angular 19", "Signals", "TypeScript", "Jasmine"],
-      repo: `${REPO}/tree/main/apps/angular-demo/src/app/grid`,
+      demo: angularDemo("grid"),
+      repo: `${REPO}/apps/angular-demo/src/app/grid`,
     },
     {
       slug: "angular-rxjs",
@@ -364,7 +363,8 @@ export const en: Content = {
         "Loading, empty and error states, with stale results flagged",
       ],
       tech: ["Angular 19", "RxJS", "Signals", "Jasmine"],
-      repo: `${REPO}/tree/main/apps/angular-demo/src/app/search`,
+      demo: angularDemo("search"),
+      repo: `${REPO}/apps/angular-demo/src/app/search`,
     },
     {
       slug: "angular-rag",
@@ -377,7 +377,8 @@ export const en: Content = {
         "Unit tests for the retrieval engine",
       ],
       tech: ["Angular 19", "Signals", "TF-IDF", "Jasmine"],
-      repo: `${REPO}/tree/main/apps/angular-demo/src/app/rag`,
+      demo: angularDemo("rag"),
+      repo: `${REPO}/apps/angular-demo/src/app/rag`,
     },
   ],
 };
