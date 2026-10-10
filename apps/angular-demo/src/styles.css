@@ -44,6 +44,11 @@
 
 * { box-sizing: border-box; }
 
+/* El encabezado queda fijo y cada demo scrollea dentro del espacio restante. Así
+   la demo de la tabla puede ajustarse al alto de la ventana (o del modal). */
+app-root { display: flex; flex-direction: column; height: 100dvh; }
+app-root > :not(header, router-outlet) { flex: 1; min-height: 0; overflow-y: auto; }
+
 body {
   margin: 0;
   background: var(--background);
