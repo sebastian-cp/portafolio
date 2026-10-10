@@ -8,7 +8,7 @@ export const en: Content = {
   },
   ui: {
     skip: "Skip to content",
-    nav: { about: "Work", experience: "Experience", demos: "Demos", projects: "Projects", contact: "Contact" },
+    nav: { about: "Work", experience: "Experience", demos: "Demos", projects: "Projects", hobbies: "Hobbies", contact: "Contact" },
     mainNav: "Main",
     themeToggle: "Switch between light and dark theme",
     lang: { other: "es", label: "Español", aria: "Cambiar a español" },
@@ -22,9 +22,10 @@ export const en: Content = {
       experience: "Track record",
       demos: "Running code",
       projects: "Work",
+      hobbies: "Away from the keyboard",
       contact: "Say hello",
     },
-    indexes: { about: "01", experience: "02", demos: "03", projects: "04", contact: "05" },
+    indexes: { about: "01", experience: "02", demos: "03", projects: "04", hobbies: "05", contact: "06" },
     asides: {
       demos: "Everything runs in your browser",
       projects: "Filter by technology",
@@ -38,6 +39,7 @@ export const en: Content = {
       vitals: "Live Core Web Vitals",
       a11y: "Accessibility: before and after",
       projects: "Projects",
+      hobbies: "Photography and travel",
       contact: "Contact",
     },
     contact: {
@@ -260,6 +262,7 @@ export const en: Content = {
       vitals: "See live Core Web Vitals",
       a11y: "See the accessibility demo",
       projects: "Go to Projects",
+      hobbies: "See photography",
       contact: "Go to Contact",
       theme: "Toggle light/dark theme",
       lang: "Cambiar a español",
@@ -268,6 +271,19 @@ export const en: Content = {
       github: "Open GitHub",
       linkedin: "Open LinkedIn",
     },
+  },
+  hobbies: {
+    intro:
+      "When I close the editor, I pick up the camera. I love traveling and photographing what I find along the way, especially the small details that show up when you walk without hurry.",
+    tags: ["Photography", "Travel", "Nature"],
+    galleryLabel: "Photo gallery",
+    photos: [
+      { id: "lago", alt: "Shore of Lake Collico with smooth stones and still water reflecting the sky, hills in the background", caption: "Lake Collico" },
+      { id: "bosque", alt: "Native forest on a slope with monkey puzzle trees, fallen trunks and moss, seen from below", caption: "Native forest" },
+      { id: "glaciar", alt: "Turquoise lagoon at the foot of a dark rocky hill with remnants of ice from the Pichillancahue Glacier", caption: "Pichillancahue Glacier" },
+      { id: "flores", alt: "White columbines in the foreground with green foliage and an overcast evening sky", caption: "Columbines" },
+      { id: "cerezo", alt: "Plum tree branches covered in white blossoms against a clear blue sky", caption: "Plum tree in bloom" },
+    ],
   },
   projectsUi: {
     filterLabel: "Filter projects by technology",
