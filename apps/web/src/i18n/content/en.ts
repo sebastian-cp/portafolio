@@ -59,7 +59,7 @@ export const en: Content = {
   },
   profile: {
     ...es.profile,
-    location: "Chile · Remote only",
+    location: "Chile · remote",
     summary:
       "I take requirements end to end: shape them with the Product Owner, build them and validate them before shipping. I bring AI into the development cycle — agents, reusable skills and Playwright tests — so the team ships faster without lowering the bar.",
     rotating: ["Angular", "React", "Node.js", "Applied AI"],

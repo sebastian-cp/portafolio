@@ -81,7 +81,7 @@ export const es = {
   profile: {
     name: "Sebastián Andrés Cofré Parra",
     role: "Software Engineer · Full Stack",
-    location: "Chile · Solo remoto",
+    location: "Chile · remoto",
     email: "scofreparr@gmail.com",
     github: "https://github.com/sebastian-cp",
     linkedin: "https://linkedin.com/in/sebastian-cofre",
