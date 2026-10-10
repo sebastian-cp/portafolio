@@ -52,7 +52,7 @@
               <span role="gridcell" class="mono">{{ r.code }}</span>
               <span role="gridcell">{{ r.name }}</span>
               <span role="gridcell" class="mono dim">{{ r.module }}</span>
-              <span role="gridcell"><em class="tag" [class]="'tag ' + r.status">{{ r.status }}</em></span>
+              <span role="gridcell" class="status"><em class="tag" [class]="'tag ' + r.status">{{ r.status }}</em></span>
               <span role="gridcell" class="mono right">{{ r.ms }} ms</span>
               <span role="gridcell" class="mono right dim">{{ formatDate(r.at) }}</span>
             </div>

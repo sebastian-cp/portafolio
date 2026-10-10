@@ -1,7 +1,7 @@
 import { Chunk } from './knowledge';
 
 const STOP = new Set(
-  'de la el en y a los las un una por con para que se del al es lo su sus como mas pero mi me tu te cual cuales tienes tiene has hecho sobre hay son fue ha he o u e le les usas usaste haces hiciste experiencia trabajado trabajaste trabajo'.split(' '),
+  'de la el en y a los las un una por con para que se del al es lo su sus como mas pero mi me tu te cual cuales tienes tiene has hecho sobre hay son fue ha he o u e le les usas usaste haces hiciste experiencia trabajado trabajaste'.split(' '),
 );
 
 /** Normaliza, quita tildes y stopwords, y reduce cada palabra a un prefijo (stem tosco). */
@@ -22,7 +22,7 @@ export interface Hit {
 
 /** TF-IDF + similitud coseno sobre los fragmentos. */
 export function retrieve(query: string, chunks: Chunk[], k = 3): Hit[] {
-  const docs = chunks.map((c) => tokenize(`${c.source} ${c.text}`));
+  const docs = chunks.map((c) => tokenize(`${c.source} ${c.text} ${c.tags ?? ''}`));
   const df = new Map<string, number>();
   for (const d of docs) for (const t of new Set(d)) df.set(t, (df.get(t) ?? 0) + 1);
   const idf = (t: string) => Math.log(1 + chunks.length / (df.get(t) ?? chunks.length));
