@@ -35,6 +35,11 @@ export function HeroCard({ profile, experience }: { profile: Content["profile"];
           <Str>{role}</Str>
           <span className={punct}>,</span>
           {"\n  "}
+          <span className={key}>experiencia</span>
+          <span className={punct}>: </span>
+          <Str>3 años</Str>
+          <span className={punct}>,</span>
+          {"\n  "}
           <span className={key}>stack</span>
           <span className={punct}>: [</span>
           <Str>Angular</Str>
@@ -60,6 +65,24 @@ export function HeroCard({ profile, experience }: { profile: Content["profile"];
           <span className={punct}>: </span>
           <Str>RAG · agentes · Playwright</Str>
           <span className={punct}>,</span>
+          {"\n  "}
+          <span className={key}>idiomas</span>
+          <span className={punct}>: [</span>
+          <Str>español</Str>
+          <span className={punct}>, </span>
+          <Str>inglés básico</Str>
+          <span className={punct}>],</span>
+          {"\n  "}
+          <span className={key}>zona</span>
+          <span className={punct}>: </span>
+          <Str>America/Santiago</Str>
+          <span className={punct}>,</span>
+          {"\n  "}
+          <span className={key}>disponible</span>
+          <span className={punct}>: </span>
+          <span className="text-good">true</span>
+          <span className={punct}>,</span>
+          <span className="pulse-dot ml-2.5 inline-block h-1.5 w-1.5 rounded-full bg-good align-middle" />
           {"\n"}
           <span className={punct}>{"}"}</span>
         </code>
