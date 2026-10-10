@@ -1,5 +1,7 @@
-:host { display: block; }
-main { max-width: 64rem; margin: 2.5rem auto; padding: 0 1.5rem; }
+/* La página ocupa exactamente el alto disponible y la tabla toma lo que sobra:
+   así hay un solo scroll (el de la tabla) y los filtros nunca salen de vista. */
+:host { display: flex; flex-direction: column; }
+main { flex: 1; min-height: 0; display: flex; flex-direction: column; width: 100%; max-width: 64rem; margin: 0 auto; padding: 1.5rem 1.5rem 1rem; }
 h1 { margin: 0; }
 
 .toolbar { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem; margin: 1.5rem 0 1rem; }
@@ -14,7 +16,10 @@ h1 { margin: 0; }
 .meters dt { font-family: var(--mono); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
 .meters dd { margin: .3rem 0 0; font-size: 1.1rem; font-weight: 600; font-variant-numeric: tabular-nums; }
 
-.grid-wrap { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+.grid-wrap {
+  flex: 1; min-height: 12rem; display: flex; flex-direction: column;
+  border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface);
+}
 .head, .tr { display: grid; grid-template-columns: 7.5rem 1fr 7rem 5.5rem 6rem 7rem; align-items: center; }
 .head { border-bottom: 1px solid var(--border); background: var(--surface-2); }
 .th {
@@ -26,19 +31,26 @@ h1 { margin: 0; }
 .th:hover { color: var(--foreground); }
 .arrow { color: var(--accent); }
 
-.viewport { height: 26rem; overflow-y: auto; overflow-x: hidden; contain: strict; }
+.viewport { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; contain: strict; }
 .viewport:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .spacer { position: relative; }
 .rows { position: absolute; inset-inline: 0; top: 0; will-change: transform; }
 
 .tr { height: 40px; padding: 0 .75rem; border-bottom: 1px solid color-mix(in oklab, var(--border) 55%, transparent); font-size: .85rem; }
 .tr > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-inline-end: .5rem; }
+/* La etiqueta de estado nunca se trunca: sin recorte, su borde se ve completo. */
+.tr > .status { overflow: visible; display: flex; align-items: center; }
 .tr.cursor { background: var(--accent-soft); box-shadow: inset 2px 0 0 var(--accent); }
 .mono { font-family: var(--mono); font-size: .78rem; }
 .dim { color: var(--muted); }
 .right { text-align: right; }
 
-.tag { font-style: normal; font-family: var(--mono); font-size: .68rem; padding: .1rem .4rem; border-radius: .3rem; border: 1px solid; }
+/* inline-block: el padding y el borde cuentan en el alto de la línea, así la celda
+   (overflow: hidden) no le corta el borde inferior. */
+.tag {
+  display: inline-block; vertical-align: middle; line-height: 1.4;
+  font-style: normal; font-family: var(--mono); font-size: .68rem; padding: .05rem .4rem; border-radius: .3rem; border: 1px solid;
+}
 .tag.ok { color: var(--good); border-color: color-mix(in oklab, var(--good) 40%, transparent); }
 .tag.slow { color: #d79a2b; border-color: color-mix(in oklab, #d79a2b 40%, transparent); }
 .tag.error { color: var(--bad); border-color: color-mix(in oklab, var(--bad) 40%, transparent); }

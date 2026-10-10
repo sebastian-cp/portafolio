@@ -88,7 +88,7 @@ export class GridComponent {
       this.rafPending = false;
       if (this.lastFrame) {
         const delta = now - this.lastFrame;
-        if (delta < 400) this.frameMs.update((prev) => Math.max(prev * 0.9, Math.round(delta * 10) / 10));
+        if (delta < 400) this.frameMs.update((prev) => Math.round(Math.max(prev * 0.9, delta) * 10) / 10);
       }
       this.lastFrame = now;
       this.scrollTop.set(el.scrollTop);

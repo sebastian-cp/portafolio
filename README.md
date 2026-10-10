@@ -39,8 +39,6 @@ cd apps/angular-demo && npm test -- --watch=false && npx ng build
 
 - **Core Web Vitals en vivo**: LCP, CLS, INP, FCP y TTFB medidos con `PerformanceObserver`,
   más un laboratorio para provocar CLS e INP a propósito.
-- **Accesibilidad antes/después**: los mismos componentes con y sin ARIA, y el árbol de
-  accesibilidad calculado en vivo desde el DOM (`src/lib/a11y-tree.ts`).
 - **RAG sobre el CV**: TF-IDF y similitud coseno en el navegador, sin APIs (`src/lib/rag.ts`).
 - **Design system en Storybook**: `npm run storybook`. `npm run build:all` lo genera en
   `public/storybook`, que es lo que necesita el enlace de la tarjeta en producción.

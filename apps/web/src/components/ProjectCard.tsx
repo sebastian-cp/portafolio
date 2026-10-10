@@ -1,11 +1,14 @@
 import type { Content } from "@/i18n";
 import { Card } from "@/ui/Card";
 import { TechChip } from "@/ui/TechChip";
+import { DemoDialog } from "./DemoDialog";
 
 type Project = Content["projects"][number];
 
 export function ProjectCard({ project, t }: { project: Project; t: Content["projectsUi"] }) {
   const { title, stack, summary, highlights, tech, demo, repo } = project;
+  // Las demos de Angular son otra app: se abren embebidas en un modal en vez de en otra pestaña.
+  const embed = stack === "angular";
   const link = "text-accent underline underline-offset-4";
   return (
     <Card as="article" className="flex h-full flex-col">
@@ -26,7 +29,8 @@ export function ProjectCard({ project, t }: { project: Project; t: Content["proj
         {tech.map((x) => <li key={x}><TechChip name={x} /></li>)}
       </ul>
       <footer className="mt-auto flex gap-4 border-t border-border pt-4 text-sm font-medium" style={{ marginTop: "1.5rem" }}>
-        {demo && <a className={link} href={demo} target="_blank" rel="noopener noreferrer">{t.demo}<span className="sr-only"> {t.of} {title}</span></a>}
+        {demo && embed && <DemoDialog src={demo} title={title} t={t} className={`${link} cursor-pointer`} />}
+        {demo && !embed && <a className={link} href={demo} target="_blank" rel="noopener noreferrer">{t.demo}<span className="sr-only"> {t.of} {title}</span></a>}
         {repo && <a className={link} href={repo} target="_blank" rel="noopener noreferrer">{t.code}<span className="sr-only"> {t.of} {title}</span></a>}
       </footer>
     </Card>
