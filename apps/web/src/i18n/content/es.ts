@@ -294,7 +294,7 @@ export const es = {
   },
   hobbies: {
     intro:
-      "Cuando cierro el editor, salgo con la cámara. Me gusta viajar y fotografiar lo que encuentro en el camino: lagos, bosques, glaciares y los detalles chicos que aparecen si uno camina sin apuro.",
+      "Cuando cierro el editor, salgo con la cámara. Me gusta viajar y fotografiar lo que encuentro en el camino, sobre todo los detalles chicos que aparecen si uno camina sin apuro.",
     tags: ["Fotografía", "Viajes", "Naturaleza"],
     galleryLabel: "Galería de fotografías",
     photos: [

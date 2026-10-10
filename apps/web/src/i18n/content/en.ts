@@ -264,7 +264,7 @@ export const en: Content = {
   },
   hobbies: {
     intro:
-      "When I close the editor, I pick up the camera. I love traveling and photographing what I find along the way: lakes, forests, glaciers and the small details that show up when you walk without hurry.",
+      "When I close the editor, I pick up the camera. I love traveling and photographing what I find along the way, especially the small details that show up when you walk without hurry.",
     tags: ["Photography", "Travel", "Nature"],
     galleryLabel: "Photo gallery",
     photos: [
