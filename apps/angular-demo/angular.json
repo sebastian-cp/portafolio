@@ -54,6 +54,13 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "vercel": {
+              "baseHref": "/demos/",
+              "outputPath": {
+                "base": "dist/vercel",
+                "browser": "demos"
+              }
             }
           },
           "defaultConfiguration": "production"

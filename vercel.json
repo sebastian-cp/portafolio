@@ -1,0 +1,22 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "web": {
+      "root": "apps/web",
+      "framework": "nextjs",
+      "buildCommand": "npm run build:all"
+    },
+    "angular-demo": {
+      "root": "apps/angular-demo",
+      "framework": "angular",
+      "buildCommand": "npm run build:vercel",
+      "outputDirectory": "dist/vercel",
+      "rewrites": [{ "source": "/demos/(.*)", "destination": "/demos/index.html" }]
+    }
+  },
+  "redirects": [{ "source": "/demos", "destination": "/demos/", "permanent": true }],
+  "rewrites": [
+    { "source": "/demos/(.*)", "destination": { "service": "angular-demo" } },
+    { "source": "/(.*)", "destination": { "service": "web" } }
+  ]
+}
