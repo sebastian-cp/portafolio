@@ -298,11 +298,11 @@ export const es = {
     tags: ["Fotografía", "Viajes", "Naturaleza"],
     galleryLabel: "Galería de fotografías",
     photos: [
-      { id: "lago", alt: "Orilla de un lago con piedras lisas y agua quieta que refleja el cielo, con cerros al fondo", caption: "Lago" },
+      { id: "lago", alt: "Orilla del Lago Collico con piedras lisas y agua quieta que refleja el cielo, con cerros al fondo", caption: "Lago Collico" },
       { id: "bosque", alt: "Bosque nativo en pendiente con araucarias, troncos caídos y musgo, visto desde abajo", caption: "Bosque nativo" },
-      { id: "glaciar", alt: "Laguna turquesa al pie de un cerro de roca oscura con restos de hielo glaciar", caption: "Glaciar" },
+      { id: "glaciar", alt: "Laguna turquesa al pie de un cerro de roca oscura con restos de hielo del Glaciar Pichillancahue", caption: "Glaciar Pichillancahue" },
       { id: "flores", alt: "Aguileñas blancas en primer plano con follaje verde y cielo nublado al atardecer", caption: "Aguileñas" },
-      { id: "cerezo", alt: "Ramas cubiertas de flores blancas contra un cielo azul despejado", caption: "Árbol en flor" },
+      { id: "cerezo", alt: "Ramas de un ciruelo cubiertas de flores blancas contra un cielo azul despejado", caption: "Ciruelo en flor" },
     ],
   },
   projectsUi: {

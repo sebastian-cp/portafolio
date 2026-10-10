@@ -268,11 +268,11 @@ export const en: Content = {
     tags: ["Photography", "Travel", "Nature"],
     galleryLabel: "Photo gallery",
     photos: [
-      { id: "lago", alt: "Lakeshore with smooth stones and still water reflecting the sky, hills in the background", caption: "Lake" },
+      { id: "lago", alt: "Shore of Lake Collico with smooth stones and still water reflecting the sky, hills in the background", caption: "Lake Collico" },
       { id: "bosque", alt: "Native forest on a slope with monkey puzzle trees, fallen trunks and moss, seen from below", caption: "Native forest" },
-      { id: "glaciar", alt: "Turquoise lagoon at the foot of a dark rocky hill with remnants of glacier ice", caption: "Glacier" },
+      { id: "glaciar", alt: "Turquoise lagoon at the foot of a dark rocky hill with remnants of ice from the Pichillancahue Glacier", caption: "Pichillancahue Glacier" },
       { id: "flores", alt: "White columbines in the foreground with green foliage and an overcast evening sky", caption: "Columbines" },
-      { id: "cerezo", alt: "Branches covered in white blossoms against a clear blue sky", caption: "Tree in bloom" },
+      { id: "cerezo", alt: "Plum tree branches covered in white blossoms against a clear blue sky", caption: "Plum tree in bloom" },
     ],
   },
   projectsUi: {
