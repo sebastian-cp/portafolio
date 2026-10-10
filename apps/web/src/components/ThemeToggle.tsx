@@ -8,7 +8,7 @@ export function ThemeToggle({ label }: { label: string }) {
       type="button"
       onClick={toggleTheme}
       aria-label={label}
-      className="theme-toggle rounded-lg border border-border p-2 text-muted hover:text-foreground"
+      className="theme-toggle rounded-lg border border-border p-2 text-muted transition-colors hover:border-accent/50 hover:text-foreground"
     >
       <svg className="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
         <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />

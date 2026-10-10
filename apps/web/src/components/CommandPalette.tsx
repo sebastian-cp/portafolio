@@ -89,17 +89,23 @@ export function CommandPalette({ t, profile, otherLocale }: Props) {
       <button
         type="button"
         onClick={open}
+        aria-label={t.open}
         aria-keyshortcuts="Control+K Meta+K"
-        className="flex items-center gap-2 rounded-lg border border-border px-3 py-1.5 text-sm text-muted hover:text-foreground"
+        className="flex items-center gap-2 rounded-lg border border-border bg-surface/60 py-2 pl-3 pr-2 text-sm text-muted transition-colors hover:border-accent/50 hover:text-foreground"
       >
-        {t.open} <kbd className="hidden font-mono text-xs sm:inline">Ctrl K</kbd>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" />
+          <path d="m20 20-3.5-3.5" />
+        </svg>
+        <span className="hidden sm:inline">{t.open}</span>
+        <kbd className="hidden sm:inline">Ctrl K</kbd>
       </button>
 
       <dialog
         ref={dialog}
         aria-label={t.title}
         onClick={(e) => { if (e.target === dialog.current) dialog.current?.close(); }}
-        className="m-auto mt-[15vh] w-[min(32rem,92vw)] rounded-xl border border-border bg-surface p-0 text-foreground backdrop:bg-black/50"
+        className="panel-in m-auto mt-[14vh] w-[min(34rem,92vw)] rounded-2xl border border-border bg-surface p-0 text-foreground shadow-[0_24px_80px_-20px_rgba(0,0,0,0.6)] backdrop:bg-black/60 backdrop:backdrop-blur-sm"
       >
         <input
           role="combobox"
@@ -112,7 +118,7 @@ export function CommandPalette({ t, profile, otherLocale }: Props) {
           onKeyDown={onKeyDown}
           placeholder={t.placeholder}
           autoComplete="off"
-          className="w-full rounded-t-xl border-b border-border bg-transparent px-4 py-3 outline-none"
+          className="w-full rounded-t-2xl border-b border-border bg-transparent px-4 py-3.5 outline-none placeholder:text-faint"
         />
         <ul id={listId} role="listbox" aria-label={t.list} className="max-h-72 overflow-y-auto p-2">
           {filtered.map((a, i) => (
@@ -123,18 +129,18 @@ export function CommandPalette({ t, profile, otherLocale }: Props) {
               aria-selected={i === active}
               onMouseMove={() => setActive(i)}
               onClick={() => run(a)}
-              className="cursor-pointer rounded-lg px-3 py-2 text-sm aria-selected:bg-accent aria-selected:text-accent-contrast"
+              className="cursor-pointer rounded-lg px-3 py-2 text-sm text-muted aria-selected:bg-accent-soft aria-selected:text-foreground"
             >
               {a.label}
             </li>
           ))}
-          {filtered.length === 0 && <li className="px-3 py-2 text-sm text-muted">{t.empty}</li>}
+          {filtered.length === 0 && <li className="px-3 py-2 text-sm text-faint">{t.empty}</li>}
         </ul>
       </dialog>
 
       <div role="status" className="sr-only">{notice}</div>
       {notice && (
-        <div aria-hidden="true" className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-lg bg-foreground px-4 py-2 text-sm text-background">
+        <div aria-hidden="true" className="panel-in fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-xl border border-border bg-surface px-4 py-2.5 text-sm shadow-[0_16px_40px_-12px_rgba(0,0,0,0.5)]">
           {notice}
         </div>
       )}

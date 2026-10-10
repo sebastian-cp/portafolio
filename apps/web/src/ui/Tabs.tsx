@@ -55,14 +55,14 @@ export function Tabs({ items, label, orientation = "vertical", className = "" }:
             aria-controls={`${uid}-panel-${item.id}`}
             tabIndex={active === i ? 0 : -1}
             onClick={() => setActive(i)}
-            className="shrink-0 rounded-lg border border-border px-4 py-3 text-left transition-colors aria-selected:border-accent aria-selected:bg-surface"
+            className="group shrink-0 rounded-xl border border-transparent px-4 py-3 text-left transition-colors hover:bg-surface-2 aria-selected:border-border aria-selected:bg-surface aria-selected:shadow-[inset_0_1px_0_0_var(--hairline)]"
           >
-            <span className="block font-semibold">{item.label}</span>
-            {item.hint && <span className="block text-xs text-muted">{item.hint}</span>}
+            <span className="block font-semibold tracking-tight transition-colors group-aria-selected:text-accent">{item.label}</span>
+            {item.hint && <span className="mt-0.5 block font-mono text-xs text-faint">{item.hint}</span>}
           </button>
         ))}
       </div>
-      <div key={current.id} role="tabpanel" id={`${uid}-panel-${current.id}`} aria-labelledby={`${uid}-tab-${current.id}`} tabIndex={0} className="panel-in rounded-xl border border-border bg-surface p-6">
+      <div key={current.id} role="tabpanel" id={`${uid}-panel-${current.id}`} aria-labelledby={`${uid}-tab-${current.id}`} tabIndex={0} className="panel-in card p-6 sm:p-8">
         {current.content}
       </div>
     </div>

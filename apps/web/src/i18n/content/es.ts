@@ -27,6 +27,23 @@ export const es = {
     themeToggle: "Cambiar entre tema claro y oscuro",
     lang: { other: "en" as Locale, label: "English", aria: "Switch to English" },
     cta: { projects: "Ver proyectos", demos: "Probar demos", cv: "Descargar CV" },
+    hero: {
+      available: "Disponible para proyectos",
+      paletteHint: "para navegar",
+      scroll: "Desplázate",
+    },
+    eyebrows: {
+      about: "Perfil",
+      experience: "Trayectoria",
+      demos: "Código corriendo",
+      projects: "Trabajo",
+      contact: "Hablemos",
+    },
+    indexes: { about: "01", experience: "02", demos: "03", projects: "04", contact: "05" },
+    asides: {
+      demos: "Todo corre en tu navegador",
+      projects: "Filtra por tecnología",
+    },
     sections: {
       about: "Sobre mí",
       stack: "Stack",
@@ -68,6 +85,10 @@ export const es = {
     { group: "Herramientas y método", items: ["Git", "GitLab", "Bitbucket", "Jenkins", "ArgoCD", "Jira", "SCRUM", "Kanban"] },
   ],
   education: {
+    label: "Formación",
+    degree: "Ingeniero en Informática",
+    place: "INACAP · titulado 2025",
+    cert: "Microsoft Certified: Azure Fundamentals (AZ-900)",
     text: "Ingeniero en Informática · INACAP (titulado 2025) · Microsoft Certified: Azure Fundamentals (AZ-900)",
   },
   experienceUi: { label: "Experiencia laboral" },

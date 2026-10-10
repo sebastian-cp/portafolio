@@ -7,6 +7,12 @@ Monorepo con dos apps frontend:
 | `apps/web` | Next.js 15 (App Router), React 19, TypeScript, Tailwind 4 | `cd apps/web && npm i && npm run dev` |
 | `apps/angular-demo` | Angular 19, Signals, OnPush | `cd apps/angular-demo && npm i && npm start` · tests: `npm test` |
 
+## Sistema de diseño
+Tokens en `apps/web/src/app/globals.css` (claro/oscuro), primitivas en `apps/web/src/ui`
+(`Card`, `Button`, `Badge`, `Tabs`) documentadas en Storybook. Tipografía: Instrument Sans +
+JetBrains Mono vía `next/font` (auto-hospedadas, con métricas de respaldo para no provocar CLS).
+Las apps de Angular reusan los mismos tokens en `apps/angular-demo/src/styles.css`.
+
 ## Demos (apps/web, ES/EN en `/es` y `/en`)
 - **Core Web Vitals en vivo**: LCP, CLS, INP, FCP y TTFB medidos con `PerformanceObserver`, más un laboratorio para provocar CLS e INP.
 - **Accesibilidad antes/después**: componentes «sin ARIA» vs «con ARIA» y árbol de accesibilidad calculado en vivo (`src/lib/a11y-tree.ts`).

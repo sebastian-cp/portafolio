@@ -1,18 +1,18 @@
 <main>
   <h1>Task Board</h1>
-  <p class="sub">Angular 19 · Signals · OnPush · control flow nativo</p>
+  <p class="sub">Signals · <code>computed()</code> · OnPush · control flow nativo</p>
 
   <form (submit)="$event.preventDefault(); add(title)">
     <label for="new-task">Nueva tarea</label>
     <div class="row">
       <input #title id="new-task" type="text" autocomplete="off" />
-      <button type="submit">Agregar</button>
+      <button type="submit" class="primary">Agregar</button>
     </div>
   </form>
 
   <div role="group" aria-label="Filtrar tareas" class="filters">
     @for (f of filters; track f.value) {
-      <button type="button" [attr.aria-pressed]="filter() === f.value" (click)="filter.set(f.value)">
+      <button type="button" class="pill" [attr.aria-pressed]="filter() === f.value" (click)="filter.set(f.value)">
         {{ f.label }}
       </button>
     }

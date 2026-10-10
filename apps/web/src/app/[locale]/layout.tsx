@@ -1,9 +1,25 @@
 import type { Metadata } from "next";
+import { Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { ScrollProgress } from "@/components/ScrollProgress";
+import { Spotlight } from "@/components/Spotlight";
 import { getContent, isLocale, locales } from "@/i18n";
 import { themeInitScript } from "@/lib/theme";
 import "../globals.css";
+
+// next/font las auto-hospeda y genera métricas de respaldo: sin petición a
+// terceros y sin salto de layout al intercambiar la fuente.
+const instrument = Instrument_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-instrument",
+});
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500"],
+  variable: "--font-jetbrains",
+});
 
 export const generateStaticParams = () => locales.map((locale) => ({ locale }));
 
@@ -27,18 +43,20 @@ export default async function RootLayout({
   const t = getContent(locale);
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning className={`${instrument.variable} ${jetbrains.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="antialiased">
         <a
           href="#contenido"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-contrast"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:font-medium focus:text-accent-contrast"
         >
           {t.ui.skip}
         </a>
+        <div className="glow" aria-hidden="true" />
         <ScrollProgress />
+        <Spotlight />
         {children}
       </body>
     </html>

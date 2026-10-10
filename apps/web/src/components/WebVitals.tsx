@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Content } from "@/i18n";
 import { Badge } from "@/ui/Badge";
 import { Button } from "@/ui/Button";
+import { Card } from "@/ui/Card";
 
 type Key = "lcp" | "cls" | "inp" | "fcp" | "ttfb";
 type Rating = "good" | "needs" | "poor";
@@ -101,7 +102,7 @@ export function WebVitals({ t }: { t: Content["vitals"] }) {
   };
 
   return (
-    <div className="rounded-xl border border-border bg-surface p-6">
+    <Card as="div" padding="lg" spot={false}>
       <p className="text-sm text-muted">{t.intro}</p>
 
       <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
@@ -110,15 +111,15 @@ export function WebVitals({ t }: { t: Content["vitals"] }) {
           const r = val === undefined ? null : rate(k, val);
           const pct = val === undefined ? 0 : Math.min((val / LIMITS[k][1]) * 100, 100);
           return (
-            <li key={k} data-metric={k} className="rounded-lg border border-border p-3">
-              <p className="font-mono text-xs text-muted" title={t.metrics[k].full}>
+            <li key={k} data-metric={k} className="rounded-xl border border-border bg-surface-2/60 p-4">
+              <p className="t-eyebrow" title={t.metrics[k].full}>
                 <abbr title={t.metrics[k].full}>{t.metrics[k].name}</abbr>
               </p>
-              <p className="mt-1 text-2xl font-bold tabular-nums">
+              <p className="mt-2 text-2xl font-semibold tracking-tight tabular-nums">
                 {val === undefined ? "—" : format(k, val)}
               </p>
-              <div aria-hidden="true" className="mt-2 h-1 rounded bg-border">
-                <div className="h-full rounded bg-accent transition-[width] duration-500" style={{ width: `${pct}%` }} />
+              <div aria-hidden="true" className="mt-3 h-1 overflow-hidden rounded-full bg-border">
+                <div className="h-full rounded-full bg-gradient-to-r from-accent to-accent-2 transition-[width] duration-700" style={{ width: `${pct}%` }} />
               </div>
               <p className="mt-2 min-h-6 text-xs">
                 {r ? <Badge tone={TONE[r]}>{t.ratings[r]}</Badge> : <span className="text-muted">{k === "inp" ? t.interact : t.measuring}</span>}
@@ -129,7 +130,7 @@ export function WebVitals({ t }: { t: Content["vitals"] }) {
       </ul>
 
       <details className="mt-4 text-sm">
-        <summary className="cursor-pointer text-accent">{t.metrics.lcp.full} · {t.metrics.cls.full} · {t.metrics.inp.full}</summary>
+        <summary className="cursor-pointer font-mono text-xs text-accent">{t.metrics.lcp.full} · {t.metrics.cls.full} · {t.metrics.inp.full}</summary>
         <ul className="mt-2 space-y-1 text-muted">
           {ORDER.map((k) => (
             <li key={k}><strong className="text-foreground">{t.metrics[k].name}:</strong> {t.metrics[k].tip}</li>
@@ -137,7 +138,7 @@ export function WebVitals({ t }: { t: Content["vitals"] }) {
         </ul>
       </details>
 
-      <h4 className="mt-6 text-sm font-semibold uppercase tracking-wide text-muted">{t.play}</h4>
+      <h4 className="t-eyebrow mt-8">{t.play}</h4>
       <div className="mt-3 flex flex-wrap gap-2">
         <Button variant="secondary" size="sm" onClick={insertBanner} disabled={banner}>{t.shift}</Button>
         <Button variant="ghost" size="sm" onClick={() => { clearTimeout(timer.current); setBanner(false); }} disabled={!banner}>{t.shiftReset}</Button>
@@ -146,16 +147,16 @@ export function WebVitals({ t }: { t: Content["vitals"] }) {
         <span className="self-center text-xs text-muted">{t.clicks}: {clicks}</span>
       </div>
 
-      <div className="mt-4 min-h-72 rounded-lg border border-dashed border-border p-4">
+      <div className="mt-4 min-h-72 rounded-xl border border-dashed border-border bg-surface-2/40 p-4">
         {banner && (
-          <div role="status" className="mb-4 flex h-40 items-center justify-center rounded-lg bg-accent text-center font-medium text-accent-contrast">
+          <div role="status" className="mb-4 flex h-40 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-accent-2 px-4 text-center font-medium text-accent-contrast">
             {t.banner}
           </div>
         )}
         <p className="text-sm text-muted">{t.lorem}</p>
-        <div className="mt-3 h-24 rounded bg-background" />
+        <div className="mt-3 h-24 rounded-lg border border-border bg-background" />
       </div>
       <p className="mt-3 text-xs text-muted">{t.note}</p>
-    </div>
+    </Card>
   );
 }

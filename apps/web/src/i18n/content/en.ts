@@ -15,6 +15,23 @@ export const en: Content = {
     themeToggle: "Switch between light and dark theme",
     lang: { other: "es", label: "Español", aria: "Cambiar a español" },
     cta: { projects: "View projects", demos: "Try the demos", cv: "Download CV" },
+    hero: {
+      available: "Available for projects",
+      paletteHint: "to navigate",
+      scroll: "Scroll",
+    },
+    eyebrows: {
+      about: "Profile",
+      experience: "Track record",
+      demos: "Running code",
+      projects: "Work",
+      contact: "Say hello",
+    },
+    indexes: { about: "01", experience: "02", demos: "03", projects: "04", contact: "05" },
+    asides: {
+      demos: "Everything runs in your browser",
+      projects: "Filter by technology",
+    },
     sections: {
       about: "About me",
       stack: "Stack",
@@ -50,6 +67,10 @@ export const en: Content = {
     { group: "Tools & methods", items: es.skills[5].items },
   ],
   education: {
+    label: "Education",
+    degree: "Computer Engineer",
+    place: "INACAP · graduated 2025",
+    cert: "Microsoft Certified: Azure Fundamentals (AZ-900)",
     text: "Computer Engineer · INACAP (graduated 2025) · Microsoft Certified: Azure Fundamentals (AZ-900)",
   },
   experienceUi: { label: "Work experience" },

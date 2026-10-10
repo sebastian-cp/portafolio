@@ -20,7 +20,7 @@ export function ProjectGrid({ projects, t }: { projects: Content["projects"]; t:
             type="button"
             aria-pressed={filter === f}
             onClick={() => setFilter(f)}
-            className="rounded-full border border-border px-4 py-1.5 text-sm transition-colors aria-pressed:border-accent aria-pressed:bg-accent aria-pressed:text-accent-contrast"
+            className="rounded-full border border-border px-4 py-1.5 text-sm text-muted transition-colors hover:text-foreground aria-pressed:border-transparent aria-pressed:bg-accent aria-pressed:text-accent-contrast"
           >
             {t[f]}
           </button>
@@ -29,7 +29,7 @@ export function ProjectGrid({ projects, t }: { projects: Content["projects"]; t:
       <p className="sr-only" role="status">
         {(visible.length === 1 ? t.shownOne : t.shownMany).replace("{n}", String(visible.length))}
       </p>
-      <div className="mt-6 grid gap-6 md:grid-cols-2">
+      <div className="mt-6 grid gap-4 md:grid-cols-2">
         {visible.map((p) => <ProjectCard key={p.slug} project={p} t={t} />)}
       </div>
     </div>

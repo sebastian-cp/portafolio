@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import type { Content } from "@/i18n";
 import { buildTree, type A11yNode } from "@/lib/a11y-tree";
 import { Badge } from "@/ui/Badge";
+import { Card } from "@/ui/Card";
 
 type Example = "button" | "field" | "disclosure";
 type Mode = "bad" | "good";
@@ -21,11 +22,11 @@ function DemoButton({ mode, t }: { mode: Mode; t: Content["a11y"] }) {
   const [on, setOn] = useState(false);
   const toggle = () => setOn((v) => !v);
   return mode === "bad" ? (
-    <div data-fake-control onClick={toggle} className={`inline-flex cursor-pointer rounded-lg border border-border p-2 ${on ? "text-red-500" : "text-muted"}`}>
+    <div data-fake-control onClick={toggle} className={`inline-flex cursor-pointer rounded-xl border border-border bg-surface-2 p-2.5 ${on ? "text-bad" : "text-muted"}`}>
       <Heart on={on} />
     </div>
   ) : (
-    <button type="button" aria-label={t.favorite} aria-pressed={on} onClick={toggle} className={`inline-flex rounded-lg border border-border p-2 ${on ? "text-red-500" : "text-muted"}`}>
+    <button type="button" aria-label={t.favorite} aria-pressed={on} onClick={toggle} className={`inline-flex rounded-xl border border-border bg-surface-2 p-2.5 ${on ? "text-bad" : "text-muted"}`}>
       <Heart on={on} />
     </button>
   );
@@ -36,17 +37,17 @@ function DemoField({ mode, t }: { mode: Mode; t: Content["a11y"] }) {
   const [touched, setTouched] = useState(false);
   const id = useId();
   const invalid = touched && !value.includes("@");
-  const input = "w-full rounded-lg border bg-background px-3 py-2 " + (invalid ? "border-red-500" : "border-border");
+  const input = "w-full rounded-xl border bg-surface-2 px-3.5 py-2.5 " + (invalid ? "border-bad" : "border-border");
   return mode === "bad" ? (
     <div>
       <input placeholder={t.emailPlaceholder} value={value} onChange={(e) => setValue(e.target.value)} onBlur={() => setTouched(true)} className={input} />
-      {invalid && <span className="mt-1 block text-sm text-red-500">{t.emailError}</span>}
+      {invalid && <span className="mt-1.5 block text-sm text-bad">{t.emailError}</span>}
     </div>
   ) : (
     <div>
       <label htmlFor={id} className="mb-1 block text-sm font-medium">{t.emailLabel}</label>
       <input id={id} type="email" required placeholder={t.emailPlaceholder} value={value} onChange={(e) => setValue(e.target.value)} onBlur={() => setTouched(true)} aria-invalid={invalid} aria-describedby={invalid ? `${id}-err` : undefined} className={input} />
-      {invalid && <p id={`${id}-err`} role="alert" className="mt-1 text-sm text-red-500">{t.emailError}</p>}
+      {invalid && <p id={`${id}-err`} role="alert" className="mt-1.5 text-sm text-bad">{t.emailError}</p>}
     </div>
   );
 }
@@ -56,12 +57,12 @@ function DemoDisclosure({ mode, t }: { mode: Mode; t: Content["a11y"] }) {
   const id = useId();
   return mode === "bad" ? (
     <div>
-      <div data-fake-control onClick={() => setOpen((v) => !v)} className="cursor-pointer rounded-lg border border-border px-3 py-2 font-medium">{t.faqQ}</div>
+      <div data-fake-control onClick={() => setOpen((v) => !v)} className="cursor-pointer rounded-xl border border-border bg-surface-2 px-3.5 py-2.5 font-medium">{t.faqQ}</div>
       {open && <div className="px-3 py-2 text-sm text-muted">{t.faqA}</div>}
     </div>
   ) : (
     <div>
-      <button type="button" aria-expanded={open} aria-controls={id} onClick={() => setOpen((v) => !v)} className="w-full rounded-lg border border-border px-3 py-2 text-left font-medium">{t.faqQ}</button>
+      <button type="button" aria-expanded={open} aria-controls={id} onClick={() => setOpen((v) => !v)} className="w-full rounded-xl border border-border bg-surface-2 px-3.5 py-2.5 text-left font-medium">{t.faqQ}</button>
       <div id={id} hidden={!open} className="px-3 py-2 text-sm text-muted">{t.faqA}</div>
     </div>
   );
@@ -88,10 +89,10 @@ export function A11yPlayground({ t }: { t: Content["a11y"] }) {
     return () => mo.disconnect();
   }, [example, mode]);
 
-  const pill = "rounded-full border border-border px-3 py-1 text-sm aria-pressed:border-accent aria-pressed:bg-accent aria-pressed:text-accent-contrast";
+  const pill = "rounded-full border border-border px-3.5 py-1.5 text-sm text-muted transition-colors hover:text-foreground aria-pressed:border-transparent aria-pressed:bg-accent aria-pressed:text-accent-contrast";
 
   return (
-    <div className="rounded-xl border border-border bg-surface p-6">
+    <Card as="div" padding="lg" spot={false}>
       <p className="text-sm text-muted">{t.intro}</p>
 
       <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3">
@@ -109,8 +110,8 @@ export function A11yPlayground({ t }: { t: Content["a11y"] }) {
 
       <div className="mt-5 grid gap-6 md:grid-cols-2">
         <section aria-label={t.demoArea}>
-          <h4 className="text-sm font-semibold uppercase tracking-wide text-muted">{t.demoArea}</h4>
-          <div ref={area} className="mt-2 min-h-32 rounded-lg border border-dashed border-border p-4" data-testid="a11y-demo">
+          <h4 className="t-eyebrow">{t.demoArea}</h4>
+          <div ref={area} className="mt-3 min-h-36 rounded-xl border border-dashed border-border bg-surface-2/40 p-5" data-testid="a11y-demo">
             {example === "button" && <DemoButton key={mode} mode={mode} t={t} />}
             {example === "field" && <DemoField key={mode} mode={mode} t={t} />}
             {example === "disclosure" && <DemoDisclosure key={mode} mode={mode} t={t} />}
@@ -119,8 +120,8 @@ export function A11yPlayground({ t }: { t: Content["a11y"] }) {
         </section>
 
         <section aria-label={t.treeTitle}>
-          <h4 className="text-sm font-semibold uppercase tracking-wide text-muted">{t.treeTitle}</h4>
-          <ul data-testid="a11y-tree" className="mt-2 min-h-32 space-y-1 rounded-lg bg-background p-4 font-mono text-xs">
+          <h4 className="t-eyebrow">{t.treeTitle}</h4>
+          <ul data-testid="a11y-tree" className="mt-3 min-h-36 space-y-1 rounded-xl border border-border bg-background p-4 font-mono text-xs">
             {tree.map((n, i) => (
               <li key={i} style={{ paddingLeft: `${n.depth * 1}rem` }} className="flex flex-wrap items-center gap-x-2">
                 <span className="text-accent">{n.role}</span>
@@ -133,6 +134,6 @@ export function A11yPlayground({ t }: { t: Content["a11y"] }) {
           <p className="mt-2 text-xs text-muted">{t.treeNote}</p>
         </section>
       </div>
-    </div>
+    </Card>
   );
 }

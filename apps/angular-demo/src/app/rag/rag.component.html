@@ -12,7 +12,7 @@
 
   <ul class="chips" aria-label="Preguntas sugeridas">
     @for (s of suggestions; track s) {
-      <li><button type="button" (click)="ask(s)">{{ s }}</button></li>
+      <li><button type="button" class="pill" (click)="ask(s)">{{ s }}</button></li>
     }
   </ul>
 

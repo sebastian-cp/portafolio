@@ -80,6 +80,13 @@ test.describe("español", () => {
     await expect(page).toHaveURL(/#contacto$/);
   });
 
+  test("el nav marca la sección visible", async ({ page }) => {
+    const nav = page.getByRole("navigation", { name: "Principal" });
+    await page.locator("#proyectos").scrollIntoViewIfNeeded();
+    await expect(nav.getByRole("link", { name: "Proyectos" })).toHaveAttribute("aria-current", "true", { timeout: 8000 });
+    await expect(nav.getByRole("link", { name: "Contacto" })).not.toHaveAttribute("aria-current", "true");
+  });
+
   test("el tema persiste tras recargar", async ({ page }) => {
     const before = await page.locator("html").getAttribute("data-theme");
     await page.getByRole("button", { name: /tema claro y oscuro/ }).click();
@@ -112,6 +119,14 @@ test.describe("english", () => {
     await page.getByRole("button", { name: "Ask", exact: true }).click();
     await expect(page.getByRole("status").filter({ hasText: "Playwright" })).toBeAttached();
   });
+});
+
+test("en móvil el disparador de la paleta conserva su nombre accesible", async ({ browser }) => {
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await ctx.newPage();
+  await page.goto("/es");
+  await expect(page.getByRole("button", { name: "Buscar" })).toBeVisible();
+  await ctx.close();
 });
 
 test("la raíz redirige según Accept-Language", async ({ browser }) => {

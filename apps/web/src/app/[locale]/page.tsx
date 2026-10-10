@@ -3,19 +3,20 @@ import { A11yPlayground } from "@/components/A11yPlayground";
 import { CommandPalette } from "@/components/CommandPalette";
 import { Counter } from "@/components/Counter";
 import { Experience } from "@/components/Experience";
+import { HeroCard } from "@/components/HeroCard";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { RagDemo } from "@/components/RagDemo";
 import { Reveal } from "@/components/Reveal";
 import { RotatingWord } from "@/components/RotatingWord";
+import { SectionHeader } from "@/components/SectionHeader";
+import { SiteNav } from "@/components/SiteNav";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { WebVitals } from "@/components/WebVitals";
 import { getContent, isLocale } from "@/i18n";
-import { Badge } from "@/ui/Badge";
 import { Button } from "@/ui/Button";
+import { Card } from "@/ui/Card";
 
-const h2 = "text-2xl font-bold";
-const h3 = "text-xl font-semibold";
-const link = "text-accent underline underline-offset-4";
+const link = "text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:decoration-accent";
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -33,16 +34,17 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
   return (
     <>
-      <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur">
-        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-3">
-          <span className="font-semibold">SC</span>
-          <nav aria-label={ui.mainNav} className="hidden md:block">
-            <ul className="flex gap-6 text-sm">
-              {nav.map((n) => (
-                <li key={n.href}><a className="text-muted hover:text-foreground" href={n.href}>{n.label}</a></li>
-              ))}
-            </ul>
-          </nav>
+      <header className="sticky top-0 z-30 border-b border-border/70 bg-background/70 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3">
+          <a href="#contenido" className="group flex items-center gap-2.5">
+            <span className="grid h-8 w-8 place-items-center rounded-lg border border-border bg-surface font-display text-sm font-semibold tracking-tight">
+              SC
+            </span>
+            <span className="hidden font-mono text-xs text-faint sm:block">sebastian-cofre</span>
+          </a>
+
+          <SiteNav items={nav} label={ui.mainNav} />
+
           <div className="flex items-center gap-2">
             <CommandPalette t={t.palette} profile={profile} otherLocale={ui.lang.other} />
             <a
@@ -50,7 +52,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               lang={ui.lang.other}
               hrefLang={ui.lang.other}
               aria-label={ui.lang.aria}
-              className="rounded-lg border border-border px-3 py-1.5 text-sm text-muted hover:text-foreground"
+              className="rounded-lg border border-border px-2.5 py-2 font-mono text-xs text-muted transition-colors hover:text-foreground"
             >
               {ui.lang.other.toUpperCase()}
             </a>
@@ -59,100 +61,178 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         </div>
       </header>
 
-      <main id="contenido" className="mx-auto max-w-5xl space-y-24 px-6 pb-24">
-        <section className="relative pt-16 sm:pt-24">
-          <div className="aurora" aria-hidden="true" />
-          <p className="font-mono text-sm text-accent">{profile.location}</p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-6xl">{profile.name}</h1>
-          <p className="mt-3 text-xl text-muted">
-            {profile.role} · <RotatingWord words={profile.rotating} />
-          </p>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed">{profile.summary}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="#proyectos">{ui.cta.projects}</Button>
-            <Button href="#demos" variant="secondary">{ui.cta.demos}</Button>
-            <Button href={profile.cv} download variant="secondary">{ui.cta.cv}</Button>
+      <main id="contenido" className="mx-auto max-w-6xl px-6 pb-32">
+        {/* ---------------- Hero ---------------- */}
+        <section className="relative grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-[1.35fr_1fr] lg:gap-16">
+          <div className="grid-lines" aria-hidden="true" />
+
+          <div>
+            <p className="t-eyebrow flex flex-wrap items-center gap-x-3 gap-y-2">
+              <span className="inline-flex items-center gap-2 text-good">
+                <span className="pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-good" />
+                {ui.hero.available}
+              </span>
+              <span aria-hidden="true" className="inline-block h-px w-5 bg-border" />
+              {profile.location}
+            </p>
+
+            <h1 className="t-hero mt-6">{profile.name}</h1>
+
+            <p className="mt-5 text-xl text-muted sm:text-2xl">
+              {profile.role} · <RotatingWord words={profile.rotating} />
+            </p>
+
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">{profile.summary}</p>
+
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Button href="#proyectos">{ui.cta.projects}</Button>
+              <Button href="#demos" variant="secondary">{ui.cta.demos}</Button>
+              <Button href={profile.cv} download variant="ghost">{ui.cta.cv}</Button>
+            </div>
+
+            <p className="mt-8 hidden items-center gap-2 font-mono text-xs text-faint lg:flex">
+              <kbd>Ctrl</kbd> <kbd>K</kbd> {ui.hero.paletteHint}
+            </p>
+          </div>
+
+          <div className="lg:pl-4">
+            <HeroCard profile={profile} experience={t.experience} />
           </div>
         </section>
 
-        <section id="sobre-mi" aria-labelledby="h-about">
+        {/* ---------------- Sobre mí ---------------- */}
+        <section id="sobre-mi" aria-labelledby="h-about" className="scroll-mt-24 pt-16">
           <Reveal>
-            <h2 id="h-about" className={h2}>{ui.sections.about}</h2>
-            <dl className="mt-6 grid gap-4 sm:grid-cols-3">
-              {t.stats.map((s) => (
-                <div key={s.label} className="rounded-xl border border-border bg-surface p-5">
-                  <dd className="text-4xl font-bold text-accent"><Counter to={s.value} suffix={s.suffix} /></dd>
-                  <dt className="mt-1 text-sm text-muted">{s.label}</dt>
-                </div>
+            <SectionHeader id="h-about" index={ui.indexes.about} eyebrow={ui.eyebrows.about} title={ui.sections.about} />
+
+            <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {t.stats.map((s, i) => (
+                <Card key={s.label} as="div" padding="lg" className={i === 0 ? "sm:col-span-2" : ""}>
+                  <dd className="t-stat text-gradient">
+                    <Counter to={s.value} suffix={s.suffix} />
+                  </dd>
+                  <dt className="mt-3 text-sm leading-snug text-muted">{s.label}</dt>
+                </Card>
               ))}
-            </dl>
-            <h3 className={`${h3} mt-10`}>{ui.sections.stack}</h3>
-            <dl className="mt-4 grid gap-4 sm:grid-cols-2">
-              {t.skills.map((s) => (
-                <div key={s.group} className="rounded-xl border border-border bg-surface p-5">
-                  <dt className="font-semibold">{s.group}</dt>
-                  <dd className="mt-2 flex flex-wrap gap-2">
-                    {s.items.map((i) => <Badge key={i} mono>{i}</Badge>)}
+
+              <Card as="div" padding="lg" className="sm:col-span-2 lg:col-span-4">
+                <div className="grid gap-5 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-8">
+                  <dt className="t-eyebrow">{t.education.label}</dt>
+                  <dd className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <span className="t-card">{t.education.degree}</span>
+                    <span className="text-sm text-muted">{t.education.place}</span>
+                    <span aria-hidden="true" className="hidden h-4 w-px bg-border sm:block" />
+                    <span className="font-mono text-xs text-accent-2">{t.education.cert}</span>
                   </dd>
                 </div>
-              ))}
+              </Card>
             </dl>
-            <p className="mt-6 text-sm text-muted">{t.education.text}</p>
-          </Reveal>
-        </section>
 
-        <section id="experiencia" aria-labelledby="h-exp">
-          <Reveal>
-            <h2 id="h-exp" className={h2}>{ui.sections.experience}</h2>
-            <div className="mt-6"><Experience entries={t.experience} label={t.experienceUi.label} /></div>
-          </Reveal>
-        </section>
-
-        <section id="demos" aria-labelledby="h-demos" className="space-y-16">
-          <h2 id="h-demos" className={h2}>{ui.sections.demos}</h2>
-          <Reveal>
-            <div id="demo-rag" className="scroll-mt-20">
-              <h3 className={h3}>{ui.sections.rag}</h3>
-              <div className="mt-4"><RagDemo t={t.rag} /></div>
-            </div>
-          </Reveal>
-          <Reveal>
-            <div id="demo-vitals" className="scroll-mt-20">
-              <h3 className={h3}>{ui.sections.vitals}</h3>
-              <div className="mt-4"><WebVitals t={t.vitals} /></div>
-            </div>
-          </Reveal>
-          <Reveal>
-            <div id="demo-a11y" className="scroll-mt-20">
-              <h3 className={h3}>{ui.sections.a11y}</h3>
-              <div className="mt-4"><A11yPlayground t={t.a11y} /></div>
+            <h3 className="t-eyebrow mt-12">{ui.sections.stack}</h3>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {t.skills.map((s, i) => (
+                <Card key={s.group} as="div" className={i === 0 ? "sm:col-span-2 lg:col-span-1" : ""}>
+                  <h4 className="t-card">{s.group}</h4>
+                  <ul className="mt-3 flex flex-wrap gap-1.5">
+                    {s.items.map((x) => <li key={x} className="chip">{x}</li>)}
+                  </ul>
+                </Card>
+              ))}
             </div>
           </Reveal>
         </section>
 
-        <section id="proyectos" aria-labelledby="h-projects">
+        {/* ---------------- Experiencia ---------------- */}
+        <section id="experiencia" aria-labelledby="h-exp" className="scroll-mt-24 pt-28">
           <Reveal>
-            <h2 id="h-projects" className={h2}>{ui.sections.projects}</h2>
-            <div className="mt-6"><ProjectGrid projects={t.projects} t={t.projectsUi} /></div>
+            <SectionHeader id="h-exp" index={ui.indexes.experience} eyebrow={ui.eyebrows.experience} title={ui.sections.experience} />
+            <Experience entries={t.experience} label={t.experienceUi.label} />
           </Reveal>
         </section>
 
-        <section id="contacto" aria-labelledby="h-contact">
+        {/* ---------------- Demos ---------------- */}
+        <section id="demos" aria-labelledby="h-demos" className="scroll-mt-24 pt-28">
           <Reveal>
-            <h2 id="h-contact" className={h2}>{ui.sections.contact}</h2>
-            <p className="mt-4 text-muted">{ui.contactIntro}</p>
-            <ul className="mt-4 space-y-1">
-              <li><a className={link} href={`mailto:${profile.email}`}>{profile.email}</a></li>
-              <li>{profile.phone}</li>
-              <li><a className={link} href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-              <li><a className={link} href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            </ul>
+            <SectionHeader
+              id="h-demos"
+              index={ui.indexes.demos}
+              eyebrow={ui.eyebrows.demos}
+              title={ui.sections.demos}
+              aside={<span className="chip">{ui.asides.demos}</span>}
+            />
+          </Reveal>
+
+          <div className="space-y-14">
+            <Reveal>
+              <div id="demo-rag" className="scroll-mt-24">
+                <h3 className="t-card mb-4">{ui.sections.rag}</h3>
+                <RagDemo t={t.rag} />
+              </div>
+            </Reveal>
+            <Reveal>
+              <div id="demo-vitals" className="scroll-mt-24">
+                <h3 className="t-card mb-4">{ui.sections.vitals}</h3>
+                <WebVitals t={t.vitals} />
+              </div>
+            </Reveal>
+            <Reveal>
+              <div id="demo-a11y" className="scroll-mt-24">
+                <h3 className="t-card mb-4">{ui.sections.a11y}</h3>
+                <A11yPlayground t={t.a11y} />
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ---------------- Proyectos ---------------- */}
+        <section id="proyectos" aria-labelledby="h-projects" className="scroll-mt-24 pt-28">
+          <Reveal>
+            <SectionHeader
+              id="h-projects"
+              index={ui.indexes.projects}
+              eyebrow={ui.eyebrows.projects}
+              title={ui.sections.projects}
+              aside={<span className="chip">{ui.asides.projects}</span>}
+            />
+            <ProjectGrid projects={t.projects} t={t.projectsUi} />
+          </Reveal>
+        </section>
+
+        {/* ---------------- Contacto ---------------- */}
+        <section id="contacto" aria-labelledby="h-contact" className="scroll-mt-24 pt-28">
+          <Reveal>
+            <SectionHeader id="h-contact" index={ui.indexes.contact} eyebrow={ui.eyebrows.contact} title={ui.sections.contact} />
+            <Card as="div" padding="lg" className="grid gap-8 sm:grid-cols-[1.2fr_1fr]">
+              <div>
+                <p className="t-section">{ui.contactIntro}</p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Button href={`mailto:${profile.email}`}>{profile.email}</Button>
+                  <Button href={profile.cv} download variant="secondary">{ui.cta.cv}</Button>
+                </div>
+              </div>
+              <dl className="grid content-start gap-4 text-sm">
+                <div>
+                  <dt className="t-eyebrow">Tel</dt>
+                  <dd className="mt-1 font-mono">{profile.phone}</dd>
+                </div>
+                <div>
+                  <dt className="t-eyebrow">Links</dt>
+                  <dd className="mt-1 flex gap-4">
+                    <a className={link} href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a className={link} href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+                  </dd>
+                </div>
+              </dl>
+            </Card>
           </Reveal>
         </section>
       </main>
 
-      <footer className="border-t border-border py-8 text-center text-sm text-muted">
-        © {new Date().getFullYear()} {profile.name} · {ui.rights}
+      <footer className="border-t border-border">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-8 font-mono text-xs text-faint">
+          <span>© {new Date().getFullYear()} {profile.name}</span>
+          <span>{ui.rights}</span>
+        </div>
       </footer>
     </>
   );

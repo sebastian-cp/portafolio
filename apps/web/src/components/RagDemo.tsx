@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { Content } from "@/i18n";
 import { retrieve, type Hit } from "@/lib/rag";
 import { Button } from "@/ui/Button";
+import { Card } from "@/ui/Card";
 
 export function RagDemo({ t }: { t: Content["rag"] }) {
   const [query, setQuery] = useState("");
@@ -40,7 +41,7 @@ export function RagDemo({ t }: { t: Content["rag"] }) {
   };
 
   return (
-    <div className="rounded-xl border border-border bg-surface p-6">
+    <Card as="div" padding="lg" spot={false}>
       <p className="text-sm text-muted">{t.intro}</p>
 
       <form onSubmit={onSubmit} className="mt-4 flex gap-2">
@@ -51,7 +52,7 @@ export function RagDemo({ t }: { t: Content["rag"] }) {
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t.placeholder}
           autoComplete="off"
-          className="min-w-0 flex-1 rounded-lg border border-border bg-background px-3 py-2"
+          className="min-w-0 flex-1 rounded-xl border border-border bg-surface-2 px-4 py-2.5 transition-colors placeholder:text-faint focus:border-accent/60"
         />
         <Button type="submit">{t.ask}</Button>
       </form>
@@ -59,7 +60,7 @@ export function RagDemo({ t }: { t: Content["rag"] }) {
       <ul className="mt-3 flex flex-wrap gap-2" aria-label={t.suggested}>
         {t.suggestions.map((s) => (
           <li key={s}>
-            <button type="button" onClick={() => { setQuery(s); ask(s); }} className="rounded-full border border-border px-3 py-1 text-xs text-muted hover:text-foreground">
+            <button type="button" onClick={() => { setQuery(s); ask(s); }} className="chip transition-colors hover:border-accent/50 hover:text-foreground">
               {s}
             </button>
           </li>
@@ -69,17 +70,17 @@ export function RagDemo({ t }: { t: Content["rag"] }) {
       {hits && (
         <div className="panel-in mt-6 grid gap-6 md:grid-cols-2">
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-muted">{t.retrieved}</h4>
+            <h4 className="t-eyebrow">{t.retrieved}</h4>
             {hits.length === 0 && <p className="mt-2 text-sm text-muted">{t.none}</p>}
             <ol className="mt-2 space-y-3">
               {hits.map(({ chunk, score }) => (
-                <li key={chunk.id} className="rounded-lg border border-border p-3 text-sm">
+                <li key={chunk.id} className="rounded-xl border border-border bg-surface-2/60 p-3 text-sm">
                   <div className="flex items-center justify-between gap-2 font-mono text-xs text-muted">
                     <span>{chunk.source}</span>
                     <span>{score.toFixed(2)}</span>
                   </div>
-                  <div aria-hidden="true" className="mt-1 h-1 rounded bg-border">
-                    <div className="h-full rounded bg-accent" style={{ width: `${Math.min(score * 100, 100)}%` }} />
+                  <div aria-hidden="true" className="mt-1.5 h-1 overflow-hidden rounded-full bg-border">
+                    <div className="h-full rounded-full bg-gradient-to-r from-accent to-accent-2" style={{ width: `${Math.min(score * 100, 100)}%` }} />
                   </div>
                   <p className="mt-2 text-muted">{chunk.text}</p>
                 </li>
@@ -87,8 +88,8 @@ export function RagDemo({ t }: { t: Content["rag"] }) {
             </ol>
           </div>
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-muted">{t.answer}</h4>
-            <p className="mt-2 leading-relaxed" aria-hidden={streaming}>
+            <h4 className="t-eyebrow">{t.answer}</h4>
+            <p className="mt-2 text-lg leading-relaxed" aria-hidden={streaming}>
               {words.slice(0, shown).join(" ")}
               {streaming && <span className="caret" />}
             </p>
@@ -96,6 +97,6 @@ export function RagDemo({ t }: { t: Content["rag"] }) {
           </div>
         </div>
       )}
-    </div>
+    </Card>
   );
 }
