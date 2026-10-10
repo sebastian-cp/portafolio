@@ -37,7 +37,7 @@ export function HeroCard({ profile, experience }: { profile: Content["profile"];
           {"\n  "}
           <span className={key}>experiencia</span>
           <span className={punct}>: </span>
-          <Str>3 años</Str>
+          <Str>2 años</Str>
           <span className={punct}>,</span>
           {"\n  "}
           <span className={key}>stack</span>
