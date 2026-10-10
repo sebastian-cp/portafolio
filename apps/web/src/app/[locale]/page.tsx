@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { A11yPlayground } from "@/components/A11yPlayground";
 import { CommandPalette } from "@/components/CommandPalette";
 import { Contact } from "@/components/Contact";
 import { Counter } from "@/components/Counter";
@@ -196,12 +195,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               <div id="demo-vitals" className="scroll-mt-24">
                 <h3 className="t-card mb-4">{ui.sections.vitals}</h3>
                 <WebVitals t={t.vitals} />
-              </div>
-            </Reveal>
-            <Reveal>
-              <div id="demo-a11y" className="scroll-mt-24">
-                <h3 className="t-card mb-4">{ui.sections.a11y}</h3>
-                <A11yPlayground t={t.a11y} />
               </div>
             </Reveal>
           </div>
