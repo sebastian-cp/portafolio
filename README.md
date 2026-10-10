@@ -11,21 +11,13 @@ Monorepo con dos apps frontend independientes. Node 20.11+ o 22; cada app tiene 
 ## Ramas
 
 ```
-master    producción, solo recibe merges desde preprod
+master    producción: Vercel despliega desde aquí
   ↑
-preprod   candidato a release
-  ↑
-cert      certificación / QA
-  ↑
-dev       integración, base de todo el trabajo nuevo
-  ↑
-feat/<algo>   fix/<algo>
+dev       integración: todo el trabajo se hace aquí
 ```
 
-- **Todo el trabajo nuevo sale de `dev`** en una rama `feat/<algo>` o `fix/<algo>`,
-  en kebab-case: `feat/filtro-proyectos`, `fix/contraste-chips`.
-- **Nunca commitear directo** a `master`, `preprod`, `cert` ni `dev`. Siempre rama y merge.
-- La promoción va en un solo sentido: `feat/*` → `dev` → `cert` → `preprod` → `master`.
+- **Se trabaja directo en `dev`**, sin ramas `feat/*` ni `fix/*`.
+- Para publicar, se mergea `dev` en `master`. La promoción va en un solo sentido.
 - Mensajes de commit en español, en una línea. Cuerpo solo si hace falta explicar el porqué.
 
 Antes de pushear:
