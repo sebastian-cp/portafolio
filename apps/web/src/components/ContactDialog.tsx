@@ -45,7 +45,8 @@ function Choices({ name, legend, options, required }: { name: string; legend: st
         {options.map((o) => (
           <label key={o} className="cursor-pointer">
             <input type="radio" name={name} value={o} required={required} className="peer sr-only" />
-            <span className="chip inline-block transition-colors hover:border-accent/50 hover:text-foreground peer-checked:border-accent/60 peer-checked:bg-accent-soft peer-checked:text-foreground peer-focus-visible:ring-2 peer-focus-visible:ring-accent">
+            {/* Sin la clase .chip: está fuera de las capas de Tailwind y taparía el estado peer-checked. */}
+            <span className="inline-flex items-center rounded-full border border-border bg-surface-2 px-3 py-1.5 text-sm text-muted transition-colors hover:border-accent/50 hover:text-foreground peer-checked:border-accent peer-checked:bg-accent-soft peer-checked:text-foreground peer-focus-visible:ring-2 peer-focus-visible:ring-accent">
               {o}
             </span>
           </label>
