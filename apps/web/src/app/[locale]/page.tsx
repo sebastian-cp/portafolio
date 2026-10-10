@@ -4,6 +4,7 @@ import { CommandPalette } from "@/components/CommandPalette";
 import { Counter } from "@/components/Counter";
 import { Experience } from "@/components/Experience";
 import { HeroCard } from "@/components/HeroCard";
+import { Hobbies } from "@/components/Hobbies";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { RagDemo } from "@/components/RagDemo";
@@ -35,6 +36,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     { href: "#experiencia", label: ui.nav.experience },
     { href: "#demos", label: ui.nav.demos },
     { href: "#proyectos", label: ui.nav.projects },
+    { href: "#hobbies", label: ui.nav.hobbies },
     { href: "#contacto", label: ui.nav.contact },
   ];
 
@@ -224,6 +226,14 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 card: <ProjectCard project={p} t={t.projectsUi} />,
               }))}
             />
+          </Reveal>
+        </section>
+
+        {/* ---------------- Hobbies ---------------- */}
+        <section id="hobbies" aria-labelledby="h-hobbies" className="scroll-mt-24 pt-28">
+          <Reveal>
+            <SectionHeader id="h-hobbies" index={ui.indexes.hobbies} eyebrow={ui.eyebrows.hobbies} title={ui.sections.hobbies} />
+            <Hobbies t={t.hobbies} />
           </Reveal>
         </section>
 

@@ -60,6 +60,7 @@ export function CommandPalette({ t, profile, otherLocale }: Props) {
       { id: "a-vit", label: t.actions.vitals, run: go("demo-vitals") },
       { id: "a-a11y", label: t.actions.a11y, run: go("demo-a11y") },
       { id: "a-proy", label: t.actions.projects, run: go("proyectos") },
+      { id: "a-hob", label: t.actions.hobbies, run: go("hobbies") },
       { id: "a-cont", label: t.actions.contact, run: go("contacto") },
       { id: "a-theme", label: t.actions.theme, run: () => { toggleTheme(); } },
       { id: "a-lang", label: t.actions.lang, run: () => { window.location.assign(`/${otherLocale}`); } },

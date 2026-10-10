@@ -29,7 +29,7 @@ export const es = {
   },
   ui: {
     skip: "Saltar al contenido",
-    nav: { about: "Trabajo", experience: "Experiencia", demos: "Demos", projects: "Proyectos", contact: "Contacto" },
+    nav: { about: "Trabajo", experience: "Experiencia", demos: "Demos", projects: "Proyectos", hobbies: "Hobbies", contact: "Contacto" },
     mainNav: "Principal",
     themeToggle: "Cambiar entre tema claro y oscuro",
     lang: { other: "en" as Locale, label: "English", aria: "Switch to English" },
@@ -43,9 +43,10 @@ export const es = {
       experience: "Trayectoria",
       demos: "Código corriendo",
       projects: "Trabajo",
+      hobbies: "Fuera del código",
       contact: "Hablemos",
     },
-    indexes: { about: "01", experience: "02", demos: "03", projects: "04", contact: "05" },
+    indexes: { about: "01", experience: "02", demos: "03", projects: "04", hobbies: "05", contact: "06" },
     asides: {
       demos: "Todo corre en tu navegador",
       projects: "Filtra por tecnología",
@@ -59,6 +60,7 @@ export const es = {
       vitals: "Core Web Vitals en vivo",
       a11y: "Accesibilidad: antes y después",
       projects: "Proyectos",
+      hobbies: "Fotografía y viajes",
       contact: "Contacto",
     },
     contactIntro: "¿Te interesó mi trabajo? Escríbeme.",
@@ -280,6 +282,7 @@ export const es = {
       vitals: "Ver Core Web Vitals en vivo",
       a11y: "Ver demo de accesibilidad",
       projects: "Ir a Proyectos",
+      hobbies: "Ver fotografías",
       contact: "Ir a Contacto",
       theme: "Cambiar tema claro/oscuro",
       lang: "Cambiar a English",
@@ -288,6 +291,19 @@ export const es = {
       github: "Abrir GitHub",
       linkedin: "Abrir LinkedIn",
     },
+  },
+  hobbies: {
+    intro:
+      "Cuando cierro el editor, salgo con la cámara. Me gusta viajar y fotografiar lo que encuentro en el camino: lagos, bosques, glaciares y los detalles chicos que aparecen si uno camina sin apuro.",
+    tags: ["Fotografía", "Viajes", "Naturaleza"],
+    galleryLabel: "Galería de fotografías",
+    photos: [
+      { id: "lago", alt: "Orilla de un lago con piedras lisas y agua quieta que refleja el cielo, con cerros al fondo", caption: "Lago" },
+      { id: "bosque", alt: "Bosque nativo en pendiente con araucarias, troncos caídos y musgo, visto desde abajo", caption: "Bosque nativo" },
+      { id: "glaciar", alt: "Laguna turquesa al pie de un cerro de roca oscura con restos de hielo glaciar", caption: "Glaciar" },
+      { id: "flores", alt: "Aguileñas blancas en primer plano con follaje verde y cielo nublado al atardecer", caption: "Aguileñas" },
+      { id: "cerezo", alt: "Ramas cubiertas de flores blancas contra un cielo azul despejado", caption: "Árbol en flor" },
+    ],
   },
   projectsUi: {
     filterLabel: "Filtrar proyectos por tecnología",
