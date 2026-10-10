@@ -17,10 +17,13 @@ h1 { margin: 0; }
 .grid-wrap { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
 .head, .tr { display: grid; grid-template-columns: 7.5rem 1fr 7rem 5.5rem 6rem 7rem; align-items: center; }
 .head { border-bottom: 1px solid var(--border); background: var(--surface-2); }
+/* Mismo canal de scroll en encabezado y cuerpo: las columnas quedan alineadas. */
+.head, .viewport { scrollbar-gutter: stable; }
+.head { overflow-y: hidden; padding: 0 .75rem; }
 .th {
   border: 0; border-radius: 0; background: transparent; color: var(--faint);
   font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase;
-  padding: .6rem .75rem; justify-content: flex-start; gap: .3rem;
+  padding: .6rem .5rem .6rem 0; justify-content: flex-start; gap: .3rem;
 }
 .th.right { justify-content: flex-end; }
 .th:hover { color: var(--foreground); }
@@ -38,7 +41,12 @@ h1 { margin: 0; }
 .dim { color: var(--muted); }
 .right { text-align: right; }
 
-.tag { font-style: normal; font-family: var(--mono); font-size: .68rem; padding: .1rem .4rem; border-radius: .3rem; border: 1px solid; }
+/* inline-block: así el padding y el borde cuentan en la altura de línea y la celda
+   (overflow: hidden) no les corta el borde inferior. */
+.tag {
+  display: inline-block; vertical-align: middle; line-height: 1.4;
+  font-style: normal; font-family: var(--mono); font-size: .68rem; padding: .05rem .4rem; border-radius: .3rem; border: 1px solid;
+}
 .tag.ok { color: var(--good); border-color: color-mix(in oklab, var(--good) 40%, transparent); }
 .tag.slow { color: #d79a2b; border-color: color-mix(in oklab, #d79a2b 40%, transparent); }
 .tag.error { color: var(--bad); border-color: color-mix(in oklab, var(--bad) 40%, transparent); }
