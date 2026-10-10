@@ -30,7 +30,12 @@ Las apps de Angular reusan los mismos tokens en `apps/angular-demo/src/styles.cs
 - Tests e2e: `npm run test:e2e` (usa `CHROMIUM_PATH` si no tienes los navegadores de Playwright).
 
 ## Demos (apps/angular-demo)
-Rutas lazy: `/tasks` (Signals + OnPush), `/dashboard` (métricas en vivo con `effect()` y SVG propio), `/rag` (mismo motor TF-IDF). Tests: `npm test`.
+Rutas lazy, todas con datos sintéticos y dominio neutro:
+- `/grid` — tabla virtualizada de 50.000 filas escrita a mano (en producción usaría `@angular/cdk/scrolling`); la matemática de la ventana vive en `grid.logic.ts`, es pura y está testeada.
+- `/search` — búsqueda con RxJS: debounce, cancelación, reintento con backoff y `switchMap` contra `mergeMap` para ver el race condition.
+- `/rag` — mismo motor TF-IDF que la versión en React.
+
+Tests: `npm test`.
 
 ## Decisiones
 - **Server Components por defecto**; las islas cliente son solo los componentes interactivos.

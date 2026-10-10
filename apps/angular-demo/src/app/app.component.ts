@@ -42,8 +42,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   readonly links = [
-    { path: '/tasks', label: 'Tareas' },
-    { path: '/dashboard', label: 'Dashboard' },
+    { path: '/grid', label: '50k filas' },
+    { path: '/search', label: 'RxJS' },
     { path: '/rag', label: 'RAG' },
   ];
 }

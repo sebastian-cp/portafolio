@@ -1,0 +1,87 @@
+<main>
+  <h1>Buscador con RxJS</h1>
+  <p class="sub">
+    debounce · cancelación de respuestas obsoletas · reintento con backoff. Las consultas cortas tardan
+    más a propósito: así el race condition se puede ver.
+  </p>
+
+  <div class="toolbar">
+    <div class="field">
+      <label for="q">Buscar tecnología</label>
+      <input id="q" type="text" autocomplete="off" placeholder="angular, rxjs, postgres…"
+             [value]="text()" (input)="type($any($event.target).value)" />
+    </div>
+
+    <div class="stack">
+      <span class="lbl" id="op-label">Operador</span>
+      <div role="group" aria-labelledby="op-label">
+        @for (s of strategies; track s) {
+          <button type="button" class="pill mono" [attr.aria-pressed]="strategy() === s" (click)="strategy.set(s); clear()">
+            {{ s }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <button type="button" [attr.aria-pressed]="failFirst()" (click)="failFirst.set(!failFirst()); clear()">
+      Fallar el 1.er intento
+    </button>
+    <button type="button" class="primary" [disabled]="typing()" (click)="simulate()">
+      Simular tipeo de «angular»
+    </button>
+    <button type="button" (click)="clear()">Limpiar</button>
+  </div>
+
+  @if (strategy() === 'mergeMap') {
+    <p class="warn" role="note">
+      <strong>mergeMap</strong> no cancela nada: toda respuesta que llega pisa a la anterior. Como
+      «a» tarda más que «angular», termina ganando la consulta vieja. Ese es el bug.
+    </p>
+  }
+
+  <section aria-labelledby="h-tl">
+    <h2 id="h-tl">Línea de tiempo de peticiones</h2>
+    @if (!reqs().length) {
+      <p class="empty">Escribe algo o usa «Simular tipeo».</p>
+    }
+    <ul class="timeline">
+      @for (r of reqs(); track r.id) {
+        <li>
+          <code class="q">{{ r.query }}</code>
+          <span class="track">
+            <span class="bar" [class]="'bar ' + r.state" [style.left.%]="left(r)" [style.width.%]="width(r)"></span>
+          </span>
+          <span class="state" [class]="'state ' + r.state">
+            {{ r.state === 'inflight' ? 'en vuelo'
+             : r.state === 'applied' ? 'aplicada'
+             : r.state === 'stale' ? 'obsoleta aplicada'
+             : r.state === 'cancelled' ? 'cancelada' : 'falló' }}
+            @if (r.retries) { <em>· {{ r.retries }} reintento{{ r.retries > 1 ? 's' : '' }}</em> }
+          </span>
+          <span class="ms mono">{{ r.ms }} ms</span>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-res">
+    <h2 id="h-res">Resultado</h2>
+    <div class="panel" [class.stale]="isStale()">
+      <p class="meta" role="status">
+        @if (inflight()) { Buscando… }
+        @else if (error()) { Error: {{ error() }} }
+        @else if (!shownQuery()) { Sin búsqueda todavía. }
+        @else if (isStale()) { Mostrando «{{ shownQuery() }}» pero escribiste «{{ text() }}» — resultado obsoleto. }
+        @else { Resultados de «{{ shownQuery() }}». }
+      </p>
+      @if (shownQuery() && !results().length && !inflight()) {
+        <p class="empty">Nada coincide con «{{ shownQuery() }}».</p>
+      }
+      <ul class="hits">
+        @for (item of results(); track item) {
+          <li>{{ item }}</li>
+        }
+      </ul>
+    </div>
+  </section>
+</main>

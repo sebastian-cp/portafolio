@@ -1,0 +1,71 @@
+<main>
+  <h1>Explorador de eventos</h1>
+  <p class="sub">
+    {{ total.toLocaleString('es-CL') }} filas en memoria · virtualización a mano · navegable con teclado
+  </p>
+
+  <div class="toolbar">
+    <div class="field">
+      <label for="q">Buscar</label>
+      <input id="q" type="text" autocomplete="off" placeholder="código, evento o módulo"
+             [value]="text()" (input)="text.set($any($event.target).value)" />
+    </div>
+
+    <div role="group" aria-label="Filtrar por estado">
+      @for (s of statuses; track s) {
+        <button type="button" class="pill" [attr.aria-pressed]="status() === s" (click)="status.set(s)">
+          {{ s === 'all' ? 'Todos' : s === 'ok' ? 'OK' : s === 'slow' ? 'Lento' : 'Error' }}
+        </button>
+      }
+    </div>
+
+    <button type="button" (click)="reset()">Limpiar</button>
+  </div>
+
+  <dl class="meters">
+    <div><dt>Filas tras filtrar</dt><dd>{{ rows().length.toLocaleString('es-CL') }}</dd></div>
+    <div><dt>Nodos en el DOM</dt><dd>{{ visibleRows().length }}</dd></div>
+    <div><dt>Filtrar + ordenar</dt><dd>{{ filterMs() }} ms</dd></div>
+    <div><dt>Frame más lento</dt><dd>{{ frameMs() ? frameMs() + " ms" : "—" }}</dd></div>
+  </dl>
+
+  <div class="grid-wrap">
+    <div class="head" role="presentation">
+      @for (c of columns; track c.key) {
+        <button type="button" class="th" [class.right]="c.align === 'right'"
+                [attr.aria-sort]="ariaSort(c.key)" (click)="setSort(c.key)">
+          {{ c.label }}
+          <span class="arrow" aria-hidden="true">{{ sort() === c.key ? (dir() === 'asc' ? '↑' : '↓') : '' }}</span>
+        </button>
+      }
+    </div>
+
+    <div #viewport class="viewport" tabindex="0" role="grid"
+         [attr.aria-rowcount]="rows().length" aria-label="Eventos"
+         (scroll)="onScroll($any($event.target))" (keydown)="onKeydown($event)">
+      <div class="spacer" [style.height.px]="slice().totalHeight">
+        <div class="rows" [style.transform]="'translateY(' + slice().padTop + 'px)'">
+          @for (r of visibleRows(); track trackRow($index, r)) {
+            <div class="tr" role="row"
+                 [attr.aria-rowindex]="slice().start + $index + 1"
+                 [class.cursor]="slice().start + $index === cursor()">
+              <span role="gridcell" class="mono">{{ r.code }}</span>
+              <span role="gridcell">{{ r.name }}</span>
+              <span role="gridcell" class="mono dim">{{ r.module }}</span>
+              <span role="gridcell"><em class="tag" [class]="'tag ' + r.status">{{ r.status }}</em></span>
+              <span role="gridcell" class="mono right">{{ r.ms }} ms</span>
+              <span role="gridcell" class="mono right dim">{{ formatDate(r.at) }}</span>
+            </div>
+          } @empty {
+            <p class="empty">Ningún evento coincide con el filtro.</p>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="note">
+    Solo existen en el DOM las filas visibles más un margen. El resto es alto reservado, por eso la barra de
+    scroll no miente. Datos sintéticos generados con semilla fija.
+  </p>
+</main>
