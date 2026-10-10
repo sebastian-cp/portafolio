@@ -1,6 +1,7 @@
 /* Mismos tokens que el portafolio en Next.js, para que las demos se lean
    como una sola pieza. */
 :root {
+  color-scheme: dark;
   --background: #08080b;
   --surface: #101014;
   --surface-2: #17171d;
@@ -22,6 +23,7 @@
 
 @media (prefers-color-scheme: light) {
   :root {
+    color-scheme: light;
     --background: #fbfbfa;
     --surface: #ffffff;
     --surface-2: #f4f4f2;
@@ -95,6 +97,9 @@ input::placeholder { color: var(--faint); }
 label { color: var(--muted); font-size: 0.875rem; }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+/* Barras de scroll con los tokens del sistema en vez de las del navegador. */
+* { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px;
