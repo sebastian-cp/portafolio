@@ -1,15 +1,18 @@
 import { expect, test, type Page } from "@playwright/test";
 
 /**
- * Formulario de Contacto con datos realistas. /api/contact se intercepta: el test
- * revisa exactamente lo que el formulario enviaría a Resend, sin mandar correos reales.
+ * Formulario de Contacto con datos realistas. Por defecto /api/contact se intercepta: el
+ * test revisa lo que el formulario enviaría a Resend, sin mandar correos.
+ * Con CONTACT_E2E_REAL=1 el envío llega de verdad a Resend y los correos llegan a CONTACT_TO.
  */
+const REAL = process.env.CONTACT_E2E_REAL === "1";
+
 async function openForm(page: Page) {
   const sent: Record<string, string>[] = [];
-  await page.route("**/api/contact", async (route) => {
-    sent.push(route.request().postDataJSON());
-    await route.fulfill({ json: { ok: true } });
+  page.on("request", (req) => {
+    if (req.url().endsWith("/api/contact") && req.method() === "POST") sent.push(req.postDataJSON());
   });
+  if (!REAL) await page.route("**/api/contact", (route) => route.fulfill({ json: { ok: true } }));
   await page.goto("/es#contacto");
   await page.locator("#contacto").getByRole("button", { name: "Escríbeme" }).click();
   const dialog = page.getByRole("dialog", { name: "Escríbeme" });
