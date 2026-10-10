@@ -11,7 +11,14 @@ export interface Project {
   repo?: string;
 }
 
-const REPO = "https://github.com/sebastian-cp/portafolio";
+export const REPO = "https://github.com/sebastian-cp/portafolio/tree/master";
+
+/** Las demos de Angular viven en otra app: en local es el `ng serve` de apps/angular-demo. */
+const ANGULAR = process.env.NEXT_PUBLIC_ANGULAR_URL ?? (process.env.NODE_ENV === "development" ? "http://localhost:4200" : undefined);
+export const angularDemo = (route: string) => (ANGULAR ? `${ANGULAR}/${route}` : undefined);
+
+/** En producción Storybook se publica dentro de public/; en local corre aparte con `npm run storybook`. */
+export const STORYBOOK = process.env.NEXT_PUBLIC_STORYBOOK_URL ?? (process.env.NODE_ENV === "development" ? "http://localhost:6006" : "/storybook/index.html");
 
 export const es = {
   locale: "es" as Locale,
@@ -200,19 +207,19 @@ export const es = {
       "¿Qué haces con IA en el desarrollo?",
     ],
     knowledge: [
-      { id: "k1", source: "Resumen", text: "Soy Software Engineer Full Stack con experiencia en ficha clínica electrónica en salud y sistemas de credit scoring multipaís en banca." },
-      { id: "k2", source: "NTT DATA · Clínica Alemana", text: "Trabajo como Rising Software Engineer en el proyecto de la Clínica Alemana de Santiago desde enero de 2025: analizo, diseño, desarrollo, valido y entrego requerimientos con metodologías ágiles." },
-      { id: "k3", source: "NTT DATA · Mentoring", text: "Capacito a nuevos desarrolladores, apoyo su onboarding y la adopción de flujos de trabajo con IA. Coordino con Product Owners los requerimientos y plazos." },
-      { id: "k4", source: "NTT DATA · IA", text: "Defino estándares, instrucciones y flujos para agentes, hooks y skills de IA generativa, y creo skills reutilizables que automatizan tareas repetitivas del ciclo de desarrollo." },
-      { id: "k5", source: "NTT DATA · Tokens", text: "Optimizo el contexto y los tokens: reduzco la información innecesaria en las interacciones con modelos generativos para mejorar su eficiencia." },
-      { id: "k6", source: "Testing", text: "Diseño y automatizo pruebas funcionales con Playwright, apoyado por IA para generar y ejecutar escenarios. También uso Jest y pruebas unitarias." },
-      { id: "k7", source: "LUXXOR · Chatbot", text: "En LUXXOR desarrollé un chatbot de asistencia virtual con la API de OpenAI para Web y WhatsApp, usando el modelo GPT-3.5 con temperatura, límite de tokens y prompt de sistema ajustados." },
-      { id: "k8", source: "LUXXOR · RAG", text: "Implementé un flujo RAG: indexé la base de conocimiento con embeddings en ChromaDB (base de datos vectorial) para búsqueda semántica y recuperar contexto antes de generar la respuesta." },
-      { id: "k9", source: "LUXXOR · Frontend", text: "Construí interfaces dinámicas con React y Material-UI, soportadas por servicios robustos en Node.js." },
-      { id: "k10", source: "BID · Angular", text: "En el Proyecto BID (Banco Interamericano de Desarrollo) desarrollé el front-end de una aplicación bancaria de credit scoring multipaís con Angular, TypeScript y Bootstrap." },
-      { id: "k11", source: "BID · Calidad", text: "Apliqué análisis estático con SonarQube y escribí pruebas unitarias para un producto más estable y mantenible." },
-      { id: "k12", source: "Educación", text: "Soy Ingeniero en Informática titulado en 2025 en INACAP y tengo la certificación Microsoft Azure Fundamentals AZ-900." },
-      { id: "k13", source: "Stack", text: "Mi stack: Angular, React, TypeScript, JavaScript, Node.js, Django, Python, PL/SQL; bases de datos Oracle, PostgreSQL y ChromaDB; herramientas Git, GitLab, Jenkins, ArgoCD, Jira y Bitbucket." },
+      { id: "k1", source: "Resumen", text: "Soy Software Engineer Full Stack con experiencia en ficha clínica electrónica en salud y sistemas de credit scoring multipaís en banca.", tags: "quien eres presentate cuentame sobre ti perfil resumen trayectoria años carrera profesion full stack" },
+      { id: "k2", source: "NTT DATA · Clínica Alemana", text: "Trabajo como Rising Software Engineer en el proyecto de la Clínica Alemana de Santiago desde enero de 2025: analizo, diseño, desarrollo, valido y entrego requerimientos con metodologías ágiles.", tags: "hoy actualmente ahora actual dedicas dedica rol cargo puesto empresa trabajas donde ntt data salud clinica" },
+      { id: "k3", source: "NTT DATA · Mentoring", text: "Capacito a nuevos desarrolladores, apoyo su onboarding y la adopción de flujos de trabajo con IA. Coordino con Product Owners los requerimientos y plazos.", tags: "mentor mentoria capacitas enseñas onboarding liderazgo lideras equipo coordinas product owner" },
+      { id: "k4", source: "NTT DATA · IA", text: "Defino estándares, instrucciones y flujos para agentes, hooks y skills de IA generativa, y creo skills reutilizables que automatizan tareas repetitivas del ciclo de desarrollo.", tags: "ia inteligencia artificial agentes copilot claude automatizacion prompts generativa" },
+      { id: "k5", source: "NTT DATA · Tokens", text: "Optimizo el contexto y los tokens: reduzco la información innecesaria en las interacciones con modelos generativos para mejorar su eficiencia.", tags: "tokens contexto optimizas costos eficiencia llm modelos" },
+      { id: "k6", source: "Testing", text: "Diseño y automatizo pruebas funcionales con Playwright, apoyado por IA para generar y ejecutar escenarios. También uso Jest y pruebas unitarias.", tags: "tests pruebas testing qa calidad automatizacion e2e unitarias jest playwright" },
+      { id: "k7", source: "LUXXOR · Chatbot", text: "En LUXXOR desarrollé un chatbot de asistencia virtual con la API de OpenAI para Web y WhatsApp, usando el modelo GPT-3.5 con temperatura, límite de tokens y prompt de sistema ajustados.", tags: "chatbot bot chatgpt openai gpt whatsapp asistente llm" },
+      { id: "k8", source: "LUXXOR · RAG", text: "Implementé un flujo RAG: indexé la base de conocimiento con embeddings en ChromaDB (base de datos vectorial) para búsqueda semántica y recuperar contexto antes de generar la respuesta.", tags: "rag embeddings vectorial busqueda semantica chromadb" },
+      { id: "k9", source: "LUXXOR · Frontend", text: "Construí interfaces dinámicas con React y Material-UI, soportadas por servicios robustos en Node.js.", tags: "react frontend front interfaces ui material node backend" },
+      { id: "k10", source: "BID · Angular", text: "En el Proyecto BID (Banco Interamericano de Desarrollo) desarrollé el front-end de una aplicación bancaria de credit scoring multipaís con Angular, TypeScript y Bootstrap.", tags: "angular banca banco bid finanzas credit scoring frontend typescript" },
+      { id: "k11", source: "BID · Calidad", text: "Apliqué análisis estático con SonarQube y escribí pruebas unitarias para un producto más estable y mantenible.", tags: "calidad sonarqube codigo limpio unitarias mantenible" },
+      { id: "k12", source: "Educación", text: "Soy Ingeniero en Informática titulado en 2025 en INACAP y tengo la certificación Microsoft Azure Fundamentals AZ-900.", tags: "estudios estudiaste universidad titulo carrera formacion educacion ingeniero certificaciones certificado azure inacap" },
+      { id: "k13", source: "Stack", text: "Mi stack: Angular, React, TypeScript, JavaScript, Node.js, Django, Python, PL/SQL; bases de datos Oracle, PostgreSQL y ChromaDB; herramientas Git, GitLab, Jenkins, ArgoCD, Jira y Bitbucket.", tags: "tecnologias lenguajes herramientas manejas dominas sabes conoces stack bases datos sql python backend devops" },
     ],
   },
   vitals: {
@@ -306,7 +313,7 @@ export const es = {
         "Tests e2e con Playwright en ambos idiomas",
       ],
       tech: ["Next.js 15", "React 19", "TypeScript", "Tailwind 4", "Playwright"],
-      repo: `${REPO}/tree/main/apps/web`,
+      repo: `${REPO}/apps/web`,
     },
     {
       slug: "web-vitals",
@@ -319,7 +326,7 @@ export const es = {
         "Cada métrica incluye cómo arreglarla",
       ],
       tech: ["React 19", "PerformanceObserver", "Event Timing", "Layout Instability"],
-      repo: `${REPO}/blob/main/apps/web/src/components/WebVitals.tsx`,
+      repo: `${REPO}/apps/web/src/components/WebVitals.tsx`,
     },
     {
       slug: "a11y-playground",
@@ -332,7 +339,7 @@ export const es = {
         "Foco y teclado: lo que falla sin semántica",
       ],
       tech: ["React 19", "WAI-ARIA", "MutationObserver"],
-      repo: `${REPO}/blob/main/apps/web/src/lib/a11y-tree.ts`,
+      repo: `${REPO}/apps/web/src/lib/a11y-tree.ts`,
     },
     {
       slug: "demo-rag",
@@ -345,7 +352,7 @@ export const es = {
         "Lógica de recuperación pura y testeable",
       ],
       tech: ["React 19", "TypeScript", "TF-IDF", "Similitud coseno"],
-      repo: `${REPO}/blob/main/apps/web/src/lib/rag.ts`,
+      repo: `${REPO}/apps/web/src/lib/rag.ts`,
     },
     {
       slug: "design-system",
@@ -358,8 +365,8 @@ export const es = {
         "Addon a11y para detectar problemas de contraste y semántica",
       ],
       tech: ["Storybook 9", "React 19", "Tailwind 4", "WAI-ARIA"],
-      demo: process.env.NEXT_PUBLIC_STORYBOOK_URL ?? "/storybook/index.html",
-      repo: `${REPO}/tree/main/apps/web/src/ui`,
+      demo: STORYBOOK,
+      repo: `${REPO}/apps/web/src/ui`,
     },
     {
       slug: "angular-grid",
@@ -372,7 +379,8 @@ export const es = {
         "La matemática de la ventana es pura y está cubierta por tests",
       ],
       tech: ["Angular 19", "Signals", "TypeScript", "Jasmine"],
-      repo: `${REPO}/tree/main/apps/angular-demo/src/app/grid`,
+      demo: angularDemo("grid"),
+      repo: `${REPO}/apps/angular-demo/src/app/grid`,
     },
     {
       slug: "angular-rxjs",
@@ -385,7 +393,8 @@ export const es = {
         "Estados de carga, vacío y error, y resultado obsoleto señalizado",
       ],
       tech: ["Angular 19", "RxJS", "Signals", "Jasmine"],
-      repo: `${REPO}/tree/main/apps/angular-demo/src/app/search`,
+      demo: angularDemo("search"),
+      repo: `${REPO}/apps/angular-demo/src/app/search`,
     },
     {
       slug: "angular-rag",
@@ -398,7 +407,8 @@ export const es = {
         "Pruebas unitarias del motor de recuperación",
       ],
       tech: ["Angular 19", "Signals", "TF-IDF", "Jasmine"],
-      repo: `${REPO}/tree/main/apps/angular-demo/src/app/rag`,
+      demo: angularDemo("rag"),
+      repo: `${REPO}/apps/angular-demo/src/app/rag`,
     },
   ] as Project[],
 };
