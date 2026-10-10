@@ -13,8 +13,11 @@ export interface Project {
 
 export const REPO = "https://github.com/sebastian-cp/portafolio/tree/master";
 
-/** Las demos de Angular viven en otra app: en local es el `ng serve` de apps/angular-demo. */
-const ANGULAR = process.env.NEXT_PUBLIC_ANGULAR_URL ?? (process.env.NODE_ENV === "development" ? "http://localhost:4200" : undefined);
+/**
+ * Las demos de Angular viven en otra app: en local es el `ng serve` de apps/angular-demo y
+ * en Vercel el servicio angular-demo, publicado en /demos del mismo dominio (ver vercel.json).
+ */
+const ANGULAR = process.env.NEXT_PUBLIC_ANGULAR_URL ?? (process.env.NODE_ENV === "development" ? "http://localhost:4200" : "/demos");
 export const angularDemo = (route: string) => (ANGULAR ? `${ANGULAR}/${route}` : undefined);
 
 /** En producción Storybook se publica dentro de public/; en local corre aparte con `npm run storybook`. */
