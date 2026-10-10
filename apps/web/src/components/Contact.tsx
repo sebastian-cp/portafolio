@@ -4,6 +4,7 @@ import type { Content } from "@/i18n";
 import { Button } from "@/ui/Button";
 import { Card } from "@/ui/Card";
 import { ChileFlag } from "@/ui/Flag";
+import { ContactDialog } from "./ContactDialog";
 import { CopyEmail } from "./CopyEmail";
 
 type Props = { t: Content["ui"]["contact"]; cta: Content["ui"]["cta"]; profile: Content["profile"] };
@@ -105,10 +106,10 @@ export function Contact({ t, cta, profile }: Props) {
           <p className="relative mt-4 max-w-md leading-relaxed text-muted">{t.sub}</p>
 
           <div className="relative mt-8 flex flex-wrap gap-3">
-            <Button href={`mailto:${profile.email}`}>
+            <ContactDialog t={t.form} email={profile.email}>
               <MailIcon />
               {t.cta}
-            </Button>
+            </ContactDialog>
             <Button href={profile.cv} download variant="secondary">{cta.cv}</Button>
           </div>
 
