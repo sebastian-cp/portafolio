@@ -38,12 +38,19 @@ h1 { margin: 0; }
 
 .tr { height: 40px; padding: 0 .75rem; border-bottom: 1px solid color-mix(in oklab, var(--border) 55%, transparent); font-size: .85rem; }
 .tr > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-inline-end: .5rem; }
+/* La etiqueta de estado nunca se trunca: sin recorte, su borde se ve completo. */
+.tr > .status { overflow: visible; display: flex; align-items: center; }
 .tr.cursor { background: var(--accent-soft); box-shadow: inset 2px 0 0 var(--accent); }
 .mono { font-family: var(--mono); font-size: .78rem; }
 .dim { color: var(--muted); }
 .right { text-align: right; }
 
-.tag { font-style: normal; font-family: var(--mono); font-size: .68rem; padding: .1rem .4rem; border-radius: .3rem; border: 1px solid; }
+/* inline-block: el padding y el borde cuentan en el alto de la línea, así la celda
+   (overflow: hidden) no le corta el borde inferior. */
+.tag {
+  display: inline-block; vertical-align: middle; line-height: 1.4;
+  font-style: normal; font-family: var(--mono); font-size: .68rem; padding: .05rem .4rem; border-radius: .3rem; border: 1px solid;
+}
 .tag.ok { color: var(--good); border-color: color-mix(in oklab, var(--good) 40%, transparent); }
 .tag.slow { color: #d79a2b; border-color: color-mix(in oklab, #d79a2b 40%, transparent); }
 .tag.error { color: var(--bad); border-color: color-mix(in oklab, var(--bad) 40%, transparent); }

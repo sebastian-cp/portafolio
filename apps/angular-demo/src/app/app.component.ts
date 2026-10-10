@@ -6,14 +6,16 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <header>
-      <strong><span class="mark">NG</span> Angular 19 · demos</strong>
-      <nav aria-label="Principal">
-        @for (l of links; track l.path) {
-          <a [routerLink]="l.path" routerLinkActive="active" ariaCurrentWhenActive="page">{{ l.label }}</a>
-        }
-      </nav>
-    </header>
+    @if (!embedded) {
+      <header>
+        <strong><span class="mark">NG</span> Angular 19 · demos</strong>
+        <nav aria-label="Principal">
+          @for (l of links; track l.path) {
+            <a [routerLink]="l.path" routerLinkActive="active" ariaCurrentWhenActive="page">{{ l.label }}</a>
+          }
+        </nav>
+      </header>
+    }
     <router-outlet />
   `,
   styles: `
@@ -41,6 +43,9 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   `,
 })
 export class AppComponent {
+  /** Dentro del modal del portafolio cada demo se abre sola: el menú entre demos sobra. */
+  readonly embedded = new URLSearchParams(location.search).has('embed');
+
   readonly links = [
     { path: '/grid', label: '50k filas' },
     { path: '/search', label: 'RxJS' },

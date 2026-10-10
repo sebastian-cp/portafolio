@@ -14,6 +14,7 @@ interface Props {
 export function DemoDialog({ src, title, t, className }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   // El iframe solo se monta al abrir: así la app de Angular no se descarga con la página.
+  // `?embed` le dice a la demo que oculte su menú: aquí se ve una demo a la vez.
   const [open, setOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const titleId = useId();
@@ -60,7 +61,7 @@ export function DemoDialog({ src, title, t, className }: Props) {
             )}
             {open && (
               <iframe
-                src={src}
+                src={`${src}${src.includes("?") ? "&" : "?"}embed`}
                 title={title}
                 onLoad={() => setLoaded(true)}
                 className="relative h-full w-full border-0"
