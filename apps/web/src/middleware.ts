@@ -6,4 +6,5 @@ export function middleware(req: NextRequest) {
   return NextResponse.redirect(new URL(`/${locale}`, req.url));
 }
 
-export const config = { matcher: ["/"] };
+// runtime nodejs: Vercel Services no admite Edge Functions, que es el runtime por defecto del middleware.
+export const config = { matcher: ["/"], runtime: "nodejs" };
