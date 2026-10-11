@@ -61,7 +61,7 @@ export function DemoDialog({ src, title, t, className }: Props) {
             )}
             {open && (
               <iframe
-                src={`${src}${src.includes("?") ? "&" : "?"}embed`}
+                src={`${src}${src.includes("?") ? "&" : "?"}embed&theme=${document.documentElement.dataset.theme ?? ""}`}
                 title={title}
                 onLoad={() => setLoaded(true)}
                 className="relative h-full w-full border-0"

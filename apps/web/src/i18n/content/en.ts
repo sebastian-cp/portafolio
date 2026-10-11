@@ -26,6 +26,12 @@ export const en: Content = {
       contact: "Say hello",
     },
     indexes: { about: "01", experience: "02", demos: "03", projects: "04", hobbies: "05", contact: "06" },
+    intros: {
+      about: "Three products in real use, across three different industries. For each one, what I built and with what.",
+      experience: "Where I have worked and what I did there. Pick an experience to see the details.",
+      demos: "These are not screenshots: it is code running on this very page. Try it, break it and see what happens.",
+      projects: "Things you can look inside: every project has its code and, where it applies, a live demo.",
+    },
     asides: {
       demos: "Everything runs in your browser",
       projects: "Filter by technology",
@@ -86,10 +92,13 @@ export const en: Content = {
         sentPerson: "Thanks! Your message reached me and I'll reply to your email.",
         error: "It couldn't be sent. Try again or email me directly at",
         privacy: "I only use your details to reply.",
+        privacyLink: "Privacy policy",
+        privacyHref: "/en/legal/privacy",
         close: "Close",
       },
     },
     rights: "All rights reserved",
+    footer: { label: "Legal", terms: "Terms of use", privacy: "Privacy policy", top: "Back to top", home: "Back to the portfolio" },
   },
   profile: {
     ...es.profile,
@@ -104,6 +113,8 @@ export const en: Content = {
       domain: "Healthcare",
       product: "Electronic health records",
       org: "Clínica Alemana de Santiago · with NTT DATA",
+      role: "Full stack · since 2025",
+      points: ["End-to-end requirements with the Product Owner", "Development standards and AI workflows for the team"],
       line: "Software clinical staff use during their shift. When a screen fails or confuses, the cost is not a ticket: it is patient time.",
       tech: ["Angular", "TypeScript", "Node.js", "Oracle"],
     },
@@ -112,6 +123,8 @@ export const en: Content = {
       domain: "Banking",
       product: "Multi-country credit scoring",
       org: "BID project · with NTT DATA",
+      role: "Front end · 2024",
+      points: ["Assessment rules that differ by country", "Unit tests and SonarQube in the pipeline"],
       line: "Credit assessment front end running under different rules per country, with unit tests and static analysis in the pipeline.",
       tech: ["Angular", "TypeScript", "Bootstrap", "SonarQube"],
     },
@@ -120,12 +133,22 @@ export const en: Content = {
       domain: "Applied AI",
       product: "RAG chatbot",
       org: "LUXXOR · web and WhatsApp",
+      role: "Full stack · 2024",
+      points: ["RAG with embeddings in ChromaDB", "One assistant on both web and WhatsApp"],
       line: "An assistant that answers from the business's real documentation: I indexed the knowledge base with embeddings and retrieve context before every reply.",
       tech: ["OpenAI API", "ChromaDB", "React", "Node.js"],
     },
   ],
 
   years: { value: 2, suffix: "+", label: "years building software" },
+  facts: {
+    experience: "Experience",
+    yearsUnit: "years",
+    yearsSub: "building software",
+    industries: "Industries",
+    industriesValue: "Health · Banking · AI",
+    industriesSub: "with products in real use",
+  },
   skills: [
     es.skills[0],
     es.skills[1],
@@ -143,7 +166,14 @@ export const en: Content = {
     cert: "Microsoft Certified: Azure Fundamentals (AZ-900)",
     text: "Computer Engineer · INACAP (graduated 2025) · Microsoft Certified: Azure Fundamentals (AZ-900)",
   },
-  experienceUi: { label: "Work experience" },
+  experienceUi: {
+    label: "Work experience",
+    count: "{n} roles",
+    pick: "Pick a company to see what I did there",
+    prev: "Previous",
+    next: "Next",
+    of: "of",
+  },
   experience: [
     {
       id: "ntt-rising",
@@ -312,6 +342,11 @@ export const en: Content = {
     code: "Code",
     of: "of",
     techLabel: "Technologies",
+    more: {
+      title: "There is more on GitHub",
+      text: "Experiments, proofs of concept and the full source of this site and its demos.",
+      cta: "See my GitHub",
+    },
   },
   projects: [
     {

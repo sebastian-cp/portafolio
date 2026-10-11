@@ -74,7 +74,7 @@ function Channel({ icon, label, value, href, extra, external, download, newTab }
           href={href}
           {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           {...(download ? { download: "" } : {})}
-          className="mt-0.5 block truncate text-sm font-medium sm:text-[0.9375rem] text-foreground outline-none after:absolute after:inset-0 after:rounded-xl focus-visible:after:ring-2 focus-visible:after:ring-accent"
+          className="mt-0.5 block truncate text-sm font-medium sm:text-base text-foreground outline-none after:absolute after:inset-0 after:rounded-xl focus-visible:after:ring-2 focus-visible:after:ring-accent"
         >
           {value}
           {external && newTab && <span className="sr-only"> {newTab}</span>}

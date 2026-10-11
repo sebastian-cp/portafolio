@@ -5,77 +5,96 @@
    --------------------------------------------------------------- */
 :root {
   color-scheme: light;
-  --background: #fbfbfa;
+  --background: #f6f5f1;
   --surface: #ffffff;
-  --surface-2: #f4f4f2;
-  --foreground: #16161a;
-  --muted: #5d5d66;
-  --faint: #8a8a94;
-  --border: #e4e4e1;
+  --surface-2: #efede7;
+  --foreground: #1b1a17;
+  --muted: #3f3d38;
+  --faint: #615e56;
+  --border: #dedad1;
   --hairline: rgba(0, 0, 0, 0.04);
-  --accent: #4f39d9;
-  --accent-2: #0d7490;
-  --accent-soft: rgba(79, 57, 217, 0.1);
+  --accent: #0d6b61;
+  --accent-2: #2a64a8;
+  --accent-soft: rgba(13, 107, 97, 0.1);
   --accent-contrast: #ffffff;
+  /* Relleno de botones: más oscuro que el acento para que el texto blanco se lea. */
+  --accent-fill: #0d6b61;
+  --accent-fill-text: #ffffff;
   --good: #047857;
   --warn: #92400e;
   --bad: #b91c1c;
-  --shadow: 0 1px 2px rgba(16, 16, 26, 0.06), 0 8px 24px -12px rgba(16, 16, 26, 0.14);
-  --noise: 0.025;
-  --glow-1: rgba(99, 76, 240, 0.28);
-  --glow-2: rgba(14, 165, 190, 0.2);
+  --shadow: 0 1px 2px rgba(28, 26, 20, 0.06), 0 8px 24px -12px rgba(28, 26, 20, 0.14);
+  --noise: 0.02;
+  --glow-1: rgba(20, 140, 125, 0.16);
+  --glow-2: rgba(60, 120, 200, 0.1);
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --background: #08080b;
-  --surface: #101014;
-  --surface-2: #17171d;
-  --foreground: #f4f4f6;
-  --muted: #a1a1ad;
-  --faint: #6e6e7c;
-  --border: #23232c;
+  --background: #0b0c0f;
+  --surface: #14161a;
+  --surface-2: #1c1f24;
+  --foreground: #f4f4f2;
+  --muted: #c3c5c9;
+  --faint: #9a9da5;
+  --border: #2b2f36;
   --hairline: rgba(255, 255, 255, 0.06);
-  --accent: #8b7cf6;
-  --accent-2: #37d4d4;
-  --accent-soft: rgba(139, 124, 246, 0.14);
-  --accent-contrast: #140f33;
+  --accent: #4fd1bd;
+  --accent-2: #7fb0ff;
+  --accent-soft: rgba(79, 209, 189, 0.13);
+  --accent-contrast: #052420;
+  --accent-fill: #0c7a6b;
+  --accent-fill-text: #ffffff;
   --good: #34d399;
   --warn: #fbbf24;
   --bad: #f87171;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 16px 40px -20px rgba(0, 0, 0, 0.8);
   --noise: 0.04;
-  --glow-1: rgba(109, 86, 255, 0.3);
-  --glow-2: rgba(28, 190, 205, 0.18);
+  --glow-1: rgba(45, 200, 175, 0.14);
+  --glow-2: rgba(90, 140, 255, 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
-    --background: #08080b;
-    --surface: #101014;
-    --surface-2: #17171d;
-    --foreground: #f4f4f6;
-    --muted: #a1a1ad;
-    --faint: #6e6e7c;
-    --border: #23232c;
+    --background: #0b0c0f;
+    --surface: #14161a;
+    --surface-2: #1c1f24;
+    --foreground: #f4f4f2;
+    --muted: #c3c5c9;
+    --faint: #9a9da5;
+    --border: #2b2f36;
     --hairline: rgba(255, 255, 255, 0.06);
-    --accent: #8b7cf6;
-    --accent-2: #37d4d4;
-    --accent-soft: rgba(139, 124, 246, 0.14);
-    --accent-contrast: #140f33;
+    --accent: #4fd1bd;
+    --accent-2: #7fb0ff;
+    --accent-soft: rgba(79, 209, 189, 0.13);
+    --accent-contrast: #052420;
+    --accent-fill: #0c7a6b;
+    --accent-fill-text: #ffffff;
     --good: #34d399;
     --warn: #fbbf24;
     --bad: #f87171;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 16px 40px -20px rgba(0, 0, 0, 0.8);
     --noise: 0.04;
-    --glow-1: rgba(109, 86, 255, 0.3);
-    --glow-2: rgba(28, 190, 205, 0.18);
+    --glow-1: rgba(45, 200, 175, 0.14);
+    --glow-2: rgba(90, 140, 255, 0.12);
   }
 }
 
 /* Barras de scroll con los tokens del sistema en vez de las del navegador. */
 * { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+
+/* Texto de lectura un punto más grande que el de Tailwind por defecto. */
+@theme {
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.5;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.55;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.65;
+  --text-lg: 1.1875rem;
+  --text-lg--line-height: 1.6;
+}
 
 @theme inline {
   --color-background: var(--background);
@@ -89,6 +108,8 @@
   --color-accent-2: var(--accent-2);
   --color-accent-soft: var(--accent-soft);
   --color-accent-contrast: var(--accent-contrast);
+  --color-accent-fill: var(--accent-fill);
+  --color-accent-fill-text: var(--accent-fill-text);
   --color-good: var(--good);
   --color-warn: var(--warn);
   --color-bad: var(--bad);
@@ -110,6 +131,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-size: 1.0625rem;
   font-feature-settings: "cv05" 1, "ss01" 1;
   overflow-x: hidden;
 }
@@ -126,8 +148,8 @@ body::after {
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--accent-contrast);
+  background: var(--accent-fill);
+  color: var(--accent-fill-text);
 }
 
 :focus-visible {
@@ -142,18 +164,23 @@ h1, h2, h3, .display {
   text-wrap: balance;
 }
 
-/* Escala fluida */
-.t-hero { font-size: clamp(2.6rem, 7.2vw, 5.25rem); line-height: 0.95; font-weight: 600; letter-spacing: -0.045em; }
-.t-section { font-size: clamp(1.75rem, 3.6vw, 2.6rem); line-height: 1.05; font-weight: 600; }
-.t-card { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em; }
+/* Escala fluida. En la capa components para que las utilidades de Tailwind
+   (text-accent, text-xl…) puedan sobrescribirla: fuera de una capa ganaba siempre. */
+@layer components {
+.t-hero { font-size: clamp(2.6rem, 6.4vw, 4.75rem); line-height: 0.95; font-weight: 600; letter-spacing: -0.045em; }
+.t-section { font-size: clamp(2rem, 4.4vw, 3.25rem); line-height: 1.02; font-weight: 650; color: var(--foreground); }
+.t-sub { font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.2; font-weight: 600; letter-spacing: -0.025em; color: var(--foreground); }
+.t-card { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em; color: var(--foreground); }
 .t-eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--faint);
+  color: var(--muted);
 }
 .t-stat { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; font-weight: 600; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+}
 
 .text-gradient {
   background: linear-gradient(100deg, var(--accent), var(--accent-2));
@@ -214,7 +241,7 @@ h1, h2, h3, .display {
   background: var(--surface-2);
   padding: 0.25rem 0.625rem;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   color: var(--muted);
 }
 

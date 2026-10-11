@@ -2,18 +2,20 @@
    como una sola pieza. */
 :root {
   color-scheme: dark;
-  --background: #08080b;
-  --surface: #101014;
-  --surface-2: #17171d;
-  --foreground: #f4f4f6;
-  --muted: #a1a1ad;
-  --faint: #6e6e7c;
-  --border: #23232c;
+  --background: #0b0c0f;
+  --surface: #14161a;
+  --surface-2: #1c1f24;
+  --foreground: #f4f4f2;
+  --muted: #c3c5c9;
+  --faint: #9a9da5;
+  --border: #2b2f36;
   --hairline: rgba(255, 255, 255, 0.06);
-  --accent: #8b7cf6;
-  --accent-2: #37d4d4;
-  --accent-soft: rgba(139, 124, 246, 0.14);
-  --accent-contrast: #140f33;
+  --accent: #4fd1bd;
+  --accent-2: #7fb0ff;
+  --accent-soft: rgba(79, 209, 189, 0.13);
+  --accent-contrast: #052420;
+  --accent-fill: #0c7a6b;
+  --accent-fill-text: #ffffff;
   --good: #34d399;
   --bad: #f87171;
   --radius: 0.875rem;
@@ -21,28 +23,86 @@
   --mono: ui-monospace, "JetBrains Mono", SFMono-Regular, Menlo, monospace;
 }
 
+/* El tema lo decide el portafolio (?theme= en el iframe o el localStorage compartido);
+   sin esa señal, se sigue la preferencia del sistema. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --background: #f6f5f1;
+  --surface: #ffffff;
+  --surface-2: #efede7;
+  --foreground: #1b1a17;
+  --muted: #3f3d38;
+  --faint: #615e56;
+  --border: #dedad1;
+  --hairline: rgba(0, 0, 0, 0.04);
+  --accent: #0d6b61;
+  --accent-2: #2a64a8;
+  --accent-soft: rgba(13, 107, 97, 0.1);
+  --accent-contrast: #ffffff;
+  --accent-fill: #0d6b61;
+  --accent-fill-text: #ffffff;
+  --good: #047857;
+  --bad: #b91c1c;
+  --shadow: 0 1px 2px rgba(28, 26, 20, 0.06), 0 8px 24px -12px rgba(28, 26, 20, 0.14);
+}
+
 @media (prefers-color-scheme: light) {
-  :root {
+  :root:not([data-theme]) {
     color-scheme: light;
-    --background: #fbfbfa;
+    --background: #f6f5f1;
     --surface: #ffffff;
-    --surface-2: #f4f4f2;
-    --foreground: #16161a;
-    --muted: #5d5d66;
-    --faint: #8a8a94;
-    --border: #e4e4e1;
+    --surface-2: #efede7;
+    --foreground: #1b1a17;
+    --muted: #3f3d38;
+    --faint: #615e56;
+    --border: #dedad1;
     --hairline: rgba(0, 0, 0, 0.04);
-    --accent: #4f39d9;
-    --accent-2: #0d7490;
-    --accent-soft: rgba(79, 57, 217, 0.1);
+    --accent: #0d6b61;
+    --accent-2: #2a64a8;
+    --accent-soft: rgba(13, 107, 97, 0.1);
     --accent-contrast: #ffffff;
+    --accent-fill: #0d6b61;
+    --accent-fill-text: #ffffff;
     --good: #047857;
     --bad: #b91c1c;
-    --shadow: 0 1px 2px rgba(16, 16, 26, 0.06), 0 8px 24px -12px rgba(16, 16, 26, 0.14);
+    --shadow: 0 1px 2px rgba(28, 26, 20, 0.06), 0 8px 24px -12px rgba(28, 26, 20, 0.14);
   }
 }
 
 * { box-sizing: border-box; }
+
+/* Textura de fondo, como en el portafolio: resplandor suave arriba, una trama de
+   puntos que se desvanece hacia abajo y grano fino. Todo fijo y sin coste de layout. */
+:root {
+  --dots: rgba(255, 255, 255, 0.07);
+  --glow-1: rgba(45, 200, 175, 0.12);
+  --glow-2: rgba(90, 140, 255, 0.1);
+  --noise: 0.04;
+}
+:root[data-theme="light"] { --dots: rgba(0, 0, 0, 0.08); --glow-1: rgba(20, 140, 125, 0.12); --glow-2: rgba(60, 120, 200, 0.08); --noise: 0.025; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) { --dots: rgba(0, 0, 0, 0.08); --glow-1: rgba(20, 140, 125, 0.12); --glow-2: rgba(60, 120, 200, 0.08); --noise: 0.025; }
+}
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+body::before {
+  background:
+    radial-gradient(40% 32rem at 22% -6rem, var(--glow-1), transparent 70%),
+    radial-gradient(36% 28rem at 80% -8rem, var(--glow-2), transparent 70%),
+    radial-gradient(var(--dots) 1px, transparent 1.4px) 0 0 / 22px 22px;
+  mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+}
+body::after {
+  z-index: 100;
+  opacity: var(--noise);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
 /* El encabezado queda fijo y cada demo scrollea dentro del espacio restante. Así
    la demo de la tabla puede ajustarse al alto de la ventana (o del modal). */
@@ -54,11 +114,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 1.0625rem;
   -webkit-font-smoothing: antialiased;
 }
 
 h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); letter-spacing: -0.035em; line-height: 1.1; }
-h2 { font-size: 0.6875rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); font-family: var(--mono); font-weight: 500; }
+h2 { font-size: 0.8125rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-family: var(--mono); font-weight: 500; }
 
 .sub { color: var(--muted); margin-top: 0.5rem; }
 .sub code { font-family: var(--mono); font-size: 0.85em; color: var(--accent-2); }
@@ -85,8 +146,8 @@ button {
   transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 button:hover { border-color: color-mix(in oklab, var(--accent) 50%, var(--border)); }
-button[aria-pressed='true'] { border-color: transparent; background: var(--accent); color: var(--accent-contrast); }
-button.primary { border-color: transparent; background: var(--accent); color: var(--accent-contrast); }
+button[aria-pressed='true'] { border-color: transparent; background: var(--accent-fill); color: var(--accent-fill-text); font-weight: 600; }
+button.primary { border-color: transparent; background: var(--accent-fill); color: var(--accent-fill-text); font-weight: 600; }
 button.pill { border-radius: 999px; }
 
 input[type='text'], input[type='email'] {

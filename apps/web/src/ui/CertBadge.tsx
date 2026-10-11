@@ -52,8 +52,8 @@ export function CertBadge({ code, title, issuer, image }: { code: string; title:
         </svg>
       )}
       <span className="leading-tight">
-        <span className="block text-sm font-medium">{title}</span>
-        <span className="block font-mono text-xs text-faint">{issuer}</span>
+        <span className="block text-base font-semibold tracking-tight">{title.replace(/-/g, "‑")}</span>
+        <span className="mt-0.5 block text-sm text-muted">{issuer}</span>
       </span>
     </span>
   );
