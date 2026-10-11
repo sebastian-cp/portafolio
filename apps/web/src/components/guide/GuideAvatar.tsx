@@ -24,6 +24,9 @@ const MAX_YAW = 0.55; // rad
 const MAX_PITCH = 0.4;
 const EYE_AZ = 0.36; // separación horizontal de los ojos sobre la esfera
 const EYE_EL = 0.1; // altura de los ojos sobre el ecuador
+// Colores fijos (los del tema oscuro): con el acento del tema claro, más oscuro, Bit se veía apagado.
+const BODY = "#4fd1bd";
+const EYES = "#052420";
 
 // Algunas expresiones fuerzan la mirada; el resto sigue al padre.
 const LOOK_OVERRIDE: Partial<Record<Expression, Look>> = {
@@ -161,8 +164,8 @@ export function GuideAvatar({ look, expression, size = 64, hop = 0 }: Props) {
       </defs>
       <ellipse ref={shadow} cx={C} cy={112} rx={30} ry={4.5} fill="#000" opacity={0.22} />
       <g ref={body}>
-        <circle cx={C} cy={C} r={R} style={{ fill: "var(--accent)" }} />
-        <g clipPath={`url(#${uid}-clip)`} style={{ fill: "var(--accent-contrast)", color: "var(--accent-contrast)" }}>
+        <circle cx={C} cy={C} r={R} fill={BODY} />
+        <g clipPath={`url(#${uid}-clip)`} fill={EYES} color={EYES}>
           <g ref={eyeL}><EyeShape expression={expression} side={-1} /></g>
           <g ref={eyeR}><EyeShape expression={expression} side={1} /></g>
         </g>
