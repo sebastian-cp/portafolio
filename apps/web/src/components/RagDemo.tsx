@@ -65,7 +65,7 @@ export function RagDemo({ t }: { t: Content["rag"] }) {
             <button
               type="button"
               onClick={() => { setQuery(s); ask(s); }}
-              className="group inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-accent/40 bg-accent-soft px-3.5 py-1.5 text-sm font-medium text-accent transition-colors hover:border-accent hover:bg-accent/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="group inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-dashed border-accent/60 bg-accent-soft px-3.5 py-1.5 text-sm font-medium text-accent transition-colors hover:border-solid hover:border-accent hover:bg-accent/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {s}
               <svg aria-hidden="true" viewBox="0 0 16 16" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
