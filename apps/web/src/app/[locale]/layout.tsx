@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
+import { GuideBot } from "@/components/guide/GuideBot";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Spotlight } from "@/components/Spotlight";
 import { getContent, isLocale, locales } from "@/i18n";
@@ -51,7 +52,7 @@ export default async function RootLayout({
       <body className="antialiased">
         <a
           href="#contenido"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:font-medium focus:text-accent-contrast"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-accent-fill focus:px-4 focus:py-2 focus:font-medium focus:text-accent-fill-text"
         >
           {t.ui.skip}
         </a>
@@ -59,6 +60,7 @@ export default async function RootLayout({
         <ScrollProgress />
         <Spotlight />
         {children}
+        <GuideBot locale={locale} />
         <Analytics />
       </body>
     </html>
