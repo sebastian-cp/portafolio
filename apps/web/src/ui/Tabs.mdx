@@ -1,0 +1,64 @@
+import { Meta, Canvas, Controls, Source, Title } from "@storybook/addon-docs/blocks";
+import { Callout, Lead } from "../docs/blocks";
+import * as TabsStories from "./Tabs.stories";
+
+<Meta of={TabsStories} />
+
+<Title />
+
+<Lead>Pestañas accesibles según el patrón WAI-ARIA: roving tabindex y navegación con flechas, Home y End. Es lo que usa la sección de experiencia.</Lead>
+
+## Ejemplo
+
+Cada pestaña recibe un `id`, una `label`, una `hint` opcional y el `content` de su panel. Solo se monta el panel activo.
+
+<Source
+  language="tsx"
+  code={`const items = [
+  { id: "a", label: "NTT DATA", hint: "2025 – Actualidad", content: <p>Clínica Alemana de Santiago.</p> },
+  { id: "b", label: "LUXXOR", hint: "2024", content: <p>Chatbot con RAG y ChromaDB.</p> },
+];
+
+<Tabs items={items} label="Experiencia laboral" />`}
+/>
+
+<Canvas of={TabsStories.Vertical} />
+
+## Orientación
+
+En `vertical` la lista queda a la izquierda desde el breakpoint `md` y arriba en móviles. En `horizontal` siempre queda arriba, con scroll lateral si no cabe. La orientación también decide qué flechas mueven la selección.
+
+<Canvas of={TabsStories.Horizontal} />
+
+## Con encabezado
+
+`header` pone un texto sobre la lista. Úsalo para decir cuántas pestañas hay y que se pueden elegir.
+
+<Canvas of={TabsStories.WithHeader} />
+
+## Con paginador
+
+`pager` agrega botones Anterior y Siguiente al pie del panel y un contador "1 de 3" que se anuncia con `aria-live`. Así se recorren las pestañas sin volver a la lista. Los textos llegan como props para que el componente no dependa del idioma.
+
+<Canvas of={TabsStories.WithPager} />
+
+## Accesibilidad
+
+| Tecla              | Acción                                   |
+| ------------------ | ---------------------------------------- |
+| `Tab`              | Entra a la pestaña activa y luego al panel. |
+| `↓` / `→`          | Siguiente pestaña (según la orientación). Vuelve a la primera desde la última. |
+| `↑` / `←`          | Pestaña anterior (según la orientación). |
+| `Home` / `End`     | Primera o última pestaña.                |
+
+Solo la pestaña activa tiene `tabIndex={0}`; el resto queda fuera del orden de tabulación. Cada pestaña apunta a su panel con `aria-controls` y el panel a su pestaña con `aria-labelledby`.
+
+<Callout title="Prueba automática">
+  La story "Navegación con teclado" tiene una prueba de interacción: enfoca la primera pestaña, pulsa `↓` y comprueba que la segunda queda seleccionada y su panel visible. Ábrela en la barra lateral y mira el panel Interactions.
+</Callout>
+
+## Props
+
+<Canvas of={TabsStories.Playground} />
+
+<Controls of={TabsStories.Playground} />

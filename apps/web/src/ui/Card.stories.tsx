@@ -1,14 +1,30 @@
 import type { Meta, StoryObj } from "@storybook/nextjs";
 import { Badge } from "./Badge";
+import { Button } from "./Button";
 import { Card } from "./Card";
 
 const meta = {
-  title: "Design System/Card",
+  title: "Componentes/Card",
   component: Card,
-  tags: ["autodocs"],
   argTypes: {
-    padding: { control: "inline-radio", options: ["none", "sm", "md", "lg"] },
-    spot: { control: "boolean" },
+    padding: {
+      control: "inline-radio",
+      options: ["none", "sm", "md", "lg"],
+      description: "Relleno interior. `lg` crece en pantallas anchas.",
+      table: { type: { summary: '"none" | "sm" | "md" | "lg"' }, defaultValue: { summary: '"md"' } },
+    },
+    spot: {
+      control: "boolean",
+      description: "Luz que sigue al cursor. Desactívala en tarjetas con mucho contenido interactivo.",
+      table: { type: { summary: "boolean" }, defaultValue: { summary: "true" } },
+    },
+    as: {
+      control: "text",
+      description: "Elemento HTML que se renderiza: `article`, `section`, `li`…",
+      table: { type: { summary: "ElementType" }, defaultValue: { summary: '"div"' } },
+    },
+    className: { control: "text", description: "Clases extra que se suman a `.card`.", table: { type: { summary: "string" } } },
+    children: { control: false, description: "Contenido de la tarjeta.", table: { type: { summary: "ReactNode" } } },
   },
   args: {
     children: (
@@ -30,9 +46,51 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
-export const Flat: Story = { args: { spot: false } };
-export const Roomy: Story = { args: { padding: "lg" } };
+/** Todas las props, editables desde el panel de controles. */
+export const Playground: Story = {};
+
+export const Basic: Story = {
+  name: "Básica",
+  render: () => (
+    <Card>
+      <h3 className="t-card">Clínica Alemana</h3>
+      <p className="mt-2 text-sm text-muted">Portal de pacientes en Angular, con foco en accesibilidad y rendimiento.</p>
+    </Card>
+  ),
+};
+
+export const Flat: Story = { name: "Sin luz", args: { spot: false } };
+
+export const Paddings: Story = {
+  name: "Rellenos",
+  decorators: [(Story) => <div className="w-[48rem]"><Story /></div>],
+  render: () => (
+    <div className="grid grid-cols-3 items-start gap-4">
+      {(["sm", "md", "lg"] as const).map((p) => (
+        <Card key={p} padding={p}>
+          <p className="font-mono text-sm">padding=&quot;{p}&quot;</p>
+        </Card>
+      ))}
+    </div>
+  ),
+};
+
+export const WithActions: Story = {
+  name: "Con acciones",
+  render: () => (
+    <Card as="article" spot={false} className="flex flex-col gap-4">
+      <header>
+        <p className="t-eyebrow">Proyecto</p>
+        <h3 className="t-card mt-1">Chatbot con RAG</h3>
+      </header>
+      <p className="text-sm text-muted">Responde preguntas sobre el portafolio con búsqueda semántica en ChromaDB.</p>
+      <footer className="flex gap-2 border-t border-border pt-4">
+        <Button size="sm">Ver demo</Button>
+        <Button size="sm" variant="ghost">Código</Button>
+      </footer>
+    </Card>
+  ),
+};
 
 /** Las tarjetas se componen en rejilla: el bento de la portada usa esta primitiva. */
 export const Bento: Story = {

@@ -1,0 +1,49 @@
+import { Meta, Canvas, Controls, Title } from "@storybook/addon-docs/blocks";
+import { Callout, Lead } from "../docs/blocks";
+import * as BadgeStories from "./Badge.stories";
+
+<Meta of={BadgeStories} />
+
+<Title />
+
+<Lead>Etiquetas pequeñas para tecnologías, versiones y estados. Cinco tonos semánticos que funcionan igual en tema claro y oscuro.</Lead>
+
+## Ejemplos
+
+<Canvas of={BadgeStories.Tones} />
+
+| Tono      | Cuándo usarlo                                         |
+| --------- | ----------------------------------------------------- |
+| `neutral` | Metadatos sin valor de estado: tecnologías, fechas.   |
+| `accent`  | Algo que tiene que verse primero: "Nuevo", "Destacado". |
+| `good`    | Resultado positivo o métrica dentro del umbral.       |
+| `warn`    | Resultado mejorable o métrica cerca del límite.       |
+| `bad`     | Resultado negativo o métrica fuera del umbral.        |
+
+## Monoespaciada
+
+Con `mono` la etiqueta usa JetBrains Mono. Úsala para versiones, códigos y nombres técnicos, donde los caracteres tienen que leerse uno a uno.
+
+<Canvas of={BadgeStories.Mono} />
+
+## Estados
+
+El panel de Web Vitals usa `good`, `warn` y `bad` para calificar cada métrica.
+
+<Canvas of={BadgeStories.WebVitalsRatings} />
+
+<Callout tone="warning" title="No dependas solo del color">
+  Un lector de pantalla o alguien con daltonismo no distingue verde de rojo. El texto de la etiqueta tiene que decir el estado por sí solo.
+</Callout>
+
+## En un título
+
+Dentro de un título la etiqueta conserva su tamaño. Alinéala con el texto usando `flex items-center`.
+
+<Canvas of={BadgeStories.InHeading} />
+
+## Props
+
+<Canvas of={BadgeStories.Playground} />
+
+<Controls of={BadgeStories.Playground} />

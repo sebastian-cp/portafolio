@@ -16,13 +16,13 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "border border-transparent bg-accent text-accent-contrast shadow-[inset_0_1px_0_0_rgba(255,255,255,0.18)] hover:brightness-110",
+    "border border-transparent bg-accent-fill font-semibold text-accent-fill-text shadow-[inset_0_1px_0_0_rgba(255,255,255,0.18)] hover:brightness-110",
   secondary:
     "border border-border bg-surface text-foreground shadow-[inset_0_1px_0_0_var(--hairline)] hover:border-accent/50 hover:bg-surface-2",
   ghost: "border border-transparent text-muted hover:bg-surface-2 hover:text-foreground",
 };
 
-const sizes: Record<Size, string> = { sm: "px-3 py-1.5 text-sm", md: "px-5 py-2.5 text-[0.9375rem]" };
+const sizes: Record<Size, string> = { sm: "px-3 py-1.5 text-sm", md: "px-5 py-2.5 text-base" };
 
 /** Botón o enlace con el mismo aspecto. Si recibe `href`, renderiza `<a>`. */
 export function Button(props: ButtonProps | LinkProps) {

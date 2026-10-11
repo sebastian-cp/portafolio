@@ -1,0 +1,62 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { Callout, Lead } from "./blocks";
+
+<Meta title="Introducción/Uso" />
+
+# Uso
+
+<Lead>Dónde vive cada pieza del sistema y cómo usarla en una página del sitio.</Lead>
+
+## Importar un componente
+
+Los componentes base están en `src/ui` y se importan con el alias `@/ui`:
+
+```tsx
+import { Button } from "@/ui/Button";
+import { Card } from "@/ui/Card";
+
+export function Hero() {
+  return (
+    <Card padding="lg">
+      <h2 className="t-section">Proyectos</h2>
+      <Button href="#proyectos">Ver proyectos</Button>
+    </Card>
+  );
+}
+```
+
+## Estructura
+
+| Carpeta              | Contenido                                                          |
+| -------------------- | ------------------------------------------------------------------ |
+| `src/app/globals.css` | Tokens de color, escala tipográfica y materiales (`.card`, `.chip`). |
+| `src/ui`             | Componentes base, sus stories y su documentación.                  |
+| `src/components`     | Secciones y patrones del sitio que componen los componentes base.  |
+| `src/i18n/content`   | Textos en español e inglés. Los componentes reciben los textos como props. |
+| `src/docs`           | Páginas de Introducción y Fundamentos de esta documentación.       |
+
+## Estilos
+
+Los componentes usan utilidades de Tailwind con los tokens del sistema (`bg-surface`, `text-muted`, `border-border`). Para extender un componente, pasa `className`: se suma a sus clases, no las reemplaza.
+
+```tsx
+<Button className="w-full">Enviar</Button>
+```
+
+<Callout title="Textos fuera de los componentes">
+  Ningún componente trae texto fijo en un idioma. Las etiquetas llegan por props desde `src/i18n`, así el mismo componente sirve en `/es` y `/en`.
+</Callout>
+
+## Documentar un componente nuevo
+
+1. Crea `Nombre.stories.tsx` junto al componente, con `title: "Componentes/Nombre"`, una story `Playground` y una story por variante.
+2. Describe cada prop en `argTypes` con `description` y `table.type`: es lo que muestra la tabla de props.
+3. Crea `Nombre.mdx` con `<Meta of={...} />`, una introducción, una sección por variante con `<Canvas of={...} />` y al final la tabla con `<Controls />`.
+4. Si debe aparecer en un lugar fijo de la barra lateral, súmalo a `storySort` en `.storybook/preview.tsx`.
+
+## Comandos
+
+```bash
+npm run storybook        # Storybook en http://localhost:6006
+npm run build-storybook  # Build estático en public/storybook, servido por el sitio
+```

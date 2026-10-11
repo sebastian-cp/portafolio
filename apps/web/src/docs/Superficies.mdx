@@ -1,0 +1,43 @@
+import { Meta, Canvas, Title } from "@storybook/addon-docs/blocks";
+import { Callout, DocLink, Lead } from "./blocks";
+import * as SuperficiesStories from "./Superficies.stories";
+
+<Meta of={SuperficiesStories} />
+
+<Title />
+
+<Lead>Los materiales del sistema: niveles de fondo, la tarjeta, el chip, la línea fina y el degradado de acento. Son clases de `globals.css`, disponibles en cualquier elemento.</Lead>
+
+## Niveles
+
+Tres fondos apilados de atrás hacia adelante. Cada nivel se separa del anterior con `border-border`, no con sombra fuerte.
+
+<Canvas of={SuperficiesStories.Elevation} />
+
+## Tarjeta
+
+`.card` es el material que usa el componente <DocLink id="componentes-card--documentación">Card</DocLink>. Úsala directamente solo cuando no puedas usar el componente, por ejemplo en un panel de `Tabs`.
+
+<Canvas of={SuperficiesStories.CardClass} />
+
+## Chip
+
+Pastilla monoespaciada sobre `surface-2`. La usan `TechChip` y la etiqueta de stack de `ProjectCard`.
+
+<Canvas of={SuperficiesStories.ChipClass} />
+
+## Línea fina
+
+`.hairline` es un separador de 1 px que se desvanece hacia la derecha.
+
+<Canvas of={SuperficiesStories.Hairline} />
+
+## Degradado de texto
+
+`.text-gradient` pinta el texto con el degradado de `--accent` a `--accent-2`. Resérvalo para cifras y titulares cortos.
+
+<Canvas of={SuperficiesStories.Gradient} />
+
+<Callout tone="warning" title="Contraste">
+  El degradado baja el contraste en los extremos. No lo uses en texto de lectura ni en tamaños menores a `.t-sub`.
+</Callout>

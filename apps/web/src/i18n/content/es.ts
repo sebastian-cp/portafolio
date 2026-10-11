@@ -50,6 +50,12 @@ export const es = {
       contact: "Hablemos",
     },
     indexes: { about: "01", experience: "02", demos: "03", projects: "04", hobbies: "05", contact: "06" },
+    intros: {
+      about: "Tres productos en uso real, en tres industrias distintas. En cada uno, qué construí y con qué.",
+      experience: "Dónde he trabajado y qué hice en cada lugar. Elige una experiencia para ver el detalle.",
+      demos: "No son capturas: es código corriendo en esta misma página. Prueba, rompe y mira qué pasa.",
+      projects: "Lo que puedes revisar por dentro: cada proyecto tiene su código y, cuando aplica, una demo.",
+    },
     asides: {
       demos: "Todo corre en tu navegador",
       projects: "Filtra por tecnología",
@@ -110,10 +116,13 @@ export const es = {
         sentPerson: "¡Gracias! Me llegó tu mensaje y te respondo a tu correo.",
         error: "No se pudo enviar. Inténtalo de nuevo o escríbeme directo a",
         privacy: "Solo uso tus datos para responderte.",
+        privacyLink: "Política de privacidad",
+        privacyHref: "/es/legal/privacy",
         close: "Cerrar",
       },
     },
     rights: "Todos los derechos reservados",
+    footer: { label: "Legal", terms: "Términos de uso", privacy: "Política de privacidad", top: "Volver arriba", home: "Volver al portafolio" },
   },
   profile: {
     name: "Sebastián Andrés Cofré Parra",
@@ -133,6 +142,8 @@ export const es = {
       domain: "Salud",
       product: "Ficha clínica electrónica",
       org: "Clínica Alemana de Santiago · con NTT DATA",
+      role: "Full Stack · desde 2025",
+      points: ["Requerimientos de punta a punta con el Product Owner", "Estándares de desarrollo y flujos con IA para el equipo"],
       line: "Software que el personal clínico usa en su turno. Si una pantalla falla o confunde, el costo no es un ticket: es tiempo de atención.",
       tech: ["Angular", "TypeScript", "Node.js", "Oracle"],
     },
@@ -141,6 +152,8 @@ export const es = {
       domain: "Banca",
       product: "Scoring crediticio multipaís",
       org: "Proyecto BID · con NTT DATA",
+      role: "Front-end · 2024",
+      points: ["Reglas de evaluación distintas por país", "Pruebas unitarias y SonarQube en el pipeline"],
       line: "Front-end de evaluación crediticia operando con reglas distintas por país, con pruebas unitarias y análisis estático en el pipeline.",
       tech: ["Angular", "TypeScript", "Bootstrap", "SonarQube"],
     },
@@ -149,12 +162,22 @@ export const es = {
       domain: "IA aplicada",
       product: "Chatbot con RAG",
       org: "LUXXOR · web y WhatsApp",
+      role: "Full Stack · 2024",
+      points: ["RAG con embeddings en ChromaDB", "Un mismo asistente en web y WhatsApp"],
       line: "Asistente que responde con la documentación real del negocio: indexé la base de conocimiento con embeddings y recupero contexto antes de cada respuesta.",
       tech: ["OpenAI API", "ChromaDB", "React", "Node.js"],
     },
   ],
 
   years: { value: 2, suffix: "+", label: "años en proyectos de software" },
+  facts: {
+    experience: "Experiencia",
+    yearsUnit: "años",
+    yearsSub: "en proyectos de software",
+    industries: "Industrias",
+    industriesValue: "Salud · Banca · IA",
+    industriesSub: "con productos en uso real",
+  },
   skills: [
     { group: "Frontend", items: ["Angular", "React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Material-UI", "Bootstrap 5"] },
     { group: "Backend", items: ["Node.js", "Django", "Python", "PL/SQL"] },
@@ -172,7 +195,14 @@ export const es = {
     cert: "Microsoft Certified: Azure Fundamentals (AZ-900)",
     text: "Ingeniero en Informática · INACAP (titulado 2025) · Microsoft Certified: Azure Fundamentals (AZ-900)",
   },
-  experienceUi: { label: "Experiencia laboral" },
+  experienceUi: {
+    label: "Experiencia laboral",
+    count: "{n} experiencias",
+    pick: "Toca una empresa para ver qué hice ahí",
+    prev: "Anterior",
+    next: "Siguiente",
+    of: "de",
+  },
   experience: [
     {
       id: "ntt-rising",
@@ -345,6 +375,11 @@ export const es = {
     code: "Código",
     of: "de",
     techLabel: "Tecnologías",
+    more: {
+      title: "Hay más en GitHub",
+      text: "Experimentos, pruebas de concepto y el código completo de este sitio y sus demos.",
+      cta: "Ver mi GitHub",
+    },
   },
   projects: [
     {

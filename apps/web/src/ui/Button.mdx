@@ -1,0 +1,57 @@
+import { Meta, Canvas, Controls, Title } from "@storybook/addon-docs/blocks";
+import { Callout, Lead } from "../docs/blocks";
+import * as ButtonStories from "./Button.stories";
+
+<Meta of={ButtonStories} />
+
+<Title />
+
+<Lead>Botones para acciones y llamados a la acción, con tres variantes y dos tamaños. El mismo componente sirve como `<button>` o como enlace.</Lead>
+
+## Ejemplos
+
+El sistema tiene tres variantes. `primary` es la acción principal del bloque; `secondary` acompaña sin competir; `ghost` es para acciones de bajo peso, como cerrar o cancelar.
+
+<Canvas of={ButtonStories.Variants} />
+
+<Callout title="Una acción principal por bloque">
+  Si dos botones `primary` aparecen juntos, ninguno destaca. Deja uno como `primary` y el resto como `secondary` o `ghost`.
+</Callout>
+
+## Etiquetas
+
+`Button` renderiza un `<button type="button">` por defecto. Si recibe `href`, renderiza un `<a>` con la misma apariencia: úsalo cuando el clic navega, no cuando ejecuta algo.
+
+<Canvas of={ButtonStories.AsLink} />
+
+## Tamaños
+
+`md` es el tamaño por defecto. `sm` sirve para barras de herramientas, tarjetas y lugares con poco espacio.
+
+<Canvas of={ButtonStories.Sizes} />
+
+## Con icono
+
+El contenido tiene `gap` incluido, así que basta con poner el SVG junto al texto. Marca el icono con `aria-hidden="true"` si es decorativo.
+
+<Canvas of={ButtonStories.WithIcon} />
+
+## Estado deshabilitado
+
+Con `disabled` el botón baja su opacidad y deja de recibir el puntero. Los enlaces no tienen estado deshabilitado: si la acción no está disponible, no muestres el enlace.
+
+<Canvas of={ButtonStories.Disabled} />
+
+## Accesibilidad
+
+- El texto del botón describe la acción ("Ver proyectos", no "Clic aquí").
+- Un botón solo con icono necesita `aria-label`.
+- El foco visible viene de los estilos globales; no lo quites con `outline: none`.
+
+## Props
+
+Cambia las props en la tabla y el ejemplo se actualiza en vivo. Cualquier atributo nativo de `<button>` o `<a>` también se acepta.
+
+<Canvas of={ButtonStories.Playground} />
+
+<Controls of={ButtonStories.Playground} />

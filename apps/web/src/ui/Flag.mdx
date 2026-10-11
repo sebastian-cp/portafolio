@@ -1,0 +1,27 @@
+import { Meta, Canvas, Controls, Title } from "@storybook/addon-docs/blocks";
+import { Lead } from "../docs/blocks";
+import * as FlagStories from "./Flag.stories";
+
+<Meta of={FlagStories} />
+
+<Title />
+
+<Lead>Bandera de Chile en SVG propio, sin dependencias ni imágenes. Acompaña la ubicación en la sección de contacto.</Lead>
+
+## Junto a texto
+
+Cuando el texto ya dice el país, deja la bandera sin `title`: queda como decoración y los lectores de pantalla la saltan.
+
+<Canvas of={FlagStories.InText} />
+
+## Tamaños
+
+Por defecto mide `h-3` con proporción 3:2. Para otro tamaño, pasa alto y ancho en `className` manteniendo la proporción.
+
+<Canvas of={FlagStories.Sizes} />
+
+## Props
+
+<Canvas of={FlagStories.Playground} />
+
+<Controls of={FlagStories.Playground} />

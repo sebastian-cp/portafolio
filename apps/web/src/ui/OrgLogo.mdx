@@ -1,0 +1,41 @@
+import { Meta, Canvas, Controls, Source, Title } from "@storybook/addon-docs/blocks";
+import { Callout, Lead } from "../docs/blocks";
+import * as OrgLogoStories from "./OrgLogo.stories";
+
+<Meta of={OrgLogoStories} />
+
+<Title />
+
+<Lead>Logo de una organización dentro de una pastilla con su propio fondo. Se ve bien en tema claro y oscuro sin retocar el archivo original.</Lead>
+
+## Ejemplo
+
+Cambia el tema en la barra de herramientas: cada pastilla mantiene el fondo para el que se diseñó su logo.
+
+<Canvas of={OrgLogoStories.All} />
+
+## Agregar un logo
+
+Los logos viven en `src/data/logos.ts`, fuera de i18n porque no dependen del idioma. Recorta el PNG, guárdalo en `public/logos/` y describe cómo dibujarlo:
+
+<Source
+  language="ts"
+  code={`salud: {
+  src: "/logos/clinica-alemana.png",
+  alt: "Clínica Alemana de Santiago",
+  bg: "light",   // fondo sobre el que se diseñó el logo
+  width: 515,
+  height: 120,
+  maxH: "h-6",   // los lockups verticales necesitan más alto que los horizontales
+}`}
+/>
+
+<Callout title="Nunca desborda">
+  La caja tiene ancho fijo y el logo nunca la desborda: en tarjetas angostas se achica en vez de cortarse.
+</Callout>
+
+## Props
+
+<Canvas of={OrgLogoStories.Playground} />
+
+<Controls of={OrgLogoStories.Playground} />

@@ -1,0 +1,72 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { Callout, ColorTable, Lead } from "./blocks";
+
+<Meta title="Fundamentos/Colores" />
+
+# Colores
+
+<Lead>Una paleta corta de tokens semánticos con valor propio en tema claro y oscuro. Los valores de esta página se leen en vivo de `globals.css`.</Lead>
+
+## Cómo se usan
+
+Cada token es una variable CSS en `:root` y se redefine en `:root[data-theme="dark"]`. Tailwind los expone como colores, así que en el marcado se usan como utilidades:
+
+```tsx
+<div className="border border-border bg-surface text-foreground">
+  <p className="text-muted">Texto secundario</p>
+  <a className="text-accent">Enlace</a>
+</div>
+```
+
+<Callout title="Nombra la intención, no el color">
+  Escribe `text-muted`, no `text-gray-600`. Así el mismo marcado funciona en ambos temas y un cambio de paleta se hace en un solo lugar.
+</Callout>
+
+## Fondos
+
+<ColorTable
+  tokens={[
+    { name: "background", utility: "bg-background", usage: "Fondo de la página." },
+    { name: "surface", utility: "bg-surface", usage: "Tarjetas, paneles y diálogos." },
+    { name: "surface-2", utility: "bg-surface-2", usage: "Chips, hover y superficies hundidas." },
+  ]}
+/>
+
+## Texto
+
+<ColorTable
+  tokens={[
+    { name: "foreground", utility: "text-foreground", usage: "Títulos y texto principal." },
+    { name: "muted", utility: "text-muted", usage: "Texto de lectura secundario." },
+    { name: "faint", utility: "text-faint", usage: "Metadatos, contadores e iconos inactivos." },
+  ]}
+/>
+
+## Bordes
+
+<ColorTable tokens={[{ name: "border", utility: "border-border", usage: "Bordes de tarjetas, campos y separadores." }]} />
+
+## Acento
+
+<ColorTable
+  tokens={[
+    { name: "accent", utility: "bg-accent · text-accent", usage: "Acción principal, enlaces, foco y selección." },
+    { name: "accent-2", utility: "text-accent-2", usage: "Segundo color del degradado de acento." },
+    { name: "accent-soft", utility: "bg-accent-soft", usage: "Fondo tenue de elementos activos." },
+    { name: "accent-contrast", utility: "text-accent-contrast", usage: "Texto sobre fondo `accent`." },
+  ]}
+/>
+
+## Estados
+
+<ColorTable
+  tokens={[
+    { name: "good", utility: "text-good · bg-good/10", usage: "Éxito, métrica dentro del umbral." },
+    { name: "warn", utility: "text-warn · bg-warn/10", usage: "Advertencia, métrica mejorable." },
+    { name: "bad", utility: "text-bad · bg-bad/10", usage: "Error, métrica fuera del umbral." },
+  ]}
+/>
+
+<Callout tone="warning" title="El color nunca va solo">
+  Un estado se comunica con texto o icono además del color. Mira los tonos de `Badge` para un ejemplo.
+</Callout>
