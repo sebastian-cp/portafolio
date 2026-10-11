@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { ScrollProgress } from "@/components/ScrollProgress";
@@ -58,6 +59,7 @@ export default async function RootLayout({
         <ScrollProgress />
         <Spotlight />
         {children}
+        <Analytics />
       </body>
     </html>
   );
