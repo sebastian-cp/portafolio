@@ -1,0 +1,47 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { Callout, Lead, TypeScale } from "./blocks";
+
+<Meta title="Fundamentos/Tipografía" />
+
+# Tipografía
+
+<Lead>Dos familias y una escala fluida: los títulos crecen con el ancho de pantalla sin saltos entre breakpoints.</Lead>
+
+## Familias
+
+| Familia          | Variable              | Utilidad    | Uso                                       |
+| ---------------- | --------------------- | ----------- | ----------------------------------------- |
+| Instrument Sans  | `--font-instrument`   | `font-sans` | Todo el texto, títulos incluidos.          |
+| JetBrains Mono   | `--font-jetbrains`    | `font-mono` | Código, versiones, chips y eyebrows.      |
+
+Las dos se cargan con `next/font`, así que no hay petición a Google Fonts en tiempo de ejecución ni salto de tipo al cargar.
+
+## Escala de títulos
+
+Clases de `globals.css` en la capa `components`. Las utilidades de Tailwind (`text-accent`, `text-xl`…) pueden sobrescribirlas.
+
+<TypeScale
+  styles={[
+    { className: "t-hero", sample: "Sebastián", usage: "Título de la portada. Uno por página." },
+    { className: "t-section", sample: "Proyectos", usage: "Título de cada sección (h2)." },
+    { className: "t-sub", sample: "Experiencia reciente", usage: "Subtítulos dentro de una sección." },
+    { className: "t-card", sample: "Chatbot con RAG", usage: "Título de tarjeta (h3)." },
+    { className: "t-stat", sample: "2+", usage: "Cifras del bento. Usa números tabulares." },
+    { className: "t-eyebrow", sample: "Proyectos destacados", usage: "Antetítulo en versalitas monoespaciadas." },
+  ]}
+/>
+
+## Texto de lectura
+
+La escala de texto de Tailwind está ajustada un paso arriba para leer mejor:
+
+| Utilidad    | Tamaño       | Interlineado |
+| ----------- | ------------ | ------------ |
+| `text-xs`   | 0.8125 rem   | 1.5          |
+| `text-sm`   | 0.9375 rem   | 1.55         |
+| `text-base` | 1.0625 rem   | 1.65         |
+| `text-lg`   | 1.1875 rem   | 1.6          |
+
+<Callout title="Equilibrio de líneas">
+  `h1`, `h2` y `h3` tienen `text-wrap: balance`: los títulos de varias líneas se reparten parejos en vez de dejar una palabra sola al final.
+</Callout>

@@ -1,0 +1,58 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { Lead, LinkGrid } from "./blocks";
+
+<Meta title="Introducción/Bienvenida" />
+
+# Design System del portafolio
+
+<Lead>Los componentes, tokens y patrones con que está hecho el sitio. Cada página explica para qué sirve una pieza, muestra ejemplos en vivo con su código y lista sus props.</Lead>
+
+El sistema está escrito en React 19 y Tailwind CSS 4, dentro de la app Next.js de `apps/web`. No es una librería publicada: los componentes se importan directo desde `@/ui`.
+
+## Empezar
+
+<LinkGrid
+  links={[
+    { title: "Uso", description: "Cómo importar componentes y dónde vive cada cosa.", id: "introducción-uso--documentación" },
+    { title: "Temas", description: "Claro, oscuro y cómo funciona el cambio de tema.", id: "introducción-temas--documentación" },
+  ]}
+/>
+
+## Fundamentos
+
+<LinkGrid
+  links={[
+    { title: "Colores", description: "Tokens semánticos con su valor en cada tema.", id: "fundamentos-colores--documentación" },
+    { title: "Tipografía", description: "Familias, escala fluida de títulos y texto de lectura.", id: "fundamentos-tipografía--documentación" },
+    { title: "Superficies", description: "Niveles de fondo, tarjeta, chip y degradado.", id: "fundamentos-superficies--documentación" },
+  ]}
+/>
+
+## Componentes
+
+<LinkGrid
+  links={[
+    { title: "Button", description: "Acciones y enlaces con tres variantes y dos tamaños.", id: "componentes-button--documentación" },
+    { title: "Badge", description: "Etiquetas de tecnología, versión y estado.", id: "componentes-badge--documentación" },
+    { title: "Card", description: "Superficie base con luz que sigue al cursor.", id: "componentes-card--documentación" },
+    { title: "Tabs", description: "Pestañas accesibles con navegación por teclado.", id: "componentes-tabs--documentación" },
+    { title: "TechChip", description: "Pastilla de tecnología con logo monocromo.", id: "componentes-techchip--documentación" },
+    { title: "CertBadge", description: "Insignia de certificación.", id: "componentes-certbadge--documentación" },
+    { title: "OrgLogo", description: "Logo de organización con su propio fondo.", id: "componentes-orglogo--documentación" },
+    { title: "Flag", description: "Bandera de Chile en SVG.", id: "componentes-flag--documentación" },
+  ]}
+/>
+
+## Patrones
+
+<LinkGrid
+  links={[
+    { title: "ProjectCard", description: "Tarjeta de proyecto armada con Card y TechChip.", id: "patrones-projectcard--documentación" },
+  ]}
+/>
+
+## Principios
+
+- **Tokens antes que colores.** Todo color sale de una variable semántica, así cada componente funciona en ambos temas sin código extra.
+- **Accesible por defecto.** Navegación por teclado, foco visible y estados que no dependen solo del color. El panel Accessibility de cada story corre axe.
+- **Pocas piezas, bien compuestas.** `Card`, `Button` y `Badge` cubren casi todo; los patrones de la portada se arman con ellas.

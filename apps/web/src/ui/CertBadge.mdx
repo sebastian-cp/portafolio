@@ -1,0 +1,25 @@
+import { Meta, Canvas, Controls, Title } from "@storybook/addon-docs/blocks";
+import { Callout, Lead } from "../docs/blocks";
+import * as CertBadgeStories from "./CertBadge.stories";
+
+<Meta of={CertBadgeStories} />
+
+<Title />
+
+<Lead>Insignia de una certificación: escudo, nombre y entidad emisora. Aparece en los datos de la portada.</Lead>
+
+## Ejemplo
+
+Sin `image`, dibuja un escudo propio en SVG con el degradado de acento. Cambia con el tema porque usa las variables `--accent` y `--accent-2`.
+
+<Canvas of={CertBadgeStories.Default} />
+
+<Callout tone="warning" title="No es el arte oficial">
+  El escudo es un diseño propio, no la insignia de Microsoft. Para usar la oficial, descarga el PNG desde Credly a `public/badges/az-900.png` y pásalo en `image`.
+</Callout>
+
+## Props
+
+<Canvas of={CertBadgeStories.Playground} />
+
+<Controls of={CertBadgeStories.Playground} />

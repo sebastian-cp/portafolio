@@ -1,0 +1,41 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { Callout, Lead } from "./blocks";
+
+<Meta title="Introducción/Temas" />
+
+# Temas
+
+<Lead>El sitio tiene tema claro y oscuro. Ambos comparten los mismos tokens con valores distintos, así ningún componente necesita saber en qué tema está.</Lead>
+
+## Cómo funciona
+
+El tema se decide con el atributo `data-theme` en `<html>`:
+
+| Estado                       | Resultado                                         |
+| ---------------------------- | ------------------------------------------------- |
+| `data-theme="light"`         | Tema claro.                                       |
+| `data-theme="dark"`          | Tema oscuro.                                      |
+| Sin atributo                 | Sigue `prefers-color-scheme` del sistema.          |
+
+El botón de tema del sitio escribe el atributo y guarda la elección. Los tokens se redefinen en `globals.css`:
+
+```css
+:root {
+  --background: …;   /* claro */
+}
+:root[data-theme="dark"] {
+  --background: …;   /* oscuro */
+}
+```
+
+## En Storybook
+
+Cambia el tema desde el botón **Tema** de la barra de herramientas. Cada ejemplo de la documentación se repinta con los tokens del tema elegido.
+
+<Callout title="Prueba siempre los dos temas">
+  Antes de dar por terminado un componente, revísalo en claro y en oscuro. El panel Accessibility revisa el contraste del tema activo.
+</Callout>
+
+## Imágenes y logos
+
+Los logos de terceros no cambian con el tema: `OrgLogo` los pone sobre el fondo para el que se diseñaron. Los iconos propios usan `currentColor` y heredan el color del texto.

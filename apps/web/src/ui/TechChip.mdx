@@ -1,0 +1,33 @@
+import { Meta, Canvas, Controls, Title } from "@storybook/addon-docs/blocks";
+import { Callout, Lead } from "../docs/blocks";
+import * as TechChipStories from "./TechChip.stories";
+
+<Meta of={TechChipStories} />
+
+<Title />
+
+<Lead>Pastilla de tecnología con su logo monocromo. Lista el stack de cada proyecto.</Lead>
+
+## Ejemplo
+
+Agrupa los chips en una lista con `aria-label`: así un lector de pantalla anuncia cuántas tecnologías hay.
+
+<Canvas of={TechChipStories.Stack} />
+
+## Logos
+
+Los logos vienen de [simple-icons](https://simpleicons.org) (CC0) y se pintan en `currentColor`, no en el color de marca. Así contrastan en claro y en oscuro, y el conjunto se lee como un sistema y no como una bolsa de colores.
+
+Si el nombre no tiene logo registrado, el chip queda solo con texto:
+
+<Canvas of={TechChipStories.WithoutIcon} />
+
+<Callout title="Agregar un logo">
+  Importa el icono desde `simple-icons` en `src/ui/TechIcon.tsx` y súmalo al mapa `ICONS` con el nombre en minúsculas. `hasTechIcon(name)` dice si un nombre ya tiene logo.
+</Callout>
+
+## Props
+
+<Canvas of={TechChipStories.Playground} />
+
+<Controls of={TechChipStories.Playground} />

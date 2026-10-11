@@ -1,0 +1,46 @@
+import { Meta, Canvas, Controls, Title } from "@storybook/addon-docs/blocks";
+import { Callout, Lead } from "../docs/blocks";
+import * as ProjectCardStories from "./ProjectCard.stories";
+
+<Meta of={ProjectCardStories} />
+
+<Title />
+
+<Lead>Tarjeta de proyecto de la sección Proyectos. Compone `Card`, `TechChip` y los enlaces de demo y código a partir del contenido i18n.</Lead>
+
+## Anatomía
+
+1. **Encabezado:** título con `.t-card` y el stack (`react` o `angular`) en un `.chip`.
+2. **Resumen y logros:** párrafo en `text-muted` y una lista con viñetas de acento.
+3. **Tecnologías:** lista de `TechChip` con `aria-label`.
+4. **Pie:** enlaces de demo y código, separados por un borde superior y empujados al fondo con `mt-auto` para que todas las tarjetas de una fila alineen su pie.
+
+<Canvas of={ProjectCardStories.React} />
+
+## Proyectos Angular
+
+Los proyectos con `stack: "angular"` son otra app. Su demo no abre otra pestaña: se embebe en un modal con `DemoDialog`.
+
+<Canvas of={ProjectCardStories.Angular} />
+
+## Con demo
+
+Si el proyecto tiene `demo`, aparece el enlace "Ver demo". Los enlaces llevan oculto el nombre del proyecto ("Ver demo de …") para que un lector de pantalla distinga cuál es cuál.
+
+<Canvas of={ProjectCardStories.WithDemo} />
+
+## En rejilla
+
+Con `h-full` las tarjetas de una fila igualan su alto.
+
+<Canvas of={ProjectCardStories.Grid} />
+
+<Callout title="El contenido viene de i18n">
+  Los proyectos y los textos de la interfaz salen de `src/i18n/content/es.ts` y `en.ts`. Para cambiar una tarjeta, edita el contenido, no el componente.
+</Callout>
+
+## Props
+
+<Canvas of={ProjectCardStories.Playground} />
+
+<Controls of={ProjectCardStories.Playground} />

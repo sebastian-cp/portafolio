@@ -1,0 +1,56 @@
+import { Meta, Canvas, Controls, Title } from "@storybook/addon-docs/blocks";
+import { Callout, Lead } from "../docs/blocks";
+import * as CardStories from "./Card.stories";
+
+<Meta of={CardStories} />
+
+<Title />
+
+<Lead>La superficie base del sistema: borde fino, degradado sutil, sombra y una luz que sigue al cursor. Todo lo que se agrupa en el sitio vive en una `Card`.</Lead>
+
+## Ejemplo
+
+`Card` no impone estructura: pon dentro títulos, texto y acciones con las clases tipográficas del sistema.
+
+<Canvas of={CardStories.Basic} />
+
+## Luz que sigue al cursor
+
+Por defecto la tarjeta tiene `spot` activo: al pasar el cursor aparece un brillo y el borde toma el color de acento. Desactívalo con `spot={false}` cuando la tarjeta tiene botones o enlaces propios, para que el brillo no compita con sus estados de hover.
+
+<Canvas of={CardStories.Flat} />
+
+<Callout title="Necesita el script del sitio">
+  El brillo sigue las variables `--mx` y `--my`, que actualiza el componente `Spotlight` del sitio. En Storybook el brillo aparece centrado arriba, sin seguir el cursor.
+</Callout>
+
+## Rellenos
+
+| Valor  | Relleno               | Uso                              |
+| ------ | --------------------- | -------------------------------- |
+| `none` | Ninguno               | Contenido a sangre (imágenes).   |
+| `sm`   | `p-4`                 | Listas densas.                   |
+| `md`   | `p-6`                 | Por defecto.                     |
+| `lg`   | `p-6`, `sm:p-8`       | Tarjetas destacadas y bento.     |
+
+<Canvas of={CardStories.Paddings} />
+
+## Con acciones
+
+Con `as="article"` la tarjeta tiene semántica propia. Separa las acciones con un borde superior.
+
+<Canvas of={CardStories.WithActions} />
+
+## Rejilla bento
+
+Las tarjetas se componen en rejilla con las utilidades de Tailwind. Así se arma el bento de la portada.
+
+<Canvas of={CardStories.Bento} />
+
+## Props
+
+Además de estas, `Card` acepta cualquier atributo HTML del elemento que renderiza.
+
+<Canvas of={CardStories.Playground} />
+
+<Controls of={CardStories.Playground} />
