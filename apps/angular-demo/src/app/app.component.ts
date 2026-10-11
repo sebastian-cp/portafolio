@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { inject as injectAnalytics } from '@vercel/analytics';
 
 @Component({
   selector: 'app-root',
@@ -51,4 +52,11 @@ export class AppComponent {
     { path: '/search', label: 'RxJS' },
     { path: '/rag', label: 'RAG' },
   ];
+
+  constructor() {
+    // Inicializa Vercel Analytics solo en el navegador
+    if (typeof window !== 'undefined') {
+      injectAnalytics();
+    }
+  }
 }
