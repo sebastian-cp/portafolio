@@ -1,4 +1,4 @@
-import { es, REPO, STORYBOOK, angularDemo, type Content } from "./es";
+import { es, REPO, STORYBOOK, PHOTO_GEO_STATS_REPO, PHOTO_GEO_STATS_DEMO, angularDemo, type Content } from "./es";
 
 export const en: Content = {
   locale: "en",
@@ -352,6 +352,21 @@ export const en: Content = {
     },
   },
   projects: [
+    {
+      slug: "photo-geo-stats",
+      title: "photo-geo-stats: your photos on the map",
+      stack: "react",
+      summary: "Drop your photos and see where you took them and with which camera. It reads EXIF in the browser, resolves country and city offline and creates a shareable image for social media.",
+      highlights: [
+        "Photos never leave the browser: EXIF in a Web Worker and offline geocoding",
+        "MapLibre map with thumbnail pins and clustering of nearby photos",
+        "Camera, ISO, aperture, shutter and time-of-day stats, plus a photographer profile",
+        "Story and post card rendered from HTML, tested with Vitest and Playwright",
+      ],
+      tech: ["Next.js 16", "React 19", "TypeScript", "MapLibre GL", "Web Workers", "Playwright"],
+      demo: `${PHOTO_GEO_STATS_DEMO}/en`,
+      repo: PHOTO_GEO_STATS_REPO,
+    },
     {
       slug: "este-portafolio",
       title: "This portfolio",
