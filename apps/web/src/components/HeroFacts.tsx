@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 import type { Content } from "@/i18n";
-import { CertBadge } from "@/ui/CertBadge";
 import { Counter } from "./Counter";
 
 const icons = {
   time: <path d="M12 7v5l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />,
   layers: <path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5" />,
   cap: <path d="M3 9l9-5 9 5-9 5-9-5Zm4 2.5V16c0 1.5 2.2 3 5 3s5-1.5 5-3v-4.5M21 9v6" />,
+  award: <path d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm-3.5-1.1L7 21l5-2.5 5 2.5-1.5-7.1" />,
 };
 
 function Fact({ icon, label, children }: { icon?: keyof typeof icons; label: string; children: ReactNode }) {
@@ -45,11 +45,16 @@ export function HeroFacts({ t }: { t: Pick<Content, "years" | "facts" | "educati
         <span className="block text-base font-semibold tracking-tight">{t.education.degree}</span>
         <span className="text-sm text-muted">{t.education.place}</span>
       </Fact>
-      <Fact label={t.education.certLabel}>
-        <ul className="space-y-3">
+      <Fact icon="award" label={t.education.certLabel}>
+        <span className="block text-base font-semibold tracking-tight">Microsoft Azure</span>
+        <ul className="mt-1.5 flex flex-wrap gap-1.5">
           {t.education.certs.map((c) => (
-            <li key={c.code}>
-              <CertBadge code={c.code} title={c.title} issuer="Microsoft Certified" />
+            <li
+              key={c.code}
+              title={`Microsoft Certified: ${c.title}`}
+              className="rounded-md border border-accent/30 bg-accent-soft px-2 py-0.5 font-mono text-xs font-semibold text-accent"
+            >
+              {c.code}
             </li>
           ))}
         </ul>
