@@ -1,9 +1,11 @@
 /**
  * Insignia de la certificación. Es un diseño propio, no el arte oficial de
  * Microsoft: para usar el oficial, descarga el PNG desde Credly a
- * `public/badges/az-900.png` y pásalo en `image`.
+ * `public/badges/<código>.png` y pásalo en `image`.
  */
 export function CertBadge({ code, title, issuer, image }: { code: string; title: string; issuer: string; image?: string }) {
+  const [prefix, number] = code.split("-");
+  const gradient = `cert-g-${code}`;
   return (
     <span className="inline-flex items-center gap-3">
       {image ? (
@@ -12,20 +14,20 @@ export function CertBadge({ code, title, issuer, image }: { code: string; title:
       ) : (
         <svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true" focusable="false" className="shrink-0">
           <defs>
-            <linearGradient id="cert-g" x1="0" y1="0" x2="1" y2="1">
+            <linearGradient id={gradient} x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stopColor="var(--accent)" />
               <stop offset="100%" stopColor="var(--accent-2)" />
             </linearGradient>
           </defs>
           <path
             d="M24 2.5 42 12v14.5c0 9-7.4 16.3-18 19.5-10.6-3.2-18-10.5-18-19.5V12Z"
-            fill="url(#cert-g)"
+            fill={`url(#${gradient})`}
             opacity="0.14"
           />
           <path
             d="M24 2.5 42 12v14.5c0 9-7.4 16.3-18 19.5-10.6-3.2-18-10.5-18-19.5V12Z"
             fill="none"
-            stroke="url(#cert-g)"
+            stroke={`url(#${gradient})`}
             strokeWidth="1.5"
           />
           <text
@@ -37,7 +39,7 @@ export function CertBadge({ code, title, issuer, image }: { code: string; title:
             fill="var(--foreground)"
             fontFamily="var(--font-mono)"
           >
-            AZ
+            {prefix}
           </text>
           <text
             x="24"
@@ -47,7 +49,7 @@ export function CertBadge({ code, title, issuer, image }: { code: string; title:
             fill="var(--accent)"
             fontFamily="var(--font-mono)"
           >
-            900
+            {number}
           </text>
         </svg>
       )}

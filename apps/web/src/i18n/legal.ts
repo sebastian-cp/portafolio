@@ -56,7 +56,7 @@ export const legal: Record<Locale, { updatedLabel: string; toc: string; related:
           title: "Marcas y logos de terceros",
           body: [
             "Los nombres y logos de Clínica Alemana de Santiago, Banco Interamericano de Desarrollo (BID), NTT DATA y LUXXOR pertenecen a sus respectivos titulares. Aparecen solo para identificar los proyectos en que participé y no implican patrocinio ni respaldo de su parte hacia este sitio.",
-            "Los íconos de tecnologías provienen de Simple Icons (licencia CC0) y sus marcas pertenecen a sus dueños. La insignia AZ-900 es un diseño propio que representa la certificación, no el arte oficial de Microsoft.",
+            "Los íconos de tecnologías provienen de Simple Icons (licencia CC0) y sus marcas pertenecen a sus dueños. Las insignias AZ-900 y AI-901 son diseños propios que representan las certificaciones, no el arte oficial de Microsoft.",
           ],
         },
         {
@@ -186,7 +186,7 @@ export const legal: Record<Locale, { updatedLabel: string; toc: string; related:
           title: "Third-party trademarks and logos",
           body: [
             "The names and logos of Clínica Alemana de Santiago, the Inter-American Development Bank (IDB), NTT DATA and LUXXOR belong to their respective owners. They appear only to identify the projects I worked on and do not imply sponsorship or endorsement of this site.",
-            "Technology icons come from Simple Icons (CC0 license) and their trademarks belong to their owners. The AZ-900 badge is my own design representing the certification, not Microsoft's official artwork.",
+            "Technology icons come from Simple Icons (CC0 license) and their trademarks belong to their owners. The AZ-900 and AI-901 badges are my own design representing the certifications, not Microsoft's official artwork.",
           ],
         },
         {

@@ -62,8 +62,8 @@ si agregas una clave en `es.ts`, TypeScript obliga a traducirla en `en.ts`.
 Los logos de tecnología vienen de `simple-icons` (CC0) y se pintan en `currentColor`, no en el
 color de marca, para que contrasten en ambos temas. Los de Clínica Alemana, BID y LUXXOR están en
 `apps/web/public/logos/` y se declaran en `apps/web/src/data/logos.ts`: quitar una entrada de ahí
-basta para que la tarjeta deje de mostrarlo. La insignia AZ-900 es un diseño propio, no el arte
-oficial de Microsoft; para usar el oficial, baja el PNG desde Credly a `public/badges/az-900.png`
+basta para que la tarjeta deje de mostrarlo. Las insignias AZ-900 y AI-901 son un diseño propio, no
+el arte oficial de Microsoft; para usar el oficial, baja el PNG desde Credly a `public/badges/<código>.png`
 y pásalo como `image` a `CertBadge`.
 
 No se publican datos ni reglas de negocio de proyectos de clientes: las demos usan datos
