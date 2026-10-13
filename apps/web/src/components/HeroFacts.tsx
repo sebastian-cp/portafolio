@@ -27,7 +27,7 @@ function Fact({ icon, label, children }: { icon?: keyof typeof icons; label: str
   );
 }
 
-/** Franja de datos rápidos al pie del hero: experiencia, industrias, formación y certificación. */
+/** Franja de datos rápidos al pie del hero: experiencia, industrias, formación y certificaciones. */
 export function HeroFacts({ t }: { t: Pick<Content, "years" | "facts" | "education"> }) {
   return (
     <dl className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border shadow-[var(--shadow)] sm:grid-cols-2 lg:grid-cols-4">
@@ -46,7 +46,13 @@ export function HeroFacts({ t }: { t: Pick<Content, "years" | "facts" | "educati
         <span className="text-sm text-muted">{t.education.place}</span>
       </Fact>
       <Fact label={t.education.certLabel}>
-        <CertBadge code="AZ-900" title={t.education.certTitle} issuer="Microsoft Certified" />
+        <ul className="space-y-3">
+          {t.education.certs.map((c) => (
+            <li key={c.code}>
+              <CertBadge code={c.code} title={c.title} issuer="Microsoft Certified" />
+            </li>
+          ))}
+        </ul>
       </Fact>
     </dl>
   );
