@@ -12,6 +12,8 @@ export interface Project {
 }
 
 export const REPO = "https://github.com/sebastian-cp/portafolio/tree/master";
+export const PHOTO_GEO_STATS_REPO = "https://github.com/sebastian-cp/photo-geo-stats";
+export const PHOTO_GEO_STATS_DEMO = "https://photo-geo-stats.vercel.app";
 
 /**
  * Las demos de Angular viven en otra app: en local es el `ng serve` de apps/angular-demo y
@@ -385,6 +387,21 @@ export const es = {
     },
   },
   projects: [
+    {
+      slug: "photo-geo-stats",
+      title: "photo-geo-stats: tus fotos en el mapa",
+      stack: "react",
+      summary: "Suelta tus fotos y ve dónde las tomaste y con qué cámara. Lee el EXIF en el navegador, ubica país y ciudad sin conexión y genera una imagen para compartir en redes.",
+      highlights: [
+        "Las fotos nunca salen del navegador: EXIF en un Web Worker y geocodificación offline",
+        "Mapa con MapLibre, miniaturas como pines y agrupación de fotos cercanas",
+        "Estadísticas de cámara, ISO, apertura, velocidad y hora del día, más un perfil de fotógrafo",
+        "Tarjeta para historias y posts generada desde HTML, con pruebas en Vitest y Playwright",
+      ],
+      tech: ["Next.js 16", "React 19", "TypeScript", "MapLibre GL", "Web Workers", "Playwright"],
+      demo: `${PHOTO_GEO_STATS_DEMO}/es`,
+      repo: PHOTO_GEO_STATS_REPO,
+    },
     {
       slug: "este-portafolio",
       title: "Este portafolio",
